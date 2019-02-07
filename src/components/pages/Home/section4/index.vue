@@ -77,22 +77,13 @@
 </template>
 
 <script>
-import {
-    Section,
-    Header1,
-    Header2,
-    RegularMd,
-    RegularLg,
-    Button,
-} from '../../../blocks';
+import { Section, Header1, RegularMd, Button } from '../../../blocks';
 
 export default {
     components: {
         Section,
         Header1,
-        Header2,
         RegularMd,
-        RegularLg,
         Button,
     },
 };

@@ -57,23 +57,13 @@
 </template>
 
 <script>
-import {
-    Section,
-    Header1,
-    Header2,
-    RegularMd,
-    RegularLg,
-    Button,
-} from '../../../blocks';
+import { Section, Header1, RegularLg } from '../../../blocks';
 
 export default {
     components: {
         Section,
         Header1,
-        Header2,
-        RegularMd,
         RegularLg,
-        Button,
     },
 };
 </script>
