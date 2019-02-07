@@ -5,7 +5,7 @@
             <Header
                 ref="header"
                 :class="[isHeaderScrolled() && 'fixed']"
-                :style="IfFixedHeaderHeight"
+                :style="headerHeight"
             >
                 <Container class="header__container">
                     <LogoHeader />
@@ -64,12 +64,16 @@ export default {
             isCheckupDone: false,
             offsetTop: 0,
             headerOffset: 0,
+            headerSize: `64px`,
+            headerBigSize: `128px`,
         };
     },
     computed: {
-        IfFixedHeaderHeight() {
+        headerHeight() {
             return {
-                height: this.isHeaderScrolled() ? `64px` : '128px',
+                height: this.isHeaderScrolled()
+                    ? this.headerSize
+                    : this.headerBigSize,
             };
         },
     },
