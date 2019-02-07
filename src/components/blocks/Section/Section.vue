@@ -65,9 +65,6 @@ export default {
         bgColor: { type: String, default: 'transparent' },
     },
     data: () => ({}),
-    created() {
-        console.log(this);
-    },
 };
 </script>
 

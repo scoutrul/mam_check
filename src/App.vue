@@ -2,7 +2,11 @@
     <v-app>
         <Main>
             <Button class="button__fix">Начать</Button>
-            <Header>
+            <Header
+                ref="header"
+                :class="[isHeaderScrolled() && 'fixed']"
+                :style="IfFixedHeaderHeight"
+            >
                 <Container class="header__container">
                     <LogoHeader />
                     <Menu />
@@ -58,14 +62,42 @@ export default {
     data() {
         return {
             isCheckupDone: false,
+            offsetTop: 0,
+            headerOffset: 0,
         };
     },
+    computed: {
+        IfFixedHeaderHeight() {
+            return {
+                height: this.isHeaderScrolled() ? `64px` : '128px',
+            };
+        },
+    },
     mounted() {
+        this.headerOffset = this.$refs.header.$el.clientHeight;
+        this.registerHandlers();
         console.log('this', this);
     },
     mutations: {
         SET_NAME: (state, name) => {
             state.name = name;
+        },
+    },
+    beforeDestroy() {
+        this.unregisterHandlers();
+    },
+    methods: {
+        isHeaderScrolled() {
+            return this.offsetTop >= this.headerOffset;
+        },
+        registerHandlers() {
+            window.addEventListener('scroll', this.handlerScrollWindow);
+        },
+        unregisterHandlers() {
+            window.removeEventListener('scroll', this.handlerScrollWindow);
+        },
+        handlerScrollWindow() {
+            this.offsetTop = window.pageYOffset;
         },
     },
 
