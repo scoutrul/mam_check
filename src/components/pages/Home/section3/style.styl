@@ -1,0 +1,51 @@
+@import '~@/assets/styles/vars/index.styl';
+
+.section3 {
+	text-align: center;
+	margin-bottom: -120px;
+	z-index: 2;
+	padding-top: 80px;
+	.listing {
+		flex-wrap wrap
+		justify-content: space-between;
+		margin: 0;
+		.block {
+			background-color white
+			display flex
+			flex-flow column
+			align-content center
+			width 100%
+			max-width: 280px;
+			box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
+			border-radius: 12px;
+			line-height: 24px;
+			font-size: 16px;
+			color $Black_Text
+			justify-content: flex-start;
+			padding: 40px 0px 20px;
+			font-weight bold
+			margin-bottom 20px
+			p {
+				padding 0 20px
+			}
+			.icon {
+				@media (max-width $LG_break) {
+					margin 0 32px 16px 0;
+				}
+			}
+		}
+		@media (max-width $XL_break) {
+			max-width: 728px;
+			margin: auto;
+			justify-content: center;
+			.block {
+				max-width: none;
+				width 100%
+				flex-direction: row;
+				align-items: center;
+				padding: 20px;
+				text-align: left;
+			}
+		}
+	}
+}

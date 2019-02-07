@@ -1,0 +1,34 @@
+@import '~@/assets/styles/vars/index.styl';
+
+.section1 {
+	.section1_pic {
+		align-items: flex-end;
+		display: flex;
+		position relative
+		@media (max-width $cta_button_brake) {
+			margin-bottom: -24%;
+			transform: translateX(5%) translateY(-10%);
+		}
+		@media (max-width $XS_break) {
+			margin-bottom: -18%
+		}
+		svg, img {
+			transform: translateY(22%) translateX(-50%);
+			position: absolute;
+			bottom: -10px;
+			left: 50%;
+			min-width 520px
+			@media (max-width $XL_break) {
+				transform: translateY(22%) translateX(-40%);
+			}
+			@media (max-width $LG_break) {
+				transform: translateY(16%) translateX(-30%);
+			}
+			@media (max-width $cta_button_brake) {
+				min-width 100%
+				position static
+				transform none
+			}
+		}
+	}
+}

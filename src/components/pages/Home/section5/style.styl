@@ -1,0 +1,33 @@
+@import '~@/assets/styles/vars/index.styl';
+
+.section5 {
+	@media (max-width $cta_button_brake) {
+		flex-flow column wrap
+	}
+	.special {
+		line-height: 18px;
+		font-size: 13px;
+		color $Lighter_Text
+		max-width: 400px;
+	}
+	.section5_pic {
+		display: flex;
+		justify-content: center;
+		@media (max-width $LG_break) {
+			justify-content: end;
+			flex-flow column wrap
+		}
+		svg {
+			min-width 775px
+			max-width 100%
+			@media (max-width $XL_break) {
+				min-width 500px
+			}
+
+			@media (max-width $XS_break) {
+				min-width 100%
+			}
+
+		}
+	}
+}
