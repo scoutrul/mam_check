@@ -8,50 +8,52 @@
             После прохождения тестов вы получите полное заключение с
             рекомендациями и узнаете совершенно бесплатно:
         </RegularLg>
-        <v-layout justify-space-between class="pad16 listing">
-            <div class="black block">
-                <div class="icon">
-                    <img
-                        svg-inline
-                        src="@/assets/images/home_health.svg"
-                        alt="Какие у вас есть хронические заболевания или риски их развития"
-                    />
+        <v-layout style="padding-top: 120px" class="white inner">
+            <v-flex justify-space-between class="pad16 listing">
+                <div class="black block">
+                    <div class="icon">
+                        <img
+                            svg-inline
+                            src="@/assets/images/home_health.svg"
+                            alt="Какие у вас есть хронические заболевания или риски их развития"
+                        />
+                    </div>
+                    <p>
+                        Какие у вас есть хронические заболевания или риски их
+                        развития
+                    </p>
                 </div>
-                <p>
-                    Какие у вас есть хронические заболевания или риски их
-                    развития
-                </p>
-            </div>
-            <div class="black block">
-                <div class="icon">
-                    <img
-                        svg-inline
-                        src="@/assets/images/home_doctor.svg"
-                        alt="Каких специалистов нужно посетить"
-                    />
+                <div class="black block">
+                    <div class="icon">
+                        <img
+                            svg-inline
+                            src="@/assets/images/home_doctor.svg"
+                            alt="Каких специалистов нужно посетить"
+                        />
+                    </div>
+                    <p>Каких специалистов нужно посетить</p>
                 </div>
-                <p>Каких специалистов нужно посетить</p>
-            </div>
-            <div class="black block">
-                <div class="icon">
-                    <img
-                        svg-inline
-                        src="@/assets/images/home_flask.svg"
-                        alt="Какие требуется сдать анализы"
-                    />
+                <div class="black block">
+                    <div class="icon">
+                        <img
+                            svg-inline
+                            src="@/assets/images/home_flask.svg"
+                            alt="Какие требуется сдать анализы"
+                        />
+                    </div>
+                    <p>Какие требуется сдать анализы</p>
                 </div>
-                <p>Какие требуется сдать анализы</p>
-            </div>
-            <div class="black block">
-                <div class="icon">
-                    <img
-                        svg-inline
-                        src="@/assets/images/home_stethoscope.svg"
-                        alt="Какую необходимо пройти инструментальную диагностику"
-                    />
+                <div class="black block">
+                    <div class="icon">
+                        <img
+                            svg-inline
+                            src="@/assets/images/home_stethoscope.svg"
+                            alt="Какую необходимо пройти инструментальную диагностику"
+                        />
+                    </div>
+                    <p>Какую необходимо пройти инструментальную диагностику</p>
                 </div>
-                <p>Какую необходимо пройти инструментальную диагностику</p>
-            </div>
+            </v-flex>
         </v-layout>
     </Section>
 </template>
