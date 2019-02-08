@@ -5,12 +5,14 @@
 	margin-bottom: -120px;
 	z-index: 2;
 	padding-top: 80px;
+	.regular {
+		margin-bottom: 40px;
+	}
 	.inner {
-		padding-top: 120px;
+		transform: translateY(40px);
 		@media (max-width $LG_break) {
 			flex-direction column
 		}
-
 		.listing {
 			flex-wrap wrap
 			justify-content: space-between;

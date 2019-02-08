@@ -5,10 +5,30 @@
 	&__container
 		height: fit-content;
 		align-items: center;
-		flex-flow row wrap !important
-	.logo
-		margin 20px 0
+		flex-direction: row !important;
+		@media(max-width: $MD_break)
+			flex-direction column !important;
+			align-items: flex-start;
+	&__logo {
+		@media(min-width: $MD_break) {
+			max-width: 200px !important;
+		}
+		.logo {
+			margin 20px 0
+		}
+	}
 
 	.copyrights
 		display block
 		flex 1 1 320px
+	&__menu
+		.menu
+			flex-flow row wrap
+			justify-content: flex-start;
+			@media(min-width: $LG_break)
+				justify-content: flex-end;
+			li
+				margin 0 20px 0 0
+			@media(max-width: $XS_break)
+				li
+					flex-flow column wrap

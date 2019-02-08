@@ -3,7 +3,7 @@
         <v-layout class="isUnder600">
             <v-flex flex sm6 xs12>
                 <Header1 class="pad16"
-                    >Оцените свое здоровье прямо сейчас</Header1
+                    >Оцените свое здоровье<br />прямо сейчас</Header1
                 >
                 <RegularMd class="pad16">
                     Пройдите комплексную проверку здоровья и получите список

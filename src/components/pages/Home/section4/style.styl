@@ -1,8 +1,17 @@
 @import '~@/assets/styles/vars/index.styl';
 
 .section4 {
+	.note {
+		margin 100px auto 24px auto
+		line-height: 22px;
+		font-size: 14px;
+	}
 	.inner {
-		padding-top: 120px;
+		.header1 {
+			margin-bottom 24px
+		}
+
+		padding-top: 235px;
 		@media (max-width $LG_break) {
 			flex-direction column
 			.button__yellow {
@@ -10,21 +19,41 @@
 			}
 		}
 		.section4_descr {
-			padding 0 16px
+			padding 0 40px
+			margin 0 0 0 20px
+			display flex
+			flex-flow column nowrap
+			width 100%
+			p {
+				margin-bottom auto
+			}
+			@media (max-width $XL_break) {
+				margin 0
+				p {
+					margin-bottom 40px
+				}
+			}
 			@media (max-width $LG_break) {
+				padding 0 16px
 				order 1
 				margin 0 auto 40px auto
 				padding 0
 				max-width: 728px;
+			}
+			p {
+				max-width: 432px;
+				line-height: 32px;
+				font-size: 20px;
 			}
 		}
 		.listing {
 			flex-wrap wrap
 			justify-content: space-between;
 			margin: 0;
-			padding 0 16px
+			padding 0 40px
 			width 100%
 			@media (max-width $LG_break) {
+				padding 0 16px
 				order 2
 				padding 0
 			}
@@ -36,29 +65,40 @@
 				box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
 				border-radius: 12px;
 				justify-content: flex-start;
-				padding: 40px 0px 20px;
+				padding: 20px 0px 20px;
 				margin-bottom 20px
 				@media (max-width $MD_break) {
 					flex-flow column wrap
 				}
 				.img {
-					margin 0 32px 16px;
+					margin: 0 24px;
+					display: flex;
+					align-items: center;
 					@media (max-width $MD_break) {
 						margin-left 0
 					}
+					@media (max-width $XL_break) {
+						margin 0 16px 0 0
+					}
 				}
 				.text {
+					padding-right 40px
+					@media (max-width $XL_break) {
+						padding-right 16px
+					}
 					.text__header {
 						color $Black_Text
 						line-height: 24px;
 						font-size: 16px;
 						font-weight bold
+
 					}
 					p {
-						padding 0
+						padding 4px 0
 						line-height: 22px;
 						font-size: 15px;
 						color $Grey
+						margin 0
 					}
 				}
 

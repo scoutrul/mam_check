@@ -21,13 +21,21 @@
             </Body>
             <Footer>
                 <Container class="footer__container">
-                    <v-flex order-xs2 order-sm1 class="footer__logo"
-                        ><LogoFooter
-                    /></v-flex>
-                    <v-flex order-xs1 order-sm3 class="footer__menu"
+                    <v-flex
+                        order-xs1
+                        order-sm1
+                        order-md3
+                        order-lg3
+                        md5
+                        class="footer__menu"
                         ><Menu
                     /></v-flex>
-                    <v-flex order-xs3 order-sm2><Copyrights /></v-flex>
+                    <v-flex order-xs2 order-sm1 xs12 md3 class="footer__logo"
+                        ><LogoFooter
+                    /></v-flex>
+                    <v-flex order-xs3 order-sm2 xs12 xs7 md4
+                        ><Copyrights
+                    /></v-flex>
                 </Container>
             </Footer>
         </Main>

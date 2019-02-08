@@ -1,6 +1,6 @@
 <template>
     <Section bg-color="#00BAFF" is-top is-bottom class="section4">
-        <v-layout style="padding-top: 120px" class="white inner">
+        <v-layout class="white inner">
             <v-flex xs12 lg6 class="listing">
                 <div class="block">
                     <div class="img">
@@ -36,7 +36,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="block">
+                <div class="block" style="margin-bottom: 0">
                     <div class="img">
                         <img
                             svg-inline
@@ -56,10 +56,8 @@
                 </div>
             </v-flex>
             <v-flex flex xs12 lg6 class="section4_descr">
-                <Header1 class="pad16 white"
-                    >На основе лучших стандартов</Header1
-                >
-                <RegularMd class="pad16 white" style="margin: 16px 0">
+                <Header1 class="white">На основе лучших стандартов</Header1>
+                <RegularMd class="white">
                     Наши тесты и все рекомендации, которые вы получаете,
                     составлены на основе материалов, подготовленных ведущими
                     российскими медицинскими учреждениями
@@ -67,7 +65,7 @@
                 <Button class="black">Начать</Button>
             </v-flex>
         </v-layout>
-        <v-layout class="pad16" align-center justify-center>
+        <v-layout align-center justify-center>
             <div class="note white">
                 Сервис соответствует Федеральному закону № 152-ФЗ «О
                 персональных данных»

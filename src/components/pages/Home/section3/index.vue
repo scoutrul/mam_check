@@ -4,11 +4,11 @@
         style="text-align: center; margin-bottom: -120px; z-index: 2;"
     >
         <Header1 class="pad16">Что дальше?</Header1>
-        <RegularLg class="pad16 max760">
-            После прохождения тестов вы получите полное заключение с
-            рекомендациями и узнаете совершенно бесплатно:
+        <RegularLg class="regular pad16 max760">
+            После прохождения тестов вы получите полное заключение<br />
+            с рекомендациями и узнаете совершенно бесплатно:
         </RegularLg>
-        <v-layout style="padding-top: 120px" class="white inner">
+        <v-layout class="white inner">
             <v-flex justify-space-between class="pad16 listing">
                 <div class="black block">
                     <div class="icon">

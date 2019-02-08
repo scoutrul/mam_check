@@ -23,20 +23,3 @@
 			transition $transition_hover
 			&:hover
 				color $Lighter_Text
-
-.footer__menu
-	@media(max-width: $MD_break)
-		flex: 1 1 100%;
-		order 0 !important
-	.menu
-		flex-flow row wrap
-		margin-bottom 24px
-		justify-content: flex-end;
-		@media(max-width: $MD_break)
-			justify-content: flex-start;
-			li
-				margin 0 20px 0 0
-		@media(max-width: $XS_break)
-			li
-				margin 0
-			flex-flow column wrap

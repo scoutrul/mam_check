@@ -16,7 +16,7 @@
                     диспансеризации в вашей поликлинике и вы сэкономите свое
                     время</RegularLg
                 >
-                <v-layout class="pad16" align-center>
+                <v-layout class="section2__button" align-center>
                     <Button class="black">Начать</Button>
                     <div class="note">Можно продолжить в любое время</div>
                 </v-layout>
