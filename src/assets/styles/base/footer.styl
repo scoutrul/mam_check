@@ -1,8 +1,15 @@
 @import '../vars/index.styl';
 
 .footer
-	display flex
+	margin-top 160px
+	display flex;
+	overflow hidden
 	&__container
+		transform: translateY(100%);
+		&.animateShow {
+			transform: translateY(0);
+			transition: $transition_footer .25s
+		}
 		height: fit-content;
 		align-items: center;
 		flex-direction: row !important;

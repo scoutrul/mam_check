@@ -2,11 +2,7 @@
     <v-app>
         <Main>
             <Button class="button__fix">Начать</Button>
-            <Header
-                ref="header"
-                :class="[isHeaderScrolled() && 'fixed']"
-                :style="headerHeight"
-            >
+            <Header ref="header" :style="getHeaderHeight">
                 <Container class="header__container">
                     <LogoHeader />
                     <Menu />
@@ -19,8 +15,11 @@
                     <router-view />
                 </v-fade-transition>
             </Body>
-            <Footer>
-                <Container class="footer__container">
+            <Footer ref="footer">
+                <Container
+                    class="footer__container"
+                    :class="[isFooterShow() && 'animateShow']"
+                >
                     <v-flex
                         order-xs1
                         order-sm1
@@ -71,22 +70,27 @@ export default {
         return {
             isCheckupDone: false,
             offsetTop: 0,
-            headerOffset: 0,
-            headerSize: `64px`,
-            headerBigSize: `128px`,
+            outerHeight: 0,
+            footerHeight: 0,
+            headerHeight: 0,
+            headerSize: {
+                small: `64px`,
+                big: `128px`,
+            },
         };
     },
     computed: {
-        headerHeight() {
+        getHeaderHeight() {
             return {
                 height: this.isHeaderScrolled()
-                    ? this.headerSize
-                    : this.headerBigSize,
+                    ? this.headerSize.small
+                    : this.headerSize.big,
             };
         },
     },
     mounted() {
-        this.headerOffset = this.$refs.header.$el.clientHeight;
+        this.headerHeight = this.$refs.header.$el.clientHeight;
+        this.footerHeight = this.$refs.footer.$el.clientHeight;
         this.registerHandlers();
         console.log('this', this);
     },
@@ -100,7 +104,10 @@ export default {
     },
     methods: {
         isHeaderScrolled() {
-            return this.offsetTop >= this.headerOffset;
+            return this.offsetTop >= this.headerHeight;
+        },
+        isFooterShow() {
+            return this.offsetTop >= this.footerHeight + this.outerHeight;
         },
         registerHandlers() {
             window.addEventListener('scroll', this.handlerScrollWindow);
@@ -110,6 +117,7 @@ export default {
         },
         handlerScrollWindow() {
             this.offsetTop = window.pageYOffset;
+            this.outerHeight = window.outerHeight;
         },
     },
 
