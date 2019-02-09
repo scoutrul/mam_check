@@ -1,8 +1,19 @@
 @import '~@/assets/styles/vars/index.styl';
 
 .section5 {
-	@media (max-width $cta_button_brake) {
-		flex-flow column wrap
+	.container {
+		@media (min-width $LG_break) {
+			padding: 0
+		}
+	}
+	.section5__content {
+		@media (max-width $cta_button_brake) {
+			flex-flow column wrap
+		}
+		@media (min-width $MD_break) {
+			flex-flow row nowrap
+		}
+	
 	}
 	&__regular {
 		max-width: 400px;
@@ -13,6 +24,10 @@
 		color $Lighter_Text
 		max-width: 400px;
 		margin: 20px 0;
+		@media (max-width $XS_break) {
+			transform: translateY(280px);
+			flex-flow: column nowrap;
+		}
 		.icon {
 			margin-right 8px
 		}
@@ -25,14 +40,15 @@
 			flex-flow column wrap
 		}
 		svg {
-			min-width 775px
+			min-width: 715px;
 			max-width 100%
 			@media (max-width $XL_break) {
-				min-width 500px
+				transform: scale(0.8) translateX(-10%);
 			}
 
 			@media (max-width $XS_break) {
-				min-width 100%
+   				transform: scale(0.46) translateX(-60%) translateY(-240px)
+    			transform-origin: top;
 			}
 
 		}

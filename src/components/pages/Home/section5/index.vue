@@ -1,13 +1,13 @@
 <template>
     <Section class="section5">
-        <v-layout>
-            <v-flex flex sm6 xs12>
+        <v-layout class="section5__content">
+            <v-flex flex lg5 sm6 class="container">
                 <Header1 class="pad16">Запишитесь в клинику</Header1>
                 <RegularMd class="pad16 section5__regular">
                     После прохождения теста вы сможете записаться на прием в
                     вашу поликлинику для дальнейшего обследования по программе
                     профосмотров или диспансеризации. Это входит в программу
-                    ОМС, поэтому для вас – совершенно бесплатно
+                    ОМС, поэтому для вас – совершенно бесплатно!
                 </RegularMd>
                 <v-layout align-center class="special flex">
                     <v-flex class="icon">
@@ -24,7 +24,7 @@
                 </v-layout>
                 <div class="pad16"><Button>Начать</Button></div>
             </v-flex>
-            <v-flex sm6 class="section5_pic">
+            <v-flex lg7 sm6 class="section5_pic">
                 <img
                     svg-inline
                     src="@/assets/images/home_zapis.svg"

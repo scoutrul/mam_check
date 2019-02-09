@@ -2,7 +2,7 @@
     <Section bg-color="transparent" class="section1">
         <v-layout :class="[isUnder600() && 'isUnder600']">
             <v-flex class="container" xs12>
-                <Header1 class="section1__header section1__header--wide"
+                <Header1 class="pad16 section1__header section1__header--wide"
                     >Оцените свое здоровье прямо сейчас</Header1
                 >
             </v-flex>
