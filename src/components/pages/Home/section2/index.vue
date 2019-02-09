@@ -1,5 +1,5 @@
 <template>
-    <Section is-top bg-color="#d9f5ff" style="margin-bottom: 80px">
+    <Section is-top bg-color="#d9f5ff">
         <v-layout column class="section2">
             <Header1 class="pad16">С чего начать?</Header1>
             <RegularLg class="pad16 max960">
