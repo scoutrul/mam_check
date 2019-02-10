@@ -22,25 +22,45 @@ const router = new Router({
 			path: '/',
 			name: 'home',
 			component: Home,
+			beforeEnter: (to, from, next) => {
+				console.log('before rote enter');
+				next();
+			},
 		},
 		{
 			path: '/project',
 			name: 'project',
 			component: Project,
+			beforeEnter: (to, from, next) => {
+				console.log('before rote enter');
+				next();
+			},
 		},
 		{
 			path: '/record',
 			name: 'record',
 			component: Record,
+			beforeEnter: (to, from, next) => {
+				console.log('before rote enter');
+				next();
+			},
 		},
 		{
 			path: '/start',
 			name: 'start',
 			component: Start,
+			beforeEnter: (to, from, next) => {
+				console.log('before rote enter');
+				next();
+			},
 		},
 		{
 			path: '/404',
 			component: fortyFour,
+			beforeEnter: (to, from, next) => {
+				console.log('before rote enter');
+				next();
+			},
 		},
 		{
 			path: '*',

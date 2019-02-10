@@ -1,6 +1,6 @@
 <template>
-    <v-btn depressed flat round dark ripple class="button__yellow">
-        <router-link to="/start"> <slot /> </router-link>
+    <v-btn depressed flat round dark ripple class="button__yellow"  to="/start">
+        <slot />
     </v-btn>
 </template>
 
