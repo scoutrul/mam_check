@@ -1,4 +1,5 @@
 import StartButton from './StartButton/StartButton';
+import SimpleButton from './SimpleButton/SimpleButton';
 import Menu from './Menu/Menu';
 import LogoHeader from './Logo/LogoHeader';
 import LogoFooter from './Logo/LogoFooter';
@@ -14,6 +15,7 @@ import {
 
 export {
 	StartButton,
+	SimpleButton,
 	Menu,
 	LogoHeader,
 	Copyrights,
