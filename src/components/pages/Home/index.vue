@@ -23,6 +23,18 @@ export default {
         Section4,
         Section5,
     },
+    beforeRouteEnter(to, from, next) {
+        console.log('beforeRouteEnter', to, from);
+        next();
+    },
+    beforeRouteUpdate(to, from, next) {
+        console.log('beforeRouteUpdate', to, from);
+        next();
+    },
+    beforeRouteLeave(to, from, next) {
+        console.log('beforeRouteLeave', to, from);
+        next();
+    },
 };
 </script>
 <style lang="stylus">

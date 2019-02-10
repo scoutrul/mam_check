@@ -1,4 +1,4 @@
-import Button from './Button/Button';
+import StartButton from './StartButton/StartButton';
 import Menu from './Menu/Menu';
 import LogoHeader from './Logo/LogoHeader';
 import LogoFooter from './Logo/LogoFooter';
@@ -13,7 +13,7 @@ import {
 } from './Typography/index';
 
 export {
-	Button,
+	StartButton,
 	Menu,
 	LogoHeader,
 	Copyrights,

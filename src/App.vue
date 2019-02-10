@@ -1,13 +1,19 @@
 <template>
     <v-app>
         <Main>
-            <Button class="button__fix" :style="isFooterShow() && `bottom: ${footerHeight + 120}px`">Начать</Button>
+            <StartButton
+                class="button__fix"
+                :style="isFooterShow() && `bottom: ${footerHeight + 120}px`"
+                >Начать</StartButton
+            >
             <Header ref="header" :style="getHeaderHeight">
                 <Container class="header__container">
                     <LogoHeader />
                     <Menu />
-                    <Button v-if="isCheckupDone">Скачать анкету</Button>
-                    <Button v-else>Начать</Button>
+                    <StartButton v-if="isCheckupDone"
+                        >Скачать анкету</StartButton
+                    >
+                    <StartButton v-else>Начать</StartButton>
                 </Container>
             </Header>
             <Body>
@@ -50,7 +56,7 @@ import {
     LogoFooter,
     Menu,
     Copyrights,
-    Button,
+    StartButton,
 } from './components/blocks';
 
 export default {
@@ -61,7 +67,7 @@ export default {
         Header,
         Footer,
         Body,
-        Button,
+        StartButton,
         Menu,
         LogoHeader,
         LogoFooter,
@@ -94,9 +100,10 @@ export default {
     mounted() {
         this.headerHeight = this.$refs.header.$el.clientHeight;
         this.footerHeight = this.$refs.footer.$el.clientHeight;
-        this.appHeight = this.$el.clientHeight; 
+        this.appHeight = this.$el.clientHeight;
         this.registerHandlers();
         console.log('this', this);
+        console.log('route', this.$route);
     },
     mutations: {
         SET_NAME: (state, name) => {
@@ -105,15 +112,16 @@ export default {
     },
     beforeDestroy() {
         this.unregisterHandlers();
+        console.log('beforeDestroy');
     },
     methods: {
         isHeaderScrolled() {
             return this.pageYOffset >= this.headerHeight;
         },
         isFooterShow() {
-            console.log( this.pageYOffset , this.appHeight , this.footerHeight , this.innerHeight );
             return (
-                this.pageYOffset >= this.appHeight - this.footerHeight - this.innerHeight  ||
+                this.pageYOffset >=
+                    this.appHeight - this.footerHeight - this.innerHeight ||
                 this.appHeight === this.innerHeight
             );
         },
@@ -126,7 +134,7 @@ export default {
         handlerScrollWindow() {
             this.pageYOffset = window.pageYOffset;
             this.innerHeight = window.innerHeight;
-            this.appHeight = this.$el.clientHeight; 
+            this.appHeight = this.$el.clientHeight;
         },
     },
 

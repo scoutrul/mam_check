@@ -62,7 +62,7 @@
                     составлены на основе материалов, подготовленных ведущими
                     российскими медицинскими учреждениями.
                 </RegularMd>
-                <Button class="black">Начать</Button>
+                <StartButton class="black">Начать</StartButton>
             </v-flex>
         </v-layout>
         <v-layout align-center justify-center>
@@ -75,14 +75,14 @@
 </template>
 
 <script>
-import { Section, Header1, RegularMd, Button } from '../../../blocks';
+import { Section, Header1, RegularMd, StartButton } from '../../../blocks';
 
 export default {
     components: {
         Section,
         Header1,
         RegularMd,
-        Button,
+        StartButton,
     },
 };
 </script>

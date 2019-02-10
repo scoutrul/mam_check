@@ -1,6 +1,6 @@
 <template>
     <v-btn depressed flat round dark ripple class="button__yellow">
-        <slot />
+        <router-link to="/start"> <slot /> </router-link>
     </v-btn>
 </template>
 
@@ -9,5 +9,5 @@ export default {};
 </script>
 
 <style lang="stylus">
-@import './button.styl';
+@import './StartButton.styl';
 </style>

@@ -22,7 +22,7 @@
                         прохождения диспансеризации
                     </v-flex>
                 </v-layout>
-                <div class="pad16"><Button>Начать</Button></div>
+                <div class="pad16"><StartButton>Начать</StartButton></div>
             </v-flex>
             <v-flex lg7 sm6 class="section5_pic">
                 <img
@@ -36,14 +36,14 @@
 </template>
 
 <script>
-import { Section, Header1, RegularMd, Button } from '../../../blocks';
+import { Section, Header1, RegularMd, StartButton } from '../../../blocks';
 
 export default {
     components: {
         Section,
         Header1,
         RegularMd,
-        Button,
+        StartButton,
     },
 };
 </script>

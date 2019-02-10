@@ -17,7 +17,7 @@
                     обследований, которые вы сможете пройти в рамках программы
                     всеобщей диспансеризации. Это совершенно бесплатно!
                 </RegularMd>
-                <div class="pad16"><Button>Начать</Button></div>
+                <div class="pad16"><StartButton>Начать</StartButton></div>
             </v-flex>
             <v-flex xs12 sm5 md7 lg7 class="section1__pic"
                 ><img
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { Section, Header1, RegularMd, Button } from '../../../blocks';
+import { Section, Header1, RegularMd, StartButton } from '../../../blocks';
 import { $viewport } from '../../../../mixins';
 
 export default {
@@ -38,7 +38,7 @@ export default {
         Section,
         Header1,
         RegularMd,
-        Button,
+        StartButton,
     },
     mixins: [$viewport],
 };

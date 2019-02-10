@@ -17,7 +17,7 @@
                     время.</RegularLg
                 >
                 <v-layout class="section2__button" align-center>
-                    <Button class="black">Начать</Button>
+                    <StartButton class="black">Начать</StartButton>
                     <div class="note">Можно продолжить в любое время</div>
                 </v-layout>
             </div>
@@ -26,7 +26,13 @@
 </template>
 
 <script>
-import { Section, Header1, Header2, RegularLg, Button } from '../../../blocks';
+import {
+    Section,
+    Header1,
+    Header2,
+    RegularLg,
+    StartButton,
+} from '../../../blocks';
 
 export default {
     components: {
@@ -34,7 +40,7 @@ export default {
         Header1,
         Header2,
         RegularLg,
-        Button,
+        StartButton,
     },
 };
 </script>
