@@ -3,7 +3,7 @@
 .section5 {
 	.container {
 		@media (min-width $LG_break) {
-			padding: 0
+			padding-right: 0
 		}
 	}
 	.section5__content {
@@ -16,7 +16,9 @@
 	
 	}
 	&__regular {
-		max-width: 400px;
+		@media (min-width $XS_break + 200) {
+			max-width: 400px;
+		}
 	}
 	.special {
 		line-height: 18px;
@@ -24,9 +26,11 @@
 		color $Lighter_Text
 		max-width: 400px;
 		margin: 20px 0;
-		@media (max-width $XS_break) {
+		@media (max-width $XS_break + 200) {
 			transform: translateY(280px);
 			flex-flow: column nowrap;
+			text-align: center;
+			margin: 0 auto
 		}
 		.icon {
 			margin-right 8px
@@ -43,11 +47,14 @@
 			min-width: 715px;
 			max-width 100%
 			@media (max-width $XL_break) {
+				transform: scale(0.8) translateX(10%);
+			}
+			@media (max-width $LG_break) {
 				transform: scale(0.8) translateX(-10%);
 			}
 
-			@media (max-width $XS_break) {
-   				transform: scale(0.46) translateX(-60%) translateY(-240px)
+			@media (max-width $XS_break + 200) {
+   				transform: scale(0.44) translateX(-60%) translateY(-240px)
     			transform-origin: top;
 			}
 

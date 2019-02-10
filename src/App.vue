@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <Main>
-            <Button class="button__fix">Начать</Button>
+            <Button class="button__fix" :style="isFooterShow() && `bottom: ${footerHeight + 120}px`">Начать</Button>
             <Header ref="header" :style="getHeaderHeight">
                 <Container class="header__container">
                     <LogoHeader />
@@ -25,6 +25,8 @@
                         order-sm1
                         order-md3
                         order-lg3
+                        xs12
+                        sm12
                         md5
                         class="footer__menu"
                         ><Menu
@@ -69,10 +71,11 @@ export default {
     data() {
         return {
             isCheckupDone: false,
-            offsetTop: 0,
-            outerHeight: 0,
+            pageYOffset: 0,
+            innerHeight: 0,
             footerHeight: 0,
             headerHeight: 0,
+            appHeight: 0,
             headerSize: {
                 small: `64px`,
                 big: `128px`,
@@ -91,6 +94,7 @@ export default {
     mounted() {
         this.headerHeight = this.$refs.header.$el.clientHeight;
         this.footerHeight = this.$refs.footer.$el.clientHeight;
+        this.appHeight = this.$el.clientHeight; 
         this.registerHandlers();
         console.log('this', this);
     },
@@ -104,10 +108,14 @@ export default {
     },
     methods: {
         isHeaderScrolled() {
-            return this.offsetTop >= this.headerHeight;
+            return this.pageYOffset >= this.headerHeight;
         },
         isFooterShow() {
-            return this.offsetTop >= this.footerHeight + this.outerHeight;
+            console.log( this.pageYOffset , this.appHeight , this.footerHeight , this.innerHeight );
+            return (
+                this.pageYOffset >= this.appHeight - this.footerHeight - this.innerHeight  ||
+                this.appHeight === this.innerHeight
+            );
         },
         registerHandlers() {
             window.addEventListener('scroll', this.handlerScrollWindow);
@@ -116,8 +124,9 @@ export default {
             window.removeEventListener('scroll', this.handlerScrollWindow);
         },
         handlerScrollWindow() {
-            this.offsetTop = window.pageYOffset;
-            this.outerHeight = window.outerHeight;
+            this.pageYOffset = window.pageYOffset;
+            this.innerHeight = window.innerHeight;
+            this.appHeight = this.$el.clientHeight; 
         },
     },
 

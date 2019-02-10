@@ -15,7 +15,7 @@ const config = {
 	mode: env,
 	output: {
 		publicPath: '/',
-		chunkFilename: '[name].bundle.js',
+		chunkFilename: '[name].[contenthash].js',
 	},
 	optimization: {
 		splitChunks: {
@@ -83,8 +83,6 @@ const config = {
 			{
 				test: /\.styl$/,
 				use: [
-					'style-loader',
-					'css-loader',
 					'stylus-loader',
 					'vue-style-loader',
 					'style-loader!css-loader',
