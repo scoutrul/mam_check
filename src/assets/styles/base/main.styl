@@ -2,17 +2,18 @@
 
 body
 	margin 0
+	overflow-y: scroll;
 	*
 		//outline: 1px solid #FCD
 		//outline-offset -1px
 
 	#app
-		overflow-x: hidden;
 		font-family: "GraphikLCG", sans-serif;
 		font-size: 30px;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
 		background-color #FFF
+		overflow hidden
 
 		.container
 			z-index 1
@@ -26,7 +27,8 @@ body
 			@media (min-width 1160px)
 				max-width $XL_break
 		.body
-			margin-top 128px
+			.section1
+				margin-top 128px
 	.white
 		color white !important
 

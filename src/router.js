@@ -13,6 +13,13 @@ const Record = () =>
 const Start = () =>
 	import(/* webpackChunkName: "Start" */ './components/pages/Start');
 
+const beforeEnter = (to, from, next) => {
+	console.log('before rote enter');
+	console.log('from', from);
+	console.log('to', to);
+	next();
+};
+
 Vue.use(Router);
 const router = new Router({
 	mode: 'history',
@@ -22,45 +29,30 @@ const router = new Router({
 			path: '/',
 			name: 'home',
 			component: Home,
-			beforeEnter: (to, from, next) => {
-				console.log('before rote enter');
-				next();
-			},
+			beforeEnter,
 		},
 		{
 			path: '/project',
 			name: 'project',
 			component: Project,
-			beforeEnter: (to, from, next) => {
-				console.log('before rote enter');
-				next();
-			},
+			beforeEnter,
 		},
 		{
 			path: '/record',
 			name: 'record',
 			component: Record,
-			beforeEnter: (to, from, next) => {
-				console.log('before rote enter');
-				next();
-			},
+			beforeEnter,
 		},
 		{
 			path: '/start',
 			name: 'start',
 			component: Start,
-			beforeEnter: (to, from, next) => {
-				console.log('before rote enter');
-				next();
-			},
+			beforeEnter,
 		},
 		{
 			path: '/404',
 			component: fortyFour,
-			beforeEnter: (to, from, next) => {
-				console.log('before rote enter');
-				next();
-			},
+			beforeEnter,
 		},
 		{
 			path: '*',

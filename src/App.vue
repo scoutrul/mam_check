@@ -3,7 +3,11 @@
         <Main>
             <StartButton
                 class="button__fix"
-                :style="isFooterShow() && `bottom: ${footerHeight + 120}px`"
+                :style="
+                    footerAllowPages &&
+                        isFooterShow() &&
+                        `bottom: ${footerHeight + 120}px`
+                "
                 >Начать</StartButton
             >
             <Header ref="header" :style="getHeaderHeight">
@@ -16,12 +20,12 @@
                     <StartButton v-else>Начать</StartButton>
                 </Container>
             </Header>
-            <Body :style="`min-height: ${innerHeight - 100}px`">
+            <Body>
                 <v-fade-transition mode="out-in">
                     <router-view />
                 </v-fade-transition>
             </Body>
-            <Footer ref="footer">
+            <Footer ref="footer" :style="{ opacity: footerAllowPages ? 1 : 0 }">
                 <Container
                     class="footer__container"
                     :class="[isFooterShow() && 'animateShow']"
@@ -95,6 +99,11 @@ export default {
                     ? this.headerSize.small
                     : this.headerSize.big,
             };
+        },
+        footerAllowPages() {
+            const pagesWithFooter = ['home', 'results'];
+            console.log(pagesWithFooter.includes(this.$route.name));
+            return pagesWithFooter.includes(this.$route.name);
         },
     },
     mounted() {
