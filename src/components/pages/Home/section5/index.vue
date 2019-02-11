@@ -1,7 +1,7 @@
 <template>
     <Section class="section5">
         <v-layout class="section5__content">
-            <v-flex flex lg5 sm6 class="container">
+            <v-flex flex lg5 sm6 class="container section5__text">
                 <Header1 class="pad16">Запишитесь в клинику</Header1>
                 <RegularMd class="pad16 section5__regular">
                     После прохождения теста вы сможете записаться на прием в
