@@ -1,5 +1,5 @@
 <template>
-    <v-btn depressed light round ripple class="button__simple" to="/start">
+    <v-btn depressed flat light round ripple class="button__simple">
         <slot />
     </v-btn>
 </template>

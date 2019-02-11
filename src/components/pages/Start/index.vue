@@ -7,11 +7,11 @@
         />
         <div class="title">Укажите Ваш пол</div>
         <v-layout>
-            <v-flex> <SimpleButton>Мужчина</SimpleButton> </v-flex>
+            <v-flex style="margin-right: 16px ">
+                <SimpleButton>Мужчина</SimpleButton>
+            </v-flex>
             <v-flex> <SimpleButton>Женщина</SimpleButton> </v-flex>
         </v-layout>
-        <div>{{ currentStep }}</div>
-        <div>{{ user }}</div>
     </v-layout>
 </template>
 
@@ -57,4 +57,6 @@ export default {
 .title
     line-height: 32px;
     font-size: 20px;
+    margin: 70px;
+    font-weight: bold;
 </style>

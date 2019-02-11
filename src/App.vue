@@ -16,7 +16,7 @@
                     <StartButton v-else>Начать</StartButton>
                 </Container>
             </Header>
-            <Body :style="`min-height: ${innerHeight}px`">
+            <Body :style="`min-height: ${innerHeight - 120}px`">
                 <v-fade-transition mode="out-in">
                     <router-view />
                 </v-fade-transition>
@@ -101,7 +101,6 @@ export default {
         this.headerHeight = this.$refs.header.$el.clientHeight;
         this.footerHeight = this.$refs.footer.$el.clientHeight;
         this.appHeight = this.$el.clientHeight;
-        this.appHeightinit = this.$el.clientHeight;
         this.innerHeight = window.innerHeight;
         this.registerHandlers();
         console.log('this', this);

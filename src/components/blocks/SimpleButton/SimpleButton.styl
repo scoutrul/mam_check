@@ -1,23 +1,38 @@
 @import '../../../assets/styles/vars/index.styl';
 .button__simple
-	border-color: $Main_White
 	background-color $Main_White
+	color $Main_White
+	border: 1px solid $Borders_Grey;
+	width: 240px;
+	height: 48px;
 	margin 0
-	width 100%
 	flex: 1 1 120px;
 	max-width 240px
-	height 50px
 	max-height 50px
 	bottom 0;
 	cursor pointer
-	border 0
 	display flex
+	&:before {
+		transition $transition_hover 0s !important
+	}
+	&:hover, &:focus {
+		background-color $Special_Blue !important
+		color white !important
+		border: 0px solid $Special_Blue;
+		.v-btn__content, a {
+			color white
+			&:hover {
+				color white
+			}
+		}
+	}
 	@media (max-width $cta_button_brake)
 		display none
 	.v-btn__content, a
 		color $Black_Text
 		text-transform: none
-		font-weight: bold;
+		font-weight: normal;
 		font-size 16px
+		transition 0
 		&:hover
 			color $Lighter_Text
