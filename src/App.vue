@@ -25,7 +25,10 @@
                     <router-view />
                 </v-fade-transition>
             </Body>
-            <Footer ref="footer" :style="{ opacity: footerAllowPages ? 1 : 0 }">
+            <Footer
+                ref="footer"
+                :style="{ display: footerAllowPages ? 'flex' : 'none' }"
+            >
                 <Container
                     class="footer__container"
                     :class="[isFooterShow() && 'animateShow']"
