@@ -6,10 +6,8 @@
             alt="Укажите Ваш пол"
         />
         <div class="title">Укажите Ваш пол</div>
-        <v-layout>
-            <v-flex style="margin-right: 16px ">
-                <SimpleButton>Мужчина</SimpleButton>
-            </v-flex>
+        <v-layout wrap justify-center>
+            <v-flex> <SimpleButton>Мужчина</SimpleButton> </v-flex>
             <v-flex> <SimpleButton>Женщина</SimpleButton> </v-flex>
         </v-layout>
     </v-layout>
@@ -54,9 +52,11 @@ export default {
 <style lang="stylus">
 .pretest
     margin-top: 120px
-.title
-    line-height: 32px;
-    font-size: 20px;
-    margin: 70px;
-    font-weight: bold;
+    img, svg
+        max-width: 100%;
+    .title
+        line-height: 32px;
+        font-size: 20px;
+        margin: 70px;
+        font-weight: bold;
 </style>

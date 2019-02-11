@@ -5,7 +5,7 @@
 	border: 1px solid $Borders_Grey;
 	width: 240px;
 	height: 48px;
-	margin 0
+	margin auto
 	flex: 1 1 120px;
 	max-width 240px
 	max-height 50px
@@ -26,13 +26,11 @@
 			}
 		}
 	}
-	@media (max-width $cta_button_brake)
-		display none
 	.v-btn__content, a
 		color $Black_Text
 		text-transform: none
 		font-weight: normal;
 		font-size 16px
-		transition 0
+		transition none
 		&:hover
 			color $Lighter_Text
