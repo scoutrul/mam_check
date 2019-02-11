@@ -16,7 +16,7 @@
                     <StartButton v-else>Начать</StartButton>
                 </Container>
             </Header>
-            <Body :style="`min-height: ${innerHeight - 120}px`">
+            <Body :style="`min-height: ${innerHeight - 100}px`">
                 <v-fade-transition mode="out-in">
                     <router-view />
                 </v-fade-transition>
@@ -28,7 +28,7 @@
                 >
                     <v-flex
                         order-xs1
-                        order-sm1
+                        order-sm3
                         order-md3
                         order-lg3
                         xs12

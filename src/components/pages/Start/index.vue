@@ -6,9 +6,13 @@
             alt="Укажите Ваш пол"
         />
         <div class="title">Укажите Ваш пол</div>
-        <v-layout wrap justify-center>
-            <v-flex> <SimpleButton>Мужчина</SimpleButton> </v-flex>
-            <v-flex> <SimpleButton>Женщина</SimpleButton> </v-flex>
+        <v-layout justify-center class="pretest__buttons">
+            <v-flex class="pretest__buttons_item xs12">
+                <SimpleButton>Мужчина</SimpleButton>
+            </v-flex>
+            <v-flex class="pretest__buttons_item xs12">
+                <SimpleButton>Женщина</SimpleButton>
+            </v-flex>
         </v-layout>
     </v-layout>
 </template>
@@ -41,7 +45,7 @@ export default {
             } else if (
                 this.user.gender &&
                 this.user.birthDate &&
-                !(this.user.width && this.user.heihgt)
+                !(this.user.width && this.user.height)
             ) {
                 this.currentStep = 3;
             }
@@ -50,13 +54,5 @@ export default {
 };
 </script>
 <style lang="stylus">
-.pretest
-    margin-top: 120px
-    img, svg
-        max-width: 100%;
-    .title
-        line-height: 32px;
-        font-size: 20px;
-        margin: 70px;
-        font-weight: bold;
+@import './styles.styl';
 </style>

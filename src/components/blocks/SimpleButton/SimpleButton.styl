@@ -3,15 +3,18 @@
 	background-color $Main_White
 	color $Main_White
 	border: 1px solid $Borders_Grey;
-	width: 240px;
+	width: 100%;
+	max-width: 240px;
 	height: 48px;
 	margin auto
-	flex: 1 1 120px;
-	max-width 240px
+	flex: 1 1 360px;
 	max-height 50px
 	bottom 0;
 	cursor pointer
 	display flex
+	@media(max-width: $XS_break) {
+		max-width: 360px;
+	}
 	&:before {
 		transition $transition_hover 0s !important
 	}
