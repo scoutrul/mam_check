@@ -7,17 +7,18 @@ import getters from './getters';
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
-	state: {
-		tests: null,
-		user: {
-			gender: null,
-			birthDate: null,
-			height: null,
-			weight: null,
-		},
+const state = {
+	tests: null,
+	user: {
+		gender: null,
+		birthDate: null,
+		height: null,
+		weight: null,
 	},
+};
 
+export default new Vuex.Store({
+	state,
 	getters,
 	mutations,
 	actions,
@@ -36,5 +37,3 @@ const store = new Vuex.Store({
 		},
 	},
 });
-
-export default store;
