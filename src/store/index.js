@@ -10,6 +10,12 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
 	state: {
 		tests: null,
+		user: {
+			gender: null,
+			birthDate: null,
+			height: null,
+			weight: null,
+		},
 	},
 
 	getters,

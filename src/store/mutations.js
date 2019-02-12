@@ -5,4 +5,7 @@ export default {
 	ADD_TEST: (state, payload) => {
 		state.tests.push(payload);
 	},
+	SET_GENDER: (state, payload) => {
+		state.user.push(payload);
+	},
 };

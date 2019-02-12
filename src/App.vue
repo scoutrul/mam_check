@@ -27,7 +27,7 @@
             </Body>
             <Footer
                 ref="footer"
-                :style="{ display: footerAllowPages ? 'flex' : 'none' }"
+                :class="[!footerAllowPages && 'footer-display-none']"
             >
                 <Container
                     class="footer__container"
@@ -104,8 +104,7 @@ export default {
             };
         },
         footerAllowPages() {
-            const pagesWithFooter = ['home', 'results'];
-            console.log(pagesWithFooter.includes(this.$route.name));
+            const pagesWithFooter = ['home', 'checkup'];
             return pagesWithFooter.includes(this.$route.name);
         },
     },
@@ -172,4 +171,7 @@ export default {
 
 <style lang="stylus">
 @import '~@/assets/styles/index.styl';
+.footer-display-none {
+    display none
+}
 </style>

@@ -23,13 +23,37 @@
 	&:hover, &:focus {
 		background-color $Special_Blue !important
 		color white !important
-		border: 0px solid $Special_Blue;
+		border: 1px solid $Special_Blue;
 		position: inherit
 		.v-btn__content, a {
 			color white
 			&:hover {
 				color white
 			}
+		}
+	}
+	&--next {
+		background-color $Special_Blue
+		.v-btn__content, a {
+			color white !important
+		}
+		&:hover, &:focus {
+			background-color $Special_Blue !important
+			color white !important
+			border: 1px solid $Special_Blue;
+			position: inherit
+		}
+	}
+	&--disabled {
+		background: $Borders_Grey;
+		.v-btn__content {
+			color: #FFFFFF !important;
+		}
+		&:hover, &:focus {
+			background: $Borders_Grey !important
+			color white !important
+			border: 1px solid white;
+			cursor default
 		}
 	}
 	.v-btn__content, a

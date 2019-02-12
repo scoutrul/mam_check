@@ -7,7 +7,7 @@
         dark
         ripple
         class="button__yellow"
-        to="/start"
+        to="/checkup"
     >
         <slot />
     </v-btn>

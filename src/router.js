@@ -10,18 +10,16 @@ const Project = () =>
 	import(/* webpackChunkName: "Project" */ './components/pages/Project');
 const Record = () =>
 	import(/* webpackChunkName: "Record" */ './components/pages/Record');
-const Start = () =>
-	import(/* webpackChunkName: "Start" */ './components/pages/Start');
-
-const beforeEnter = (to, from, next) => {
-	console.log('before rote enter');
-	console.log('from', from);
-	console.log('to', to);
-	next();
-};
+const Pretest = () =>
+	import(/* webpackChunkName: "Pretest" */ './components/pages/PreTest');
+const Checkup = () =>
+	import(/* webpackChunkName: "Checkup" */ './components/pages/Checkup');
 
 Vue.use(Router);
+
 const router = new Router({
+	saveScrollPosition: true,
+	history: true,
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes: [
@@ -29,30 +27,30 @@ const router = new Router({
 			path: '/',
 			name: 'home',
 			component: Home,
-			beforeEnter,
 		},
 		{
 			path: '/project',
 			name: 'project',
 			component: Project,
-			beforeEnter,
 		},
 		{
 			path: '/record',
 			name: 'record',
 			component: Record,
-			beforeEnter,
 		},
 		{
-			path: '/start',
-			name: 'start',
-			component: Start,
-			beforeEnter,
+			path: '/pretest',
+			name: 'pretest',
+			component: Pretest,
+		},
+		{
+			path: '/checkup',
+			name: 'checkup',
+			component: Checkup,
 		},
 		{
 			path: '/404',
 			component: fortyFour,
-			beforeEnter,
 		},
 		{
 			path: '*',
