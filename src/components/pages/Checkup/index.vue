@@ -19,22 +19,47 @@
                             svg-inline
                             src="@/assets/images/test_icon.svg"
                             alt="icon"/>'
-                        color="yellow"
+                        color="#FEE245"
                         shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
                         :questionsNum="10"
                         :completedNum="5"
                         :resetSelf="resetTestItem"
                     />
                     <TestItem 
+                        name="Здоровое дыхание"
+                        icon='<img
+                            svg-inline
+                            src="@/assets/images/test_icon.svg"
+                            alt="icon"/>'
+                        color="#FEE245"
+                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        :questionsNum="10"
+                        :completedNum="0"
+                        :resetSelf="resetTestItem"
+                    />
+                    <TestItem 
+                        name="Здоровое дыхание"
+                        icon='<img
+                            svg-inline
+                            src="@/assets/images/test_icon.svg"
+                            alt="icon"/>'
+                        color="#FEE245"
+                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        :questionsNum="10"
+                        :completedNum="10"
+                        :resetSelf="resetTestItem"
+                    />
+                    <TestItem 
                         name="Мозговое кровообращение"
+                        color="#EF4D4D"
                         shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
                         :questionsNum="10"
                         :resetSelf="resetTestItem"
                     />
                     <TestItem 
                         name="Мозговое кровообращение"
-                        color="red"
-                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        color="#58B379"
+                        shortDescription="Не кушайте с пола"
                         :questionsNum="10"
                         :completedNum="10"
                         :resetSelf="resetTestItem"
