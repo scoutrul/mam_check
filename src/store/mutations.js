@@ -9,6 +9,6 @@ export default {
 		state.user.push(payload);
 	},
 	SAVE_PRETEST: (state, payload) => {
-		state.user = { ...state.user, ...payload, isUserInfoDone: true };
+		state.user = { ...state.user, ...payload };
 	},
 };
