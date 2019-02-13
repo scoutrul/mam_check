@@ -131,6 +131,7 @@ export default {
     },
     data: () => ({
         user: {
+            isUserInfoDone: false,
             birthday: '',
             gender: '',
             height: '',
@@ -173,7 +174,8 @@ export default {
             }
         },
         goNextPage() {
-            // store data .then
+            this.user.isUserInfoDone = true;
+            this.$store.dispatch('storePreTest', this.user);
             this.$router.push('/checkup');
         },
     },

@@ -1,25 +1,33 @@
 <template>
-    <v-fade-transition mode="out-in"> <div>Checkup</div> </v-fade-transition>
+        <Section>
+            <v-flex class="black">checkup</v-flex>
+            
+        </Section>
 </template>
 
 <script>
+import { Section } from '../../blocks';
 export default {
-    components: {},
+    components: {
+        Section
+    },
     data: () => ({}),
     created() {
-        // if user data is NOT complete
-        if (!true) {
-            this.$router.push('checkup');
-        } else {
-            this.$router.push('pretest');
+       this.redirectToPreTest();
+    },
+    computed: {
+        isUserInfoDone(){
+            return this.$store.getters.isUserInfoDone;
         }
     },
-    beforeRouteEnter(to, from, next) {
-        console.log('beforeRouteEnter Checkup');
-        next();
+    methods: {
+        redirectToPreTest(){
+            // if user data is NOT complete then redirect to pretest page
+            if (!this.isUserInfoDone) {
+                this.$router.push('pretest');
+            }
+        }
     },
-
-    methods: {},
 };
 </script>
 <style lang="stylus"></style>

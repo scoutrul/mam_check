@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <Main>
+        <Main style="margin-top: 128px;">
             <StartButton
                 class="button__fix"
                 :style="

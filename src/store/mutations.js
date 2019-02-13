@@ -8,4 +8,7 @@ export default {
 	SET_GENDER: (state, payload) => {
 		state.user.push(payload);
 	},
+	SAVE_PRETEST: (state, payload) => {
+		state.user = { ...state.user, ...payload, isUserInfoDone: true };
+	},
 };

@@ -8,8 +8,11 @@ import getters from './getters';
 Vue.use(Vuex);
 
 const state = {
-	tests: null,
+	settings: {
+		isAnletaAvailable: false,
+	},
 	user: {
+		isUserInfoDone: false,
 		gender: null,
 		birthDate: null,
 		height: null,
@@ -22,18 +25,4 @@ export default new Vuex.Store({
 	getters,
 	mutations,
 	actions,
-
-	created() {
-		// this.fetchTests();
-	},
-
-	computed: {
-		fetchTests() {
-			this.$store.dispatch('GET_TESTS');
-		},
-
-		testsList() {
-			return this.$store.getters.TESTS;
-		},
-	},
 });

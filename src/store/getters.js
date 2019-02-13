@@ -1,3 +1,3 @@
 export default {
-	TESTS: state => state.tests,
+	isUserInfoDone: state => state.user.isUserInfoDone,
 };
