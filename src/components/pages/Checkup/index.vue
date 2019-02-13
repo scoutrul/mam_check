@@ -10,19 +10,39 @@
                 В этом году вам доступна диспансеризация</v-flex>
         
         
-            <v-flex class="black">
+            <v-flex>
                 <Header4>Непройденные тесты</Header4>
-                <v-layout column>
+                <v-layout column class="testItems_list">
                     <TestItem 
-                        name="name"
-                        icon="icon"
-                        color="color"
-                        shortDescription="shortDescription"
-                        :questionsNum="11"
-                        :completedNum="4"
-                        :resetSelf="function non(){ return 'func'}"
-                        treatment="treatment"
-                        :recommendations="['recommendatio']"
+                        name="Здоровое дыхание"
+                        icon='<img
+                            svg-inline
+                            src="@/assets/images/test_icon.svg"
+                            alt="icon"/>'
+                        color="yellow"
+                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        :questionsNum="10"
+                        :completedNum="5"
+                        :resetSelf="resetTestItem"
+                    />
+                    <TestItem 
+                        name="Мозговое кровообращение"
+                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        :questionsNum="10"
+                        :resetSelf="resetTestItem"
+                    />
+                    <TestItem 
+                        name="Мозговое кровообращение"
+                        color="red"
+                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        :questionsNum="10"
+                        :completedNum="10"
+                        :resetSelf="resetTestItem"
+                        treatment="У Вас повышен риск развития сердечно-сосудитстых заболеваний. Откажитесь от курения - это очень важно для Вас! Проходить пешком 
+                                в день в среднем или высоком темпе 30 минут и более или 3 км. 
+
+                                Контролируйте уровень Вашего артериального давления и обязательно периодически проверяйте уровень холестерина в крови."
+                        :recommendations="['больше спите', 'лучше питайтесь', 'радуйтесь']"
                     />
                 </v-layout>
             </v-flex>
@@ -58,8 +78,14 @@ export default {
             if (!this.isUserInfoDone) {
                 this.$router.push('pretest');
             }
+        },
+        resetTestItem(){
+            console.log('resetItem')
         }
     },
 };
 </script>
-<style lang="stylus"></style>
+<style lang="stylus">
+.testItems_list
+    margin-top 16px
+</style>

@@ -1,0 +1,78 @@
+@import '../../../assets/styles/vars/index.styl';
+.testItem 
+    box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
+    border-radius: 8px;
+    margin 12px 0
+    padding: 20px
+    &--done
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+        border-left: 2px solid currentColor;
+    &__header
+        align-items: center;
+    &__header_2
+        flex-direction: row
+        @media (max-width $MD_break)
+            flex-direction:column
+    &__info 
+        display flex
+        justify-content: flex-end;    
+        @media (max-width $MD_break)
+            justify-content: flex-start;   
+
+    // &__icon, &__name, &__info 
+    &__icon 
+        flex: 0 0 24px;
+        display: flex;
+        margin-right: 32px
+    &__name 
+        font-weight: bold;
+    &__short
+        color $Lighter_Text
+    &__progress
+        color $Special_Blue
+    &__treatment
+        flex-direction: row
+        @media (max-width $MD_break)
+            flex-direction:column
+        &_info
+            line-height: 22px;
+            font-size: 15px;
+            color: #1E1E1E;
+            margin 24px 0
+    &__recommendations 
+        margin-top 16px
+        align-items: center;
+        &_label
+            line-height: 34px;
+            font-size: 13px;
+            color: #ABB8C7;
+            margin-right: 16px;
+            flex: 1 1 auto;
+            @media (max-width $MD_break)
+                min-width: 100%
+        display: flex
+        flex-wrap: wrap;
+        @media (max-width $XS_break)
+            flex-direction: column
+            align-items: flex-start;
+        &_item
+            @media (min-width $XS_break)
+                max-width: fit-content; 
+            justify-content: center;
+            align-items: center;
+            display: flex;
+            flex 1 1 auto
+            white-space: nowrap
+            background: #F2F5F9;
+            border-radius: 200px;
+            line-height: 18px;
+            font-size: 13px;
+            text-align: center;
+            color: #1E1E1E;
+            padding 8px 16px
+            margin 8px 4px
+            &:first-child
+                margin-left 0
+            &:last-child
+                margin-right 0
