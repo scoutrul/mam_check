@@ -1,8 +1,18 @@
 <template>
+    <v-layout column>
         <Section>
-            <v-flex class="black">checkup</v-flex>
-            
+            <v-flex class="black">Анкета заполнена на 72%</v-flex>
         </Section>
+        <Section>
+            <v-flex class="black">В этом году вам доступна диспансеризация</v-flex>
+        </Section>
+        <Section>
+            <v-flex class="black">Непройденные тесты</v-flex>
+        </Section>
+        <Section>
+            <v-flex class="black">Пройденные тесты</v-flex>
+        </Section>
+    </v-layout>
 </template>
 
 <script>
@@ -13,7 +23,7 @@ export default {
     },
     data: () => ({}),
     created() {
-       this.redirectToPreTest();
+    //    this.redirectToPreTest();
     },
     computed: {
         isUserInfoDone(){
