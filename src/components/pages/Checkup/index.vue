@@ -1,38 +1,60 @@
 <template>
-    <v-layout column>
-        <Section>
-            <v-flex class="black">Анкета заполнена на 72%</v-flex>
-        </Section>
-        <Section>
-            <v-flex class="black">В этом году вам доступна диспансеризация</v-flex>
-        </Section>
-        <Section>
-            <v-flex class="black">Непройденные тесты</v-flex>
-        </Section>
-        <Section>
-            <v-flex class="black">Пройденные тесты</v-flex>
-        </Section>
+    <v-layout column class="container">
+        
+            <v-flex class="black">
+                <Header1>Анкета заполнена на <span style="color: #00BAFF">72%</span></Header1>
+            </v-flex>
+        
+        
+            <v-flex class="black">
+                В этом году вам доступна диспансеризация</v-flex>
+        
+        
+            <v-flex class="black">
+                <Header4>Непройденные тесты</Header4>
+                <v-layout column>
+                    <TestItem 
+                        name="name"
+                        icon="icon"
+                        color="color"
+                        shortDescription="shortDescription"
+                        :questionsNum="11"
+                        :completedNum="4"
+                        :resetSelf="function non(){ return 'func'}"
+                        treatment="treatment"
+                        :recommendations="['recommendatio']"
+                    />
+                </v-layout>
+            </v-flex>
+        
+        
+            <v-flex class="black">
+                <Header4>Пройденные тесты</Header4>
+            </v-flex>
+        
     </v-layout>
 </template>
 
 <script>
-import { Section } from '../../blocks';
+import { mapGetters } from 'vuex';
+import { Section, Header1 , Header4, TestItem } from '../../blocks';
+
 export default {
     components: {
-        Section
+        Section, 
+        Header1,
+        Header4,
+        TestItem
     },
     data: () => ({}),
     created() {
     //    this.redirectToPreTest();
     },
-    computed: {
-        isUserInfoDone(){
-            return this.$store.getters.isUserInfoDone;
-        }
-    },
+    ...mapGetters({
+        isUserInfoDone: 'isUserInfoDone',
+    }),
     methods: {
         redirectToPreTest(){
-            // if user data is NOT complete then redirect to pretest page
             if (!this.isUserInfoDone) {
                 this.$router.push('pretest');
             }
