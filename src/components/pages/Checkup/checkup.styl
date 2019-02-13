@@ -1,0 +1,44 @@
+@import '~@/assets/styles/vars/index.styl';
+
+.testItems_list
+    margin-top 16px
+.checkup__section
+    margin-bottom: 32px;    
+.banner {
+    margin-top 32px
+    margin-bottom 64px
+    text-align left
+    color #FFF
+    background: $Special_Blue
+    box-shadow: 0px 20px 50px rgba(19, 24, 31, 0.1);
+    border-radius: 16px;
+    flex-flow: column wrap !important;
+    padding 24px 52px
+    
+    @media (min-width $LG_break) {
+        background-image url("~@/assets/images/banner_bg.svg")
+    }
+    background-position: 101% top;
+    background-repeat: no-repeat;
+    background-size contain
+    p, h1, h2 {
+        color #FFF
+    }
+    p {
+        max-width 680px
+        @media (max-width $cta_button_brake) {
+            font-size: 16px
+        }
+    }
+    button {
+        margin 32px 16px 24px 0
+        border-color #FFF !important
+        .v-btn__content {
+            color $Special_Blue
+        }
+    }
+
+}
+&__button {
+    margin 32px 0 28px
+}

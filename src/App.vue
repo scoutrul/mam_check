@@ -6,7 +6,7 @@
                 :style="
                     footerAllowPages &&
                         isFooterShow() &&
-                        `bottom: ${footerHeight + 120}px`
+                        `bottom: ${footerHeight + 184}px`
                 "
                 >Начать</StartButton
             >

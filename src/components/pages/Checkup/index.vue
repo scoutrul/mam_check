@@ -1,16 +1,25 @@
 <template>
-    <v-layout column class="container">
-        
+    <v-layout column class="container checkup">
             <v-flex class="black">
                 <Header1>Анкета заполнена на <span style="color: #00BAFF">72%</span></Header1>
             </v-flex>
-        
-        
             <v-flex class="black">
-                В этом году вам доступна диспансеризация</v-flex>
-        
-        
-            <v-flex>
+                <div class="banner">
+                <Header2 class="pad16">Комплексное тестирование</Header2>
+                <RegularLg class="pad16"
+                    >Пройдя проверку, вы получите список персональных
+                    рекомендаций по состоянию вашего здоровья. Кроме того, мы
+                    заполним анкету для прохождения профосмотра или
+                    диспансеризации в вашей поликлинике и вы сэкономите свое
+                    время.</RegularLg
+                >
+                <v-layout class="section2__button" align-center>
+                    <SimpleButton>Продолжить заполнение</SimpleButton>
+                    <SimpleButton>Начать заново</SimpleButton>
+                </v-layout>
+            </div>
+            </v-flex>
+            <v-flex class="checkup__section">
                 <Header4>Непройденные тесты</Header4>
                 <v-layout column class="testItems_list">
                     <TestItem 
@@ -19,20 +28,7 @@
                             svg-inline
                             src="@/assets/images/test_icon.svg"
                             alt="icon"/>'
-                        color="#FEE245"
-                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
-                        :questionsNum="10"
-                        :completedNum="5"
-                        :resetSelf="resetTestItem"
-                    />
-                    <TestItem 
-                        name="Здоровое дыхание"
-                        icon='<img
-                            svg-inline
-                            src="@/assets/images/test_icon.svg"
-                            alt="icon"/>'
-                        color="#FEE245"
-                        shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
+                        shortDescription="Аверьте, нет ли у вас Пр заболеваний или легких"
                         :questionsNum="10"
                         :completedNum="0"
                         :resetSelf="resetTestItem"
@@ -43,19 +39,28 @@
                             svg-inline
                             src="@/assets/images/test_icon.svg"
                             alt="icon"/>'
-                        color="#FEE245"
                         shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
                         :questionsNum="10"
-                        :completedNum="10"
+                        :completedNum="3"
                         :resetSelf="resetTestItem"
                     />
                     <TestItem 
-                        name="Мозговое кровообращение"
-                        color="#EF4D4D"
+                        name="Здоровое дыхание"
+                        icon='<img
+                            svg-inline
+                            src="@/assets/images/test_icon.svg"
+                            alt="icon"/>'
                         shortDescription="Проверьте, нет ли у вас заболеваний легких или бронхов"
                         :questionsNum="10"
+                        :completedNum="7"
                         :resetSelf="resetTestItem"
                     />
+                </v-layout>
+            </v-flex>
+        
+            <v-flex class="checkup__section">
+                <Header4>Пройденные тесты</Header4>
+                <v-layout column class="testItems_list">
                     <TestItem 
                         name="Мозговое кровообращение"
                         color="#58B379"
@@ -69,12 +74,16 @@
                                 Контролируйте уровень Вашего артериального давления и обязательно периодически проверяйте уровень холестерина в крови."
                         :recommendations="['больше спите', 'лучше питайтесь', 'радуйтесь']"
                     />
+                    <TestItem 
+                        name="Вредные привычки"
+                        color="#58B379"
+                        shortDescription="Не кушайте с пола"
+                        :questionsNum="10"
+                        :completedNum="10"
+                        :resetSelf="resetTestItem"
+                        treatment="Вы можете выпить рюмку-другую за праздничным столом или на дне рождения у друзей. И все-таки больше того, что Вы употребляете, пить не нужно! Ведите здоровый образ жизни, проходите в день пешком 30 минут и больше или не менее 3 км, ешьте не менее 400 г фруктов и овощей в день, не курите!"
+                    />
                 </v-layout>
-            </v-flex>
-        
-        
-            <v-flex class="black">
-                <Header4>Пройденные тесты</Header4>
             </v-flex>
         
     </v-layout>
@@ -82,14 +91,17 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { Section, Header1 , Header4, TestItem } from '../../blocks';
+import { Section, Header1 , Header2, Header4, TestItem, RegularLg, SimpleButton } from '../../blocks';
 
 export default {
     components: {
         Section, 
         Header1,
+        Header2,
         Header4,
-        TestItem
+        RegularLg,
+        TestItem,
+        SimpleButton
     },
     data: () => ({}),
     created() {
@@ -111,6 +123,5 @@ export default {
 };
 </script>
 <style lang="stylus">
-.testItems_list
-    margin-top 16px
+@import './checkup.styl';
 </style>

@@ -5,24 +5,24 @@
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
                 <v-flex class="testItem__info">
-                    <template v-if="isInProgress">
-                        <v-flex class="testItem__progress">
-                            <template v-if="isInProgress">
-                                Выполнено {{ completedNum }} / {{ questionsNum }} 
-                                <div class="testItem__progressBar">
-                                    <div class="testItem__progressBar_completed" :style="`transform: translateX(-${ countProgress }%)`"></div>
-                                </div>
-                            </template>
-                            <template v-else-if="itIsCompleted">
+  
+                    <v-flex class="testItem__progress" v-if="isInProgress">
+                            Выполнено {{ completedNum }} / {{ questionsNum }} 
+                            <div class="testItem__progressBar">
+                                <div class="testItem__progressBar_completed" :style="`transform: translateX(-${ 100 - countProgress }%)`"></div>
+                            </div>
+                    </v-flex>
+
+                    <template v-else>
+                        <v-flex class="testItem__short">
+                            <template v-if="itIsCompleted">
                                 <svg width="23" height="24" viewBox="0 0 23 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M22.1094 10.9714C22.0668 10.4071 21.5557 9.98406 21.0224 10.0271C20.4667 10.0567 20.0265 10.5742 20.0915 11.1518C20.3051 13.2251 19.8101 15.387 18.5331 17.2348C16.1152 20.7416 11.4501 21.9567 7.54161 20.1171C2.37948 17.6833 0.528755 11.1649 3.70497 6.52084C6.27424 2.74454 11.3619 1.63029 15.3886 3.89949L14.5814 5.33722C14.2913 5.8539 14.6989 6.51493 15.277 6.49859L20.2827 6.38385C20.8609 6.36751 21.2014 5.76097 20.9133 5.26063L18.5057 0.747663C18.2077 0.211529 17.4695 0.192834 17.1795 0.709519L16.3723 2.14725C11.5271 -0.63754 5.53568 0.539482 2.25266 5.00037C-1.82096 10.5494 0.136169 18.4786 6.18308 21.7368C11.2065 24.4176 17.4599 22.8271 20.4564 18.0764C21.8426 15.8741 22.3415 13.3851 22.1094 10.9714Z" fill="#ABB8C7"/>
                                 </svg>
                             </template>
-                        </v-flex>
-                    </template>
-                    <template v-else>
-                        <v-flex class="testItem__short">
-                            {{ shortDescription }}
+                            <template v-else>
+                                {{ shortDescription }}
+                            </template>
                         </v-flex>
                     </template>
                 </v-flex>
@@ -30,7 +30,7 @@
         </v-layout>
         <v-layout v-if="treatment" column class="testItem__treatment">
             <v-flex v-if="treatment" class="testItem__treatment_info">{{ treatment }}</v-flex>
-            <v-flex v-if="recommendations[0]" class="testItem__recommendations">
+            <v-flex v-if="recommendations" class="testItem__recommendations">
                 <div class="testItem__recommendations_label">Рекомендуемые обследования</div>
                 <div class="testItem__recommendations_item" v-for="(item, index) in recommendations" :key="index">
                     {{ item }}
@@ -50,7 +50,7 @@ export default {
         },
         color: {
             type: String,
-            default: 'transparent',
+            default: '#e6f3ff',
         },
         shortDescription: String,
         questionsNum: Number,
@@ -76,10 +76,10 @@ export default {
     },
     computed: {
         isInProgress() {
-            return this.completedNum > 0 && this.completedNum < this.questionsNum;
+            return (!this.itIsCompleted && this.completedNum > 0);
         },
         itIsCompleted() {
-            return this.completedNum == this.questionsNum;
+            return this.completedNum === this.questionsNum;
         },
         countProgress(){
             return 100 / (this.questionsNum / this.completedNum) ;
