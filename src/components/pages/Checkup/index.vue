@@ -8,13 +8,9 @@
         </v-flex>
         <v-flex class="black">
             <div class="banner">
-                <Header2 class="pad16">Комплексное тестирование</Header2>
+                <Header2 class="pad16">В этом году вам доступна диспансеризация</Header2>
                 <RegularLg class="pad16"
-                    >Пройдя проверку, вы получите список персональных
-                    рекомендаций по состоянию вашего здоровья. Кроме того, мы
-                    заполним анкету для прохождения профосмотра или
-                    диспансеризации в вашей поликлинике и вы сэкономите свое
-                    время.</RegularLg
+                    >Завершите все тесты чекапа и получите информацию по необходимым обследованиям, анализам и диагностике, положенным вам по программе всеобщей диспансеризации. Также вы получите готовую анкету, с которой сможете пройти диспансеризацию в вашей поликлинике</RegularLg
                 >
                 <v-layout class="section2__button" align-center>
                     <SimpleButton>Продолжить заполнение</SimpleButton>
@@ -23,7 +19,7 @@
             </div>
         </v-flex>
         <v-flex class="checkup__section">
-            <Header4>Непройденные тесты</Header4>
+            <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
                     name="Здоровое дыхание"
@@ -50,7 +46,7 @@
         </v-flex>
 
         <v-flex class="checkup__section">
-            <Header4>Пройденные тесты</Header4>
+            <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
                     name="Мозговое кровообращение"
