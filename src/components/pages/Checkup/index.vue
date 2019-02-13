@@ -63,7 +63,7 @@
                 <v-layout column class="testItems_list">
                     <TestItem 
                         name="Мозговое кровообращение"
-                        color="#58B379"
+                        color="#FEE245"
                         shortDescription="Не кушайте с пола"
                         :questionsNum="10"
                         :completedNum="10"
