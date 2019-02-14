@@ -7,7 +7,7 @@ import router from './router';
 
 import './plugins/vuetify';
 
-const unsync = sync(store, router);
+sync(store, router);
 
 new Vue({
 	store,
@@ -17,11 +17,9 @@ new Vue({
 
 Vue.config.productionTip = false;
 
-unsync();
-
 router.beforeEach((to, from, next) => {
-	console.log('# beforeEach');
 	console.log('# from', from);
 	console.log('# to', to);
 	next();
 });
+// unsync();

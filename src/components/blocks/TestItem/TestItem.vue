@@ -1,17 +1,21 @@
 <template>
-    <v-layout column class="testItem" :style="`border-color: ${color}`">
+    <v-layout
+        v-ripple
+        column
+        class="testItem"
+        :style="`border-color: ${color}`"
+    >
         <v-layout class="testItem__header">
-            <v-flex
-                class="testItem__icon"
-                :style="`color: ${color}`"
-                v-html="icon"
-            >
+            <v-flex class="testItem__icon" :style="`color: ${color}`">
+                <img :src="`/assets/images/test_${icon}.svg`" />
             </v-flex>
             <v-layout class="testItem__header_inner">
-                <v-flex class="testItem__name">{{ name }}</v-flex>
+                <v-flex class="testItem__name" @click="startSelf({ id })">{{
+                    name
+                }}</v-flex>
                 <v-flex class="testItem__info">
-                    <v-flex v-if="isInProgress" class="testItem__progress">
-                        Выполнено {{ completedNum }} / {{ questionsNum }}
+                    <v-flex v-if="isInProgress" class="testItem__progress"
+                        >Выполнено {{ completedNum }} / {{ questionsNum }}
                         <div class="testItem__progressBar">
                             <div
                                 class="testItem__progressBar_completed"
@@ -70,11 +74,11 @@
 <script>
 export default {
     props: {
+        id: Number,
         name: String,
         icon: {
             type: String,
-            default:
-                '<img svg-inline src="@/assets/images/test_icon.svg" alt="icon"/>',
+            default: 'icon',
         },
         color: {
             type: String,
@@ -86,10 +90,15 @@ export default {
         resetSelf: Function,
         treatment: String,
         recommendations: Array,
+        startSelf: {
+            type: Function,
+            default: ({ id }) => console.log(id),
+        },
     },
     data() {
         return {
             props: {
+                id: this.id,
                 name: this.name,
                 icon: this.icon,
                 color: this.color,
@@ -99,6 +108,7 @@ export default {
                 resetSelf: this.resetSelf(),
                 treatment: this.treatment,
                 recommendations: this.recommendations,
+                startSelf: this.startSelf,
             },
         };
     },

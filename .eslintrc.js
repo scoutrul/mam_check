@@ -8,9 +8,10 @@ module.exports = {
 		'airbnb',
 		'plugin:prettier/recommended',
 		'plugin:vue/recommended',
+		'vuetify',
 		'prettier',
 		'prettier/vue',
-		'prettier/react',
+		'prettier/react'
 	],
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
@@ -40,10 +41,10 @@ module.exports = {
 		'vue/max-attributes-per-line': [
 			4,
 			{
-				singleline: 1,
+				singleline: 0,
 				multiline: {
 					max: 1,
-					allowFirstLine: false,
+					allowFirstLine: true,
 				},
 			},
 		],
@@ -51,10 +52,5 @@ module.exports = {
 	},
 	parserOptions: {
 		parser: 'babel-eslint',
-	},
-	globals: {
-		moment: true,
-		SpeechRecognition: true,
-		SpeechGrammarList: true,
 	},
 };

@@ -14,6 +14,8 @@ const Pretest = () =>
 	import(/* webpackChunkName: "Pretest" */ './components/pages/PreTest');
 const Checkup = () =>
 	import(/* webpackChunkName: "Checkup" */ './components/pages/Checkup');
+const Test = () =>
+	import(/* webpackChunkName: "Test" */ './components/pages/Test');
 
 Vue.use(Router);
 
@@ -47,6 +49,11 @@ const router = new Router({
 			path: '/checkup',
 			name: 'checkup',
 			component: Checkup,
+		},
+		{
+			path: '/test/:testId',
+			name: 'test',
+			component: Test,
 		},
 		{
 			path: '/404',

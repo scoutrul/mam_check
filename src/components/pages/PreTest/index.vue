@@ -153,9 +153,7 @@ export default {
             },
         ],
     }),
-    mounted() {
-        //
-    },
+    mounted() {},
     methods: {
         handleBirthday(value) {
             this.user.birthday = value;
@@ -183,16 +181,4 @@ export default {
 </script>
 <style lang="stylus">
 @import 'styles.styl';
-    .stepper__clear
-        box-shadow none
-        padding 0
-    .stepper__container
-        width: 100%;
-        align-items: center;
-        display: flex;
-        justify-content: center;
-    .back_button
-        position absolute !important;
-        left 0
-        top: 200px
 </style>

@@ -1,0 +1,21 @@
+@import "~@/assets/styles/vars/index.styl";
+
+.header
+	display flex
+	flex 0 0 auto
+	position fixed
+	width 100%
+	left 0
+	top 0
+	background-color #FFF
+	z-index 10
+	align-items: center;
+	transition $transition_header
+	height: 128px;
+	&__container
+		height: fit-content;
+		align-items: center;
+		margin: 0 auto;
+		flex-flow row nowrap !important
+	&.fixed
+		position fixed

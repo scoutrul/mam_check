@@ -114,8 +114,6 @@ export default {
         this.appHeight = this.$el.clientHeight;
         this.innerHeight = window.innerHeight;
         this.registerHandlers();
-        console.log('this', this);
-        console.log('route', this.$route);
     },
     mutations: {
         SET_NAME: (state, name) => {

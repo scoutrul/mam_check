@@ -8,9 +8,15 @@
         </v-flex>
         <v-flex class="black">
             <div class="banner">
-                <Header2 class="pad16">В этом году вам доступна диспансеризация</Header2>
+                <Header2 class="pad16"
+                    >В этом году вам доступна диспансеризация</Header2
+                >
                 <RegularLg class="pad16"
-                    >Завершите все тесты чекапа и получите информацию по необходимым обследованиям, анализам и диагностике, положенным вам по программе всеобщей диспансеризации. Также вы получите готовую анкету, с которой сможете пройти диспансеризацию в вашей поликлинике</RegularLg
+                    >Завершите все тесты чекапа и получите информацию по
+                    необходимым обследованиям, анализам и диагностике,
+                    положенным вам по программе всеобщей диспансеризации. Также
+                    вы получите готовую анкету, с которой сможете пройти
+                    диспансеризацию в вашей поликлинике</RegularLg
                 >
                 <v-layout class="section2__button" align-center>
                     <SimpleButton>Продолжить заполнение</SimpleButton>
@@ -22,18 +28,15 @@
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
-                    name="Здоровое дыхание"
-                    short-description="Аверьте, нет ли у вас Пр заболеваний или легких"
-                    :questions-num="10"
-                    :completed-num="0"
+                    v-for="item in TEST_LIST"
+                    :id="item.id"
+                    :key="item.id"
+                    :icon="item.shortName"
+                    :name="item.name"
+                    :short-description="item.shortDescription"
+                    :questions-num="item.questionsNum"
                     :reset-self="resetTestItem"
-                />
-                <TestItem
-                    name="Здоровое дыхание"
-                    short-description="Проверьте, нет ли у вас заболеваний легких или бронхов"
-                    :questions-num="10"
-                    :completed-num="3"
-                    :reset-self="resetTestItem"
+                    :start-self="startTestItem"
                 />
                 <TestItem
                     name="Здоровое дыхание"
@@ -81,8 +84,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import fakeApi from '@/services/fakeApi';
 import {
-    Section,
     Header1,
     Header2,
     Header4,
@@ -93,7 +96,6 @@ import {
 
 export default {
     components: {
-        Section,
         Header1,
         Header2,
         Header4,
@@ -101,9 +103,12 @@ export default {
         TestItem,
         SimpleButton,
     },
-    data: () => ({}),
+    data: () => ({
+        TEST_LIST: [],
+    }),
     created() {
         //    this.redirectToPreTest();
+        this.fetchMedicalTests();
     },
     ...mapGetters({
         isUserInfoDone: 'isUserInfoDone',
@@ -116,6 +121,40 @@ export default {
         },
         resetTestItem() {
             console.log('resetItem');
+        },
+        startTestItem({ id }) {
+            console.log(id);
+            this.$router.push(`/test/${id}/`);
+        },
+        fetchMedicalTests() {
+            fakeApi.getMedicalTests().then(tests => {
+                this.TEST_LIST = tests;
+            });
+        },
+
+        fetchData() {
+            fakeApi
+                .getMedicalTest({ id: +this.$route.params.testId })
+                .then(test => {
+                    this.test = test;
+
+                    return fakeApi.getQuestionsByTestId({ id: this.test.id });
+                })
+                .then(questions => {
+                    this.questions = questions;
+
+                    this.loading = false;
+                })
+                .catch(error => {
+                    this.$store.commit('SET_NOTIFICATION_MESSAGE', {
+                        message: error.message,
+                        type: 'error',
+                    });
+
+                    this.$router.push({
+                        name: 'main',
+                    });
+                });
         },
     },
 };

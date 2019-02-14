@@ -11,7 +11,7 @@ import Header3 from './Typography/Header3';
 import Header4 from './Typography/Header4';
 import RegularMd from './Typography/RegularMd';
 import RegularLg from './Typography/RegularLg';
-import TestItem from './Tests/TestItem';
+import TestItem from './TestItem/TestItem';
 
 export {
 	StartButton,

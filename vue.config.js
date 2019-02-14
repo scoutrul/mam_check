@@ -1,6 +1,7 @@
 module.exports = {
 	transpileDependencies: [/node_modules[/\\\\]vuetify[/\\\\]/],
 	publicPath: '/',
+	// filenameHashing: false,
 	pluginOptions: {
 		webpackBundleAnalyzer: {
 			openAnalyzer: false,
