@@ -1,7 +1,7 @@
 <template>
     <v-layout column align-center class="container testSelf">
         <v-stepper
-            v-if="currentTest.length"
+            v-if="stepper <= currentTest.length"
             v-model="stepper"
             light
             :ripple="false"
@@ -19,7 +19,9 @@
                 />
             </SimpleButton>
             <div class="testSelf__stepperBar">
-                <span> Вопрос {{ stepper }}</span> из {{ currentTest.length }}
+                <div>
+                    <span> Вопрос {{ stepper }}</span> из {{ currentTest.length }}
+                </div>
             </div>
             <div class="testSelf__progressBar">
                 <div
@@ -33,18 +35,19 @@
                     v-for="(item, index) in currentTest"
                     :key="item.id"
                     class="testSelf__body"
-                    :step="++index"
+                    :step="index+1"
                 >
                     <div class="testSelf__body_question">{{ item.name }}</div>
-                    <div class="testSelf__buttons">
-                        <SimpleButton
-                            v-for="(answer, i) in item.answers"
-                            :key="i"
-                            @click.native="stepper += 1"
-                        >
-                            {{ answer.title }}
-                        </SimpleButton>
-                    </div>
+
+                        <div class="testSelf__buttons" >
+                            <SimpleButton
+                                v-for="(answer, i) in item.answers"
+                                :key="i"
+                                @click.native="stepper += 1"
+                            >
+                                {{ answer.title }}
+                            </SimpleButton>
+                        </div>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
@@ -86,7 +89,7 @@ export default {
             return 100 / (this.currentTest.length / this.stepper);
         },
     },
-    updated() {
+    beforeUpdate() {
         if (this.stepper > this.currentTest.length) {
             this.$router.push('/checkup');
         }

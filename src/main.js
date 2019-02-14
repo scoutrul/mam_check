@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import PortalVue from 'portal-vue'
 import { sync } from 'vuex-router-sync';
 
 import store from './store';
@@ -8,6 +9,7 @@ import router from './router';
 import './plugins/vuetify';
 
 sync(store, router);
+Vue.use(PortalVue);
 
 new Vue({
 	store,

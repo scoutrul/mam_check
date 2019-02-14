@@ -2,7 +2,8 @@
 @import "../../blocks/SimpleButton/SimpleButton.styl"
 
 .testSelf
-	margin-top: 100px
+	margin-top: 24px
+	
 	.v-stepper {
 		width 100%
 		box-shadow: none;
@@ -10,6 +11,7 @@
 			padding 0
 		}
 		&__items {
+			height: fit-content;
 			width 100%
 			max-width: 840px;
 			margin: auto;
@@ -29,6 +31,8 @@
 		}
 	}
 	&__body {
+		z-index 5
+		position: relative
 		&_picture {
 			width 300px
 			height 300px
@@ -81,17 +85,20 @@
 			flex-flow column wrap
 		}
 		max-height: max-content;
-		width 100%
+		width: 100%;
 		max-width: 520px;
+		margin: auto;
+		// transform: translateY(220px);
 		button
 			background-color $Special_Blue
-
-			&:hover {
+			&:hover, &:focus 
 				background-color $Blue_Dark !important
-			}
+				color white !important
+				border: 1px solid $Special_Blue;
+				position: relative
 			.v-btn__content
 				color white
+				white-space: normal;
 		&_item
 			max-height 48px
 			margin: 8px
-
