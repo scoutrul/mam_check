@@ -30,6 +30,7 @@
                 ></div>
             </div>
             <div class="testSelf__body_picture">pic</div>
+            <portal-target  v-for="(item, index) in currentTest" :key="item.id" :name="'dest'+item.id"></portal-target>
             <v-stepper-items>
                 <v-stepper-content
                     v-for="(item, index) in currentTest"
@@ -37,17 +38,20 @@
                     class="testSelf__body"
                     :step="index+1"
                 >
+                <portal :to="'dest'+item.id">
+                    <div class="testSelf__buttons"
+                            :if="stepper === index+1" :class="stepper === index+1  ? 'testSelf__buttons-hide testSelf__buttons-show' : 'testSelf__buttons-hide'">
+                        <SimpleButton
+                            v-for="(answer, i) in item.answers"
+                            :key="i"
+                            @click.native="stepper += 1"
+                            
+                        >
+                            {{ answer.title }}
+                        </SimpleButton>
+                    </div>
+                </portal>
                     <div class="testSelf__body_question">{{ item.name }}</div>
-
-                        <div class="testSelf__buttons" >
-                            <SimpleButton
-                                v-for="(answer, i) in item.answers"
-                                :key="i"
-                                @click.native="stepper += 1"
-                            >
-                                {{ answer.title }}
-                            </SimpleButton>
-                        </div>
                 </v-stepper-content>
             </v-stepper-items>
         </v-stepper>
