@@ -50,9 +50,12 @@
                     :style="`transform: translateX(${countProgress}%)`"
                 ></div>
             </div>
-            <div class="testSelf__body_picture">pic</div>
+            <div class="testSelf__body_picture">
+                <img :src="`/assets/images/test_${shortName}_pic.svg`" />
+            </div>
+
             <portal-target
-                v-for="(item, index) in currentTest"
+                v-for="item in currentTest"
                 :key="item.id"
                 :name="'dest' + item.id"
             />
@@ -101,6 +104,7 @@ export default {
     data: () => ({
         stepper: 1,
         currentTest: [],
+        shortName: '',
     }),
     computed: {
         countProgress() {
@@ -109,12 +113,21 @@ export default {
             return koef - 100 - 100 / this.currentTest.length;
         },
     },
-    created() {
+    async created() {
         this.fetchTestQuestions({ id: +this.$route.params.testId });
+
+        try {
+            const shortName = id =>
+                this.$store.state.tests.find(test => test.id === id).shortName;
+            this.shortName = await shortName(+this.$route.params.testId);
+        } catch (e) {
+            console.log(e, 'err');
+            this.closeSelf();
+        }
     },
     beforeUpdate() {
         if (this.stepper > this.currentTest.length) {
-            this.$router.push('/checkup');
+            this.closeSelf();
         }
     },
     methods: {

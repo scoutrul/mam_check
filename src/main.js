@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import PortalVue from 'portal-vue'
+import PortalVue from 'portal-vue';
 import { sync } from 'vuex-router-sync';
 
 import store from './store';

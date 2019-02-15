@@ -7,8 +7,8 @@
         @click="startSelf({ id })"
     >
         <v-layout class="testItem__header">
-            <v-flex class="testItem__icon" :style="`color: ${color}`">
-                <img :src="`/assets/images/test_${icon}.svg`" />
+            <v-flex class="testItem__icon">
+                <img :src="`/assets/images/test_${shortName}.svg`" />
             </v-flex>
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
@@ -19,8 +19,7 @@
                             <div
                                 class="testItem__progressBar_completed"
                                 :style="
-                                    `transform: translateX(-${100 -
-                                        countProgress}%)`
+                                    `transform: translateX(-${countProgress}%)`
                                 "
                             ></div>
                         </div>
@@ -73,22 +72,46 @@
 <script>
 export default {
     props: {
-        id: Number,
-        name: String,
-        icon: {
+        id: {
+            type: Number,
+            default: 0,
+        },
+        name: {
+            type: String,
+            default: '',
+        },
+        shortName: {
             type: String,
             default: 'icon',
         },
         color: {
             type: String,
-            default: '#e6f3ff',
+            default: '#FFF',
         },
-        shortDescription: String,
-        questionsNum: Number,
-        completedNum: Number,
-        resetSelf: Function,
-        treatment: String,
-        recommendations: Array,
+        shortDescription: {
+            type: String,
+            default: '',
+        },
+        questionsNum: {
+            type: Number,
+            default: 0,
+        },
+        completedNum: {
+            type: Number,
+            default: 0,
+        },
+        recommendations: {
+            type: Array,
+            default: () => [],
+        },
+        resetSelf: {
+            type: Function,
+            default: ({ id }) => console.log(id),
+        },
+        treatment: {
+            type: String,
+            default: '',
+        },
         startSelf: {
             type: Function,
             default: ({ id }) => console.log(id),
@@ -99,7 +122,7 @@ export default {
             props: {
                 id: this.id,
                 name: this.name,
-                icon: this.icon,
+                shortName: this.shortName,
                 color: this.color,
                 shortDescription: this.shortDescription,
                 questionsNum: this.questionsNum,
@@ -119,7 +142,11 @@ export default {
             return this.completedNum === this.questionsNum;
         },
         countProgress() {
-            return 100 / (this.questionsNum / this.completedNum);
+            return (
+                100 -
+                (100 / (this.questionsNum / this.completedNum) -
+                    100 / this.questionsNum)
+            );
         },
     },
 };

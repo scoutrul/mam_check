@@ -33,7 +33,7 @@
                     v-for="item in getTests"
                     :id="item.id"
                     :key="item.id"
-                    :icon="item.shortName"
+                    :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"

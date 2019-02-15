@@ -83,7 +83,7 @@ export default {
 	getMedicalTest: ({ id }) =>
 		new Promise((resolve, reject) => {
 			setTimeout(() => {
-				const test = TESTS_DATA.find(test => test.id === id);
+				const test = TESTS_DATA.find(item => item.id === id);
 
 				if (test) {
 					return resolve(test);
@@ -94,7 +94,6 @@ export default {
 
 	getQuestionsByTestId: ({ id }) =>
 		new Promise((resolve, reject) => {
-			console.log(id);
 			setTimeout(() => {
 				const questions = [
 					{
@@ -1847,9 +1846,7 @@ export default {
 					},
 				];
 
-				const question = questions.find(
-					question => question.testId === id,
-				);
+				const question = questions.find(item => item.testId === id);
 
 				if (question) {
 					return resolve(question.items);
