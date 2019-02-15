@@ -62,7 +62,7 @@
                     составлены на основе материалов, подготовленных ведущими
                     российскими медицинскими учреждениями.
                 </RegularMd>
-                <StartButton class="black">Начать</StartButton>
+                <StartButton class="black" />
             </v-flex>
         </v-layout>
         <v-layout align-center justify-center>

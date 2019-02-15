@@ -22,7 +22,7 @@
                         прохождения диспансеризации
                     </v-flex>
                 </v-layout>
-                <div class="pad16"><StartButton>Начать</StartButton></div>
+                <div class="pad16"><StartButton /></div>
             </v-flex>
             <v-flex lg7 sm6 class="section5_pic">
                 <img

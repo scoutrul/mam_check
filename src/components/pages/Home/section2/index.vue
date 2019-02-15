@@ -17,7 +17,7 @@
                     время.</RegularLg
                 >
                 <v-layout class="section2__button" align-center>
-                    <StartButton class="black">Начать</StartButton>
+                    <StartButton class="black" />
                     <div class="note">Можно продолжить в любое время</div>
                 </v-layout>
             </div>

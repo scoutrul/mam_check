@@ -1,9 +1,17 @@
 @import '~@/assets/styles/vars/index.styl';
-.checkup 
+
+.checkup
     margin-top 32px
     .checkup__section
-        margin-bottom: 48px;    
+        margin-bottom: 48px;
     .banner {
+	    .banner__button {
+			flex-flow row wrap;
+		    margin 32px 16px 24px 0
+		    @media (max-width $XS_break) {
+			    margin: 0 0px 16px 0;
+		    }
+		}
         margin-top 32px
         margin-bottom 64px
         text-align left
@@ -13,7 +21,9 @@
         border-radius: 16px;
         flex-flow: column wrap !important;
         padding 24px 52px
-        
+	    @media (max-width $XS_break) {
+		    padding 16px 24px
+	    }
         @media (min-width $LG_break) {
             background-image url("~@/assets/images/banner_bg.svg")
         }
@@ -29,15 +39,29 @@
                 font-size: 16px
             }
         }
+
         button {
-            margin 32px 16px 24px 0
             border-color #FFF !important
-            .v-btn__content {
+	        margin: 0 20px 16px 0;
+	        @media (max-width $XS_break) {
+		        margin: 0 0 16px 0;
+	        }
+	        .v-btn__content {
                 color $Special_Blue
             }
+	        &.button--alt {
+				background: $Special_Blue
+				.v-btn__content {
+					color white
+				}
+		        &:hover, &:focus {
+			        background-color white !important
+			        border: 1px solid $Special_Blue;
+			        position: inherit
+			        .v-btn__content {
+				        color $Special_Blue !important
+			        }
+		        }
+	        }
         }
-
-    }
-    &__button {
-        margin 32px 0 28px
     }

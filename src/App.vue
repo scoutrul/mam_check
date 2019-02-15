@@ -8,16 +8,13 @@
                         isFooterShow() &&
                         `bottom: ${footerHeight + 184}px`
                 "
-                >Начать</StartButton
+            />
             >
             <Header ref="header" :style="getHeaderHeight">
                 <Container class="header__container">
                     <LogoHeader />
                     <Menu />
-                    <StartButton v-if="isCheckupDone"
-                        >Скачать анкету</StartButton
-                    >
-                    <StartButton v-else>Начать</StartButton>
+                    <StartButton />
                 </Container>
             </Header>
             <Body>
@@ -83,7 +80,6 @@ export default {
 
     data() {
         return {
-            isCheckupDone: false,
             pageYOffset: 0,
             innerHeight: 0,
             footerHeight: 0,

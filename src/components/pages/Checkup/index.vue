@@ -18,9 +18,11 @@
                     вы получите готовую анкету, с которой сможете пройти
                     диспансеризацию в вашей поликлинике</RegularLg
                 >
-                <v-layout class="section2__button" align-center>
+                <v-layout class="banner__button" align-center>
                     <SimpleButton>Продолжить заполнение</SimpleButton>
-                    <SimpleButton>Начать заново</SimpleButton>
+                    <SimpleButton class="button--alt"
+                        >Начать заново</SimpleButton
+                    >
                 </v-layout>
             </div>
         </v-flex>
@@ -109,15 +111,16 @@ export default {
         isUserInfoDone: state => state.user.isUserInfoDone,
     }),
     beforeMount() {
-        console.log(this.isUserInfoDone);
-        if (this.isUserInfoDone === false) {
-            this.$router.push('pretest');
-        }
+        // this.redirectToPreTest();
         this.fetchMedicalTests();
     },
 
     methods: {
-        redirectToPreTest() {},
+        redirectToPreTest() {
+            if (this.isUserInfoDone === false) {
+                this.$router.push('pretest');
+            }
+        },
         resetTestItem() {
             console.log('resetItem');
         },

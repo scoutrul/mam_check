@@ -1,6 +1,5 @@
 <template>
     <v-btn
-        v-show="isHomePage"
         depressed
         flat
         round
@@ -9,16 +8,22 @@
         class="button__yellow"
         to="/checkup"
     >
-        <slot />
+        <span v-if="!isUserInfoDone">Начать</span>
+        <span v-else>Продолжить</span>
     </v-btn>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
     computed: {
         isHomePage() {
             return this.$route.name === 'home';
         },
+        ...mapState({
+            isUserInfoDone: state => state.user.isUserInfoDone,
+        }),
     },
 };
 </script>
