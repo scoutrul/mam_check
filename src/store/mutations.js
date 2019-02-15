@@ -1,14 +1,17 @@
 export default {
-	SET_TESTS: (state, payload) => {
+	STORE_TESTS: (state, payload) => {
 		state.tests = payload;
 	},
-	ADD_TEST: (state, payload) => {
-		state.tests.push(payload);
-	},
 	SET_GENDER: (state, payload) => {
-		state.user.push(payload);
+		state.user.gender = payload;
 	},
-	SAVE_PRETEST: (state, payload) => {
-		state.user = { ...state.user, ...payload };
+	SET_BIRTHDAY: (state, payload) => {
+		state.user.birthday = payload;
+	},
+	SET_WEIGHT: (state, payload) => {
+		state.user.weight = payload;
+	},
+	SET_HEIGHT: (state, payload) => {
+		state.user.height = payload;
 	},
 };

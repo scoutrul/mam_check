@@ -2,17 +2,18 @@
 .button__simple
 	background-color $Main_White
 	color $Main_White
-	border-width 0 !important
 	width: 100%;
 	max-width: 240px;
-	height: 48px;
+	min-height 48px
+	height: fit-content;
 	margin auto
 	flex: 1 1 360px;
-	max-height 50px
+	//max-height 50px
 	bottom 0;
 	cursor pointer
 	display flex
 	z-index: 5
+	border: 1px solid $Borders_Grey;
 	@media(max-width: $XS_break) {
 		max-width: 360px;
 	}
@@ -20,7 +21,7 @@
 		position relative
 		transition $transition_hover 0s !important
 	}
-	&:hover, &:focus {
+	&:hover, &:focus, &.isActive {
 		background-color $Special_Blue !important
 		color white !important
 		border: 1px solid $Special_Blue;
@@ -75,6 +76,6 @@
 		&:hover, &:focus {
 			background-color #f2f5f9 !important
 			color white !important
-			border: 0px solid #f2f5f9;
+			border: 1px solid #f2f5f9;
 		}
 	}

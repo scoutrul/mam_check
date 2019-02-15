@@ -13,10 +13,10 @@ const state = {
 	},
 	user: {
 		isUserInfoDone: false,
-		gender: null,
-		birthDate: null,
-		height: null,
-		weight: null,
+		gender: '',
+		birthday: '',
+		height: '',
+		weight: '',
 	},
 };
 

@@ -28,7 +28,7 @@
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
-                    v-for="item in TEST_LIST"
+                    v-for="item in getTests"
                     :id="item.id"
                     :key="item.id"
                     :icon="item.shortName"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import fakeApi from '@/services/fakeApi';
 import {
     Header1,
@@ -103,22 +103,21 @@ export default {
         TestItem,
         SimpleButton,
     },
-    data: () => ({
-        TEST_LIST: [],
+    data: () => ({}),
+    computed: mapState({
+        getTests: state => state.tests,
+        isUserInfoDone: state => state.user.isUserInfoDone,
     }),
-    created() {
-        //    this.redirectToPreTest();
+    beforeMount() {
+        console.log(this.isUserInfoDone);
+        if (this.isUserInfoDone === false) {
+            this.$router.push('pretest');
+        }
         this.fetchMedicalTests();
     },
-    ...mapGetters({
-        isUserInfoDone: 'isUserInfoDone',
-    }),
+
     methods: {
-        redirectToPreTest() {
-            if (!this.isUserInfoDone) {
-                this.$router.push('pretest');
-            }
-        },
+        redirectToPreTest() {},
         resetTestItem() {
             console.log('resetItem');
         },
@@ -128,33 +127,8 @@ export default {
         },
         fetchMedicalTests() {
             fakeApi.getMedicalTests().then(tests => {
-                this.TEST_LIST = tests;
+                this.$store.dispatch('STORE_TESTS', tests);
             });
-        },
-
-        fetchData() {
-            fakeApi
-                .getMedicalTest({ id: +this.$route.params.testId })
-                .then(test => {
-                    this.test = test;
-
-                    return fakeApi.getQuestionsByTestId({ id: this.test.id });
-                })
-                .then(questions => {
-                    this.questions = questions;
-
-                    this.loading = false;
-                })
-                .catch(error => {
-                    this.$store.commit('SET_NOTIFICATION_MESSAGE', {
-                        message: error.message,
-                        type: 'error',
-                    });
-
-                    this.$router.push({
-                        name: 'main',
-                    });
-                });
         },
     },
 };

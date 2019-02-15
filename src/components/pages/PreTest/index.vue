@@ -27,12 +27,16 @@
                     <div class="title">Укажите ваш пол</div>
                     <v-layout justify-center class="pretest__buttons">
                         <v-flex class="pretest__buttons_item xs12">
-                            <SimpleButton @click.native="stepper = 2"
+                            <SimpleButton
+                                :class="user.gender === 'male' && 'isActive'"
+                                @click.native="setGender('male')"
                                 >Мужчина</SimpleButton
                             >
                         </v-flex>
                         <v-flex class="pretest__buttons_item xs12">
-                            <SimpleButton @click.native="stepper = 2"
+                            <SimpleButton
+                                :class="user.gender === 'female' && 'isActive'"
+                                @click.native="setGender('female')"
                                 >Женщина</SimpleButton
                             >
                         </v-flex>
@@ -123,6 +127,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { SimpleButton } from '../../blocks';
 
 export default {
@@ -130,39 +135,24 @@ export default {
         SimpleButton,
     },
     data: () => ({
-        user: {
-            isUserInfoDone: false,
-            birthday: '',
-            gender: '',
-            height: '',
-            weight: '',
-        },
         stepper: 1,
-        steps: [
-            {
-                label: 'Пол',
-                completed: false,
-            },
-            {
-                label: 'Возраст',
-                completed: false,
-            },
-            {
-                label: 'Рост, вес',
-                completed: false,
-            },
-        ],
     }),
-    mounted() {},
+    computed: mapState(['user']),
+
     methods: {
+        setGender(val) {
+            this.stepper += 1;
+            this.$store.dispatch('SET_GENDER', val);
+        },
         handleBirthday(value) {
-            this.user.birthday = value;
+            this.$store.dispatch('SET_BIRTHDAY', value);
         },
         handleHeight(value) {
-            this.user.height = value;
+            this.$store.dispatch('SET_HEIGHT', value);
         },
         handleWeight(value) {
             this.user.weight = value;
+            this.$store.dispatch('SET_WEIGHT', value);
         },
         goBack() {
             if (this.stepper > 1) {
@@ -172,8 +162,7 @@ export default {
             }
         },
         goNextPage() {
-            this.user.isUserInfoDone = true;
-            this.$store.dispatch('storePreTest', this.user);
+            this.$store.state.user.isUserInfoDone = true;
             this.$router.push('/checkup');
         },
     },

@@ -20,7 +20,8 @@
             </SimpleButton>
             <div class="testSelf__stepperBar">
                 <div>
-                    <span> Вопрос {{ stepper }}</span> из {{ currentTest.length }}
+                    <span> Вопрос {{ stepper }}</span> из
+                    {{ currentTest.length }}
                 </div>
             </div>
             <div class="testSelf__progressBar">
@@ -30,27 +31,37 @@
                 ></div>
             </div>
             <div class="testSelf__body_picture">pic</div>
-            <portal-target  v-for="(item, index) in currentTest" :key="item.id" :name="'dest'+item.id"></portal-target>
+            <portal-target
+                v-for="(item, index) in currentTest"
+                :key="item.id"
+                :name="'dest' + item.id"
+            ></portal-target>
             <v-stepper-items>
                 <v-stepper-content
                     v-for="(item, index) in currentTest"
                     :key="item.id"
                     class="testSelf__body"
-                    :step="index+1"
+                    :step="index + 1"
                 >
-                <portal :to="'dest'+item.id">
-                    <div class="testSelf__buttons"
-                            :if="stepper === index+1" :class="stepper === index+1  ? 'testSelf__buttons-hide testSelf__buttons-show' : 'testSelf__buttons-hide'">
-                        <SimpleButton
-                            v-for="(answer, i) in item.answers"
-                            :key="i"
-                            @click.native="stepper += 1"
-                            
+                    <portal :to="'dest' + item.id">
+                        <div
+                            class="testSelf__buttons"
+                            :if="stepper === index + 1"
+                            :class="
+                                stepper === index + 1
+                                    ? 'testSelf__buttons-hide testSelf__buttons-show'
+                                    : 'testSelf__buttons-hide'
+                            "
                         >
-                            {{ answer.title }}
-                        </SimpleButton>
-                    </div>
-                </portal>
+                            <SimpleButton
+                                v-for="(answer, i) in item.answers"
+                                :key="i"
+                                @click.native="stepper += 1"
+                            >
+                                {{ answer.title }}
+                            </SimpleButton>
+                        </div>
+                    </portal>
                     <div class="testSelf__body_question">{{ item.name }}</div>
                 </v-stepper-content>
             </v-stepper-items>
@@ -71,8 +82,18 @@ export default {
         stepper: 1,
         currentTest: [],
     }),
+    computed: {
+        countProgress() {
+            return 100 / (this.currentTest.length / this.stepper);
+        },
+    },
     created() {
         this.fetchTestQuestions({ id: +this.$route.params.testId });
+    },
+    beforeUpdate() {
+        if (this.stepper > this.currentTest.length) {
+            this.$router.push('/checkup');
+        }
     },
     methods: {
         fetchTestQuestions({ id }) {
@@ -87,16 +108,6 @@ export default {
                 this.stepper = 1;
             }
         },
-    },
-    computed: {
-        countProgress() {
-            return 100 / (this.currentTest.length / this.stepper);
-        },
-    },
-    beforeUpdate() {
-        if (this.stepper > this.currentTest.length) {
-            this.$router.push('/checkup');
-        }
     },
 };
 </script>
