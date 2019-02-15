@@ -18,6 +18,7 @@ const state = {
 		height: '',
 		weight: '',
 	},
+	tests: {},
 };
 
 export default new Vuex.Store({

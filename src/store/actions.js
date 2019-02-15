@@ -1,9 +1,6 @@
 /* eslint-disable no-unused-vars */
 
 export default {
-	FETCH_TESTS_DATA: async ({ commit }) => {
-		commit('FETCH_TESTS_DATA');
-	},
 	SET_GENDER: (store, payload) => {
 		store.commit('SET_GENDER', payload);
 	},
@@ -16,7 +13,7 @@ export default {
 	SET_HEIGHT: (store, payload) => {
 		store.commit('SET_HEIGHT', payload);
 	},
-	STORE_TESTS: ({ commit }, payload) => {
+	store_tests: async ({ commit }, payload) => {
 		commit('STORE_TESTS', payload);
 	},
 };

@@ -125,12 +125,11 @@ export default {
             console.log('resetItem');
         },
         startTestItem({ id }) {
-            console.log(id);
             this.$router.push(`/test/${id}/`);
         },
         fetchMedicalTests() {
             fakeApi.getMedicalTests().then(tests => {
-                this.$store.dispatch('STORE_TESTS', tests);
+                this.$store.dispatch('store_tests', tests);
             });
         },
     },

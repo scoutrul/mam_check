@@ -4,15 +4,14 @@
         column
         class="testItem"
         :style="`border-color: ${color}`"
+        @click="startSelf({ id })"
     >
         <v-layout class="testItem__header">
             <v-flex class="testItem__icon" :style="`color: ${color}`">
                 <img :src="`/assets/images/test_${icon}.svg`" />
             </v-flex>
             <v-layout class="testItem__header_inner">
-                <v-flex class="testItem__name" @click="startSelf({ id })">{{
-                    name
-                }}</v-flex>
+                <v-flex class="testItem__name">{{ name }}</v-flex>
                 <v-flex class="testItem__info">
                     <v-flex v-if="isInProgress" class="testItem__progress"
                         >Выполнено {{ completedNum }} / {{ questionsNum }}

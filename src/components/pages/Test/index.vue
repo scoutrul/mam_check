@@ -18,6 +18,26 @@
                     alt="Вернуться"
                 />
             </SimpleButton>
+            <portal to="closeCurrentTest">
+                <SimpleButton
+                    class="button__simple--arrow close_button"
+                    @click.native="closeSelf"
+                >
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            d="M17.7549 4.7549C18.1656 4.33879 18.8366 4.33659 19.25 4.75V4.75C19.6634 5.16342 19.6612 5.83437 19.2451 6.24507L13.4142 12L19.2451 17.7549C19.6612 18.1656 19.6634 18.8366 19.25 19.25V19.25C18.8366 19.6634 18.1656 19.6612 17.7549 19.2451L12 13.4142L6.24507 19.2451C5.83437 19.6612 5.16342 19.6634 4.75 19.25V19.25C4.33659 18.8366 4.33879 18.1656 4.7549 17.7549L10.5858 12L4.7549 6.24507C4.33878 5.83437 4.33658 5.16342 4.75 4.75V4.75C5.16342 4.33658 5.83437 4.33878 6.24507 4.7549L12 10.5858L17.7549 4.7549Z"
+                            fill="#1E1E1E"
+                        />
+                    </svg>
+                </SimpleButton>
+            </portal>
+
             <div class="testSelf__stepperBar">
                 <div>
                     <span> Вопрос {{ stepper }}</span> из
@@ -27,7 +47,7 @@
             <div class="testSelf__progressBar">
                 <div
                     class="testSelf__progressBar_completed"
-                    :style="`transform: translateX(-${100 - countProgress}%)`"
+                    :style="`transform: translateX(${countProgress}%)`"
                 ></div>
             </div>
             <div class="testSelf__body_picture">pic</div>
@@ -35,7 +55,7 @@
                 v-for="(item, index) in currentTest"
                 :key="item.id"
                 :name="'dest' + item.id"
-            ></portal-target>
+            />
             <v-stepper-items>
                 <v-stepper-content
                     v-for="(item, index) in currentTest"
@@ -84,7 +104,9 @@ export default {
     }),
     computed: {
         countProgress() {
-            return 100 / (this.currentTest.length / this.stepper);
+            const koef = (this.stepper / this.currentTest.length) * 100;
+
+            return koef - 100 - 100 / this.currentTest.length;
         },
     },
     created() {
@@ -107,6 +129,9 @@ export default {
             } else {
                 this.stepper = 1;
             }
+        },
+        closeSelf() {
+            this.$router.push('/checkup');
         },
     },
 };

@@ -1,5 +1,6 @@
 <template>
     <v-btn
+        v-if="$store.state.route.name !== 'test'"
         depressed
         flat
         round

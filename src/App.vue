@@ -9,12 +9,13 @@
                         `bottom: ${footerHeight + 184}px`
                 "
             />
-            >
+
             <Header ref="header" :style="getHeaderHeight">
                 <Container class="header__container">
                     <LogoHeader />
                     <Menu />
                     <StartButton />
+                    <portal-target name="closeCurrentTest" />
                 </Container>
             </Header>
             <Body>

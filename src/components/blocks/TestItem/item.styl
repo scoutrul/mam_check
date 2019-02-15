@@ -1,15 +1,16 @@
 @import '../../../assets/styles/vars/index.styl';
+.testItem_list
+    margin-top 16px
 .testItem
-    &_list
-        margin-top 16px
-    box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
-    border-radius: 8px;
+    transition $transition_hover
+    box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08)
+    border-radius: 8px
     margin 12px 0
     padding: 20px
-    border-left-style: solid;
-    border-left-width: 4px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    border-left-style: solid
+    border-left-width: 4px
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
     &--done
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
@@ -112,3 +113,8 @@
                 margin-left 0
             &:last-child
                 margin-right 0
+
+.testItem:hover {
+	cursor pointer
+	box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.18)
+}
