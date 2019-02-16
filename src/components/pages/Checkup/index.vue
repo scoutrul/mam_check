@@ -111,16 +111,10 @@ export default {
         isUserInfoDone: state => state.user.isUserInfoDone,
     }),
     beforeMount() {
-        this.redirectToPreTest();
         this.fetchMedicalTests();
     },
 
     methods: {
-        redirectToPreTest() {
-            if (this.isUserInfoDone === false) {
-                this.$router.push('pretest');
-            }
-        },
         resetTestItem() {
             console.log('resetItem');
         },
