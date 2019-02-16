@@ -111,7 +111,7 @@ export default {
         isUserInfoDone: state => state.user.isUserInfoDone,
     }),
     beforeMount() {
-        // this.redirectToPreTest();
+        this.redirectToPreTest();
         this.fetchMedicalTests();
     },
 

@@ -8,19 +8,13 @@ const env = process.env.NODE_ENV;
 const sourceMap = env === 'development';
 
 const config = {
-	devtool: sourceMap ? 'cheap-module-eval-source-map' : undefined,
+	devtool: 'nosources-source-map',
 	entry: {
 		index: './src/main.js',
 	},
 	mode: env,
 	output: {
 		publicPath: '/',
-		chunkFilename: '[name].[contenthash].js',
-	},
-	optimization: {
-		splitChunks: {
-			chunks: 'all',
-		},
 	},
 	module: {
 		rules: [
