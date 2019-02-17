@@ -30,7 +30,20 @@
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
-                    v-for="item in getTests"
+                    v-for="item in filterInProgressTests"
+                    :id="item.id"
+                    :key="item.id"
+                    :short-name="item.shortName"
+                    :name="item.name"
+                    :short-description="item.shortDescription"
+                    :questions-num="item.questionsNum"
+                    :reset-self="resetTestItem"
+                    :start-self="startTestItem"
+                />
+                <Header4>нов тесты</Header4>
+
+                <TestItem
+                    v-for="item in filterTests"
                     :id="item.id"
                     :key="item.id"
                     :short-name="item.shortName"
@@ -53,6 +66,18 @@
         <v-flex class="checkup__section">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
+                <TestItem
+                    v-for="item in filterCompletedTests"
+                    :id="item.id"
+                    :key="item.id"
+                    :short-name="item.shortName"
+                    :name="item.name"
+                    :short-description="item.shortDescription"
+                    :questions-num="item.questionsNum"
+                    :completed-num="item.questionsNum"
+                    :reset-self="resetTestItem"
+                    :start-self="startTestItem"
+                />
                 <TestItem
                     name="Мозговое кровообращение"
                     color="#FEE245"
@@ -107,9 +132,20 @@ export default {
         SimpleButton,
     },
     data: () => ({}),
-    computed: mapState({
-        getTests: state => state.tests,
-    }),
+    computed: {
+        ...mapState({
+            getTests: state => state.tests,
+        }),
+        filterCompletedTests(){
+            return this.getTests.filter(item => item.questions && item.questions[item.questions.length - 1].weight !== undefined) || []
+        },
+        filterInProgressTests(){
+            return this.getTests.filter(item => item.questions && item.questions[0].weight !== undefined && !item.questions[item.questions.length - 1]).weight === undefined || []
+        },
+        filterTests(){
+            return this.getTests.filter(item => !item.questions || item.questions[0].weight === undefined || [])
+        },
+    },
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
