@@ -12,6 +12,21 @@ export default {
 
 		state.tests = newTestsArr;
 	},
+	STORE_TEST_ANSWER: (state, payload) => {
+		const { testId, testIndex, weight } = payload;
+		console.log(testId, testIndex, weight);
+		const newTestsArr = state.tests.map(item => {
+			if (item.id === testId) {
+				item.questions[testIndex] = {
+					...item.questions[testIndex],
+					weight,
+				};
+			}
+			return item;
+		});
+
+		state.tests = newTestsArr;
+	},
 	SET_GENDER: (state, payload) => {
 		state.user.gender = payload;
 	},

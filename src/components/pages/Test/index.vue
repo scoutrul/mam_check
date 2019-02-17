@@ -40,7 +40,7 @@
 
             <div class="testSelf__stepperBar">
                 <div>
-                    <span> Вопрос {{ stepper }}</span> из
+                    <span>Вопрос {{ stepper }}</span> из
                     {{ currentTest.length }}
                 </div>
             </div>
@@ -82,7 +82,7 @@
                             <SimpleButton
                                 v-for="(answer, i) in item.answers"
                                 :key="i"
-                                @click.native="goNext(answer.weight)"
+                                @click.native="goNext(answer.weight, index)"
                             >
                                 {{ answer.title }}
                             </SimpleButton>
@@ -126,7 +126,6 @@ export default {
         },
     },
     async mounted() {
-
         try {
             const shortName = id =>
                 this.$store.state.tests.find(test => test.id === id).shortName;
@@ -136,7 +135,7 @@ export default {
             this.closeSelf();
         }
     },
-    beforeUpdate() {
+    updated() {
         if (this.stepper > this.currentTest.length) {
             this.closeSelf();
         }
@@ -152,9 +151,15 @@ export default {
         closeSelf() {
             this.$router.push('/checkup');
         },
-        goNext(value) {
+        goNext(weight, testIndex) {
+            const payload = {
+                testId: +this.$route.params.testId,
+                testIndex,
+                weight
+            };
+            this.$store.dispatch('store_test_answer', payload);
+            this.weights += weight;
             this.stepper += 1;
-            this.weights += value;
             // сохранять баллы к каждый вопрос в СТОРЕ
             // currentTestId
             // считать баллы и выдавать рекомендации в чекап пейдж

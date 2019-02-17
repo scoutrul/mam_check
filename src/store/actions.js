@@ -21,7 +21,10 @@ export default {
 			});
 		}
 	},
-	store_current_test: async ({ commit }, payload) => {
+	store_current_test: ({ commit }, payload) => {
 		commit('STORE_CURRENT_TEST', payload);
+	},
+	store_test_answer: ({ commit }, payload) => {
+		commit('STORE_TEST_ANSWER', payload);
 	},
 };
