@@ -50,8 +50,9 @@
                     />
                     <div class="title">Укажите вашу дату рождения</div>
                     <v-layout justify-center class="pretest__buttons">
-                        <v-flex class="pretest__buttons_item xs12">
+                        <v-flex class="pretest__buttons_item xs12" @click="$refs.birthdayInput.focus();">
                             <v-text-field
+                                ref="birthdayInput"
                                 hide-details
                                 class="pretest__input"
                                 :value="user.birthday"
@@ -83,8 +84,9 @@
                     />
                     <div class="title">Укажите ваш рост и вес</div>
                     <v-layout justify-center class="pretest__buttons">
-                        <v-flex class="pretest__buttons_item xs12">
+                        <v-flex class="pretest__buttons_item xs12" @click="$refs.heightInput.focus();">
                             <v-text-field
+                                ref="heightInput"
                                 hide-details
                                 label="см"
                                 class="pretest__input"
@@ -95,8 +97,9 @@
                                 @input="handleHeight"
                             ></v-text-field>
                         </v-flex>
-                        <v-flex class="pretest__buttons_item xs12">
+                        <v-flex class="pretest__buttons_item xs12" @click="$refs.weightInput.focus();">
                             <v-text-field
+                                ref="weightInput"
                                 hide-details
                                 label="кг"
                                 class="pretest__input"

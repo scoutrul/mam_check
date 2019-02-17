@@ -79,7 +79,7 @@
                             <SimpleButton
                                 v-for="(answer, i) in item.answers"
                                 :key="i"
-                                @click.native="stepper += 1"
+                                @click.native="goNext(answer.weight)"
                             >
                                 {{ answer.title }}
                             </SimpleButton>
@@ -106,6 +106,7 @@ export default {
     data: () => ({
         stepper: 1,
         shortName: '',
+        weights: 0,
     }),
     computed: {
         ...mapState({
@@ -145,6 +146,13 @@ export default {
         closeSelf() {
             this.$router.push('/checkup');
         },
+        goNext(value){
+            this.stepper += 1;
+            this.weights += value;
+            // сохранять баллы к каждый вопрос в СТОРЕ
+            // считать баллы и выдавать рекомендации в чекап пейдж
+            // реализовать паузу - продолжение тестов
+        }
     },
 };
 </script>
