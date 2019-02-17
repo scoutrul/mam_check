@@ -8,6 +8,8 @@ import router from './router';
 
 import './plugins/vuetify';
 
+import services from './services';
+
 sync(store, router);
 Vue.use(PortalVue);
 
@@ -23,8 +25,9 @@ router.beforeEach((to, from, next) => {
 	console.log('# from', from);
 	console.log('# to', to);
 	if (to.name === 'checkup') {
+		services.fetchMedicalTests();
 		if (store.state.user.isUserInfoDone === false) {
-			next('pretest');
+			next('/pretest');
 		}
 	}
 	next();

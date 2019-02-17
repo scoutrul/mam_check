@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        v-if="$store.state.route.name !== 'test'"
+        v-if="$store.state.route.name === 'home'"
         depressed
         flat
         round
@@ -15,16 +15,15 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 
 export default {
     computed: {
         isHomePage() {
             return this.$route.name === 'home';
         },
-        ...mapState({
-            isUserInfoDone: state => state.user.isUserInfoDone,
-        }),
+        isUserInfoDone(){
+            return this.$store.state.user.isUserInfoDone
+        },
     },
 };
 </script>

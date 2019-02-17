@@ -51,7 +51,7 @@
                 ></div>
             </div>
             <div class="testSelf__body_picture">
-                <img :src="`/assets/images/test_${shortName}_pic.svg`" />
+                <img v-if="shortName" :src="`/assets/images/test_${shortName}_pic.svg`" />
             </div>
 
             <portal-target
@@ -93,7 +93,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import fakeApi from '@/services/fakeApi';
+import services from '@/services';
 
 import { SimpleButton } from '../../blocks';
 
@@ -103,10 +105,12 @@ export default {
     },
     data: () => ({
         stepper: 1,
-        currentTest: [],
         shortName: '',
     }),
     computed: {
+        ...mapState({
+            currentTest: state => state.user.currentTest,
+        }),
         countProgress() {
             const koef = (this.stepper / this.currentTest.length) * 100;
 
@@ -114,7 +118,7 @@ export default {
         },
     },
     async created() {
-        this.fetchTestQuestions({ id: +this.$route.params.testId });
+        services.fetchTestQuestions({ id: +this.$route.params.testId });
 
         try {
             const shortName = id =>
@@ -131,11 +135,6 @@ export default {
         }
     },
     methods: {
-        fetchTestQuestions({ id }) {
-            fakeApi.getQuestionsByTestId({ id }).then(item => {
-                this.currentTest = item;
-            });
-        },
         goBack() {
             if (this.stepper > 1) {
                 this.stepper = this.stepper - 1;

@@ -17,6 +17,7 @@ const state = {
 		birthday: '',
 		height: '',
 		weight: '',
+		currentTest: [],
 	},
 	tests: {},
 };

@@ -16,4 +16,7 @@ export default {
 	store_tests: async ({ commit }, payload) => {
 		commit('STORE_TESTS', payload);
 	},
+	store_current_test: async ({ commit }, payload) => {
+		commit('STORE_CURRENT_TEST', payload);
+	},
 };

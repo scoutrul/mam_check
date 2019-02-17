@@ -2,6 +2,9 @@ export default {
 	STORE_TESTS: (state, payload) => {
 		state.tests = payload;
 	},
+	STORE_CURRENT_TEST: (state, payload) => {
+		state.user.currentTest = payload;
+	},
 	SET_GENDER: (state, payload) => {
 		state.user.gender = payload;
 	},
