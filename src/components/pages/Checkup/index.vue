@@ -87,7 +87,7 @@
 <script>
 import { mapState } from 'vuex';
 import fakeApi from '@/services/fakeApi';
-import service from '@/services';
+
 import {
     Header1,
     Header2,
@@ -111,9 +111,7 @@ export default {
         getTests: state => state.tests,
     }),
     beforeMount() {
-        if (!this.$store.tests) {
-            service.fetchMedicalTests();
-        }
+        this.$store.dispatch('get_tests');
     },
 
     methods: {
@@ -123,7 +121,6 @@ export default {
         startTestItem({ id }) {
             this.$router.push(`/test/${id}/`);
         },
-
     },
 };
 </script>

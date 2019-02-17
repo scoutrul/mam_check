@@ -51,7 +51,10 @@
                 ></div>
             </div>
             <div class="testSelf__body_picture">
-                <img v-if="shortName" :src="`/assets/images/test_${shortName}_pic.svg`" />
+                <img
+                    v-if="shortName"
+                    :src="`/assets/images/test_${shortName}_pic.svg`"
+                />
             </div>
 
             <portal-target
@@ -93,7 +96,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
 import fakeApi from '@/services/fakeApi';
 import services from '@/services';
 
@@ -108,18 +110,22 @@ export default {
         shortName: '',
         weights: 0,
     }),
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            services.fetchTestQuestions({ id: +vm.$route.params.testId });
+        })
+    },
     computed: {
-        ...mapState({
-            currentTest: state => state.user.currentTest,
-        }),
+        currentTest() {
+            return this.$store.state.tests.find(item => item.id === +this.$route.params.testId).questions || [];
+        },
         countProgress() {
             const koef = (this.stepper / this.currentTest.length) * 100;
 
             return koef - 100 - 100 / this.currentTest.length;
         },
     },
-    async created() {
-        services.fetchTestQuestions({ id: +this.$route.params.testId });
+    async mounted() {
 
         try {
             const shortName = id =>
@@ -146,13 +152,14 @@ export default {
         closeSelf() {
             this.$router.push('/checkup');
         },
-        goNext(value){
+        goNext(value) {
             this.stepper += 1;
             this.weights += value;
             // сохранять баллы к каждый вопрос в СТОРЕ
+            // currentTestId
             // считать баллы и выдавать рекомендации в чекап пейдж
             // реализовать паузу - продолжение тестов
-        }
+        },
     },
 };
 </script>

@@ -25,10 +25,10 @@ router.beforeEach((to, from, next) => {
 	console.log('# from', from);
 	console.log('# to', to);
 	if (to.name === 'checkup') {
-		services.fetchMedicalTests();
 		if (store.state.user.isUserInfoDone === false) {
 			next('/pretest');
 		}
+		services.fetchMedicalTests();
 	}
 	next();
 });

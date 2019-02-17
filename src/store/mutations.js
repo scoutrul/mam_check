@@ -3,7 +3,14 @@ export default {
 		state.tests = payload;
 	},
 	STORE_CURRENT_TEST: (state, payload) => {
-		state.user.currentTest = payload;
+		const newTestsArr = state.tests.map(item => {
+			if (item.id === payload.id) {
+				item.questions = payload.questions;
+			}
+			return item;
+		});
+
+		state.tests = newTestsArr;
 	},
 	SET_GENDER: (state, payload) => {
 		state.user.gender = payload;

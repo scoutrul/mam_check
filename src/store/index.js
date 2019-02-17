@@ -8,18 +8,14 @@ import getters from './getters';
 Vue.use(Vuex);
 
 const state = {
-	settings: {
-		isAnletaAvailable: false,
-	},
 	user: {
 		isUserInfoDone: false,
 		gender: '',
 		birthday: '',
 		height: '',
 		weight: '',
-		currentTest: [],
 	},
-	tests: {},
+	tests: [],
 };
 
 export default new Vuex.Store({

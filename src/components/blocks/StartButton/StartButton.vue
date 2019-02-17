@@ -15,14 +15,13 @@
 </template>
 
 <script>
-
 export default {
     computed: {
         isHomePage() {
             return this.$route.name === 'home';
         },
-        isUserInfoDone(){
-            return this.$store.state.user.isUserInfoDone
+        isUserInfoDone() {
+            return this.$store.state.user.isUserInfoDone;
         },
     },
 };

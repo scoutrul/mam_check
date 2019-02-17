@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import fakeApi from '@/services/fakeApi';
 
 export default {
 	SET_GENDER: (store, payload) => {
@@ -13,8 +14,12 @@ export default {
 	SET_HEIGHT: (store, payload) => {
 		store.commit('SET_HEIGHT', payload);
 	},
-	store_tests: async ({ commit }, payload) => {
-		commit('STORE_TESTS', payload);
+	get_tests: async store => {
+		if (store.getters.allTestsCount < 1) {
+			fakeApi.getMedicalTests().then(tests => {
+				store.commit('STORE_TESTS', tests);
+			});
+		}
 	},
 	store_current_test: async ({ commit }, payload) => {
 		commit('STORE_CURRENT_TEST', payload);
