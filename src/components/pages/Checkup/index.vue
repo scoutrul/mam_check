@@ -37,7 +37,10 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                 />
@@ -50,15 +53,11 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
-                />
-                <TestItem
-                    name="Здоровое дыхание"
-                    short-description="Проверьте, нет ли у вас заболеваний легких или бронхов"
-                    :questions-num="10"
-                    :completed-num="7"
                 />
             </v-layout>
         </v-flex>
@@ -73,8 +72,10 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
-                    :completed-num="item.questionsNum"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
+                    :completed-num="item.questions && item.questions.length"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                 />

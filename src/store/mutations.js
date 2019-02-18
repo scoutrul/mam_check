@@ -41,7 +41,6 @@ export default {
 	},
 	RESET_TEST_QUESTIONS: (state, payload) => {
 		const { id } = payload;
-		debugger;
 		const updatedTest = state.tests.map(item => {
 			if (item.id === id) {
 				item.currentStep = 1;

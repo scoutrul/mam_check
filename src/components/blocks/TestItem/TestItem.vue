@@ -141,10 +141,10 @@ export default {
     },
     computed: {
         isInProgress() {
-            return !this.itIsCompleted && this.completedNum > 0;
+            return this.completedNum < this.questionsNum;
         },
         itIsCompleted() {
-            return this.completedNum === this.questionsNum;
+            return this.completedNum > this.questionsNum;
         },
         countProgress() {
             return (
