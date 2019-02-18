@@ -42,6 +42,7 @@
                     :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
+                    :treatment="item.treatment"
                 />
                 <TestItem
                     v-for="item in filterTests"
@@ -56,6 +57,7 @@
                     :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
+                    :treatment="item.treatment"
                 />
             </v-layout>
         </v-flex>
@@ -76,6 +78,7 @@
                     :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
+                    :treatment="item.treatment"
                 />
                 <TestItem
                     name="Мозговое кровообращение"
@@ -110,6 +113,8 @@
 import { mapState } from 'vuex';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
+import each from 'lodash/each';
+import fakeApi from '@/services/fakeApi';
 
 import {
     Header1,
@@ -165,6 +170,9 @@ export default {
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
+    mounted(){
+        this.getTreatments()
+    },
 
     methods: {
         startTestItem({ id }) {
@@ -178,6 +186,25 @@ export default {
                 path: `/test/${id}/`,
             });
         },
+        getTreatments(){
+            each(this.getTests, test => {
+                let weight = 0;
+                each(test.questions, question => {
+                    weight = weight + question.weight || 0;
+
+                    fakeApi.getTreatmentByResult({ testId: test.id, answerSum: weight }).then(async test => {
+                        
+                        console.log(test);
+                        const payload = {
+                            id: test.id,
+                            treatment: test.decode,
+                        }
+                        await this.$store.dispatch('set_treatments', payload)
+                    });
+                })
+            });
+            
+        }
     },
 };
 </script>

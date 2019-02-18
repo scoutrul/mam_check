@@ -30,4 +30,7 @@ export default {
 	reset_test_questions: ({ commit }, payload) => {
 		commit('RESET_TEST_QUESTIONS', payload);
 	},
+	set_treatments: ({ commit }, payload) => {
+		commit('SET_TREATMENTS', payload);
+	},
 };

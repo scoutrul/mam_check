@@ -55,9 +55,7 @@
             </v-layout>
         </v-layout>
         <v-layout v-if="treatment" column class="testItem__treatment">
-            <v-flex v-if="treatment" class="testItem__treatment_info">{{
-                treatment
-            }}</v-flex>
+            <v-flex class="testItem__treatment_info">{{treatment}}</v-flex>
             <v-flex v-if="recommendations" class="testItem__recommendations">
                 <div class="testItem__recommendations_label">
                     Рекомендуемые обследования

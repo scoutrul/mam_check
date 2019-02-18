@@ -49,4 +49,15 @@ export default {
 		});
 		state.tests = updatedTest;
 	},
+	SET_TREATMENTS: (state, payload) => {
+		const { id, treatment } = payload;
+		const updatedTest = state.tests.map(item => {
+			item.treatment = 'false';
+			if (item.id === id) {
+				item.treatment = treatment;
+			}
+			return item;
+		});
+		state.tests = updatedTest;
+	}
 };
