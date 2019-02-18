@@ -29,7 +29,6 @@
         <v-flex class="checkup__section">
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
-                <Header4 v-if="filterInProgressTests">В ПРОГРЕССЕ</Header4>
                 <TestItem
                     v-for="item in filterInProgressTests"
                     :id="item.id"
@@ -44,8 +43,6 @@
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                 />
-                <Header4>нов тесты</Header4>
-
                 <TestItem
                     v-for="item in filterTests"
                     :id="item.id"
@@ -56,6 +53,7 @@
                     :questions-num="
                         (item.questions && item.questions.length) || 0
                     "
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                 />
@@ -75,7 +73,7 @@
                     :questions-num="
                         (item.questions && item.questions.length) || 0
                     "
-                    :completed-num="item.questions && item.questions.length"
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                 />

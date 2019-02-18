@@ -13,8 +13,11 @@
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
                 <v-flex class="testItem__info">
-                    <v-flex v-if="isInProgress" class="testItem__progress"
-                        >Выполнено {{ completedNum }} / {{ questionsNum }}
+                    <template v-if="completedNum < 1">
+                        {{ shortDescription }}
+                    </template>
+                    <v-flex v-else-if="isInProgress" class="testItem__progress"
+                        >Выполнено {{ completedNum-1 }} / {{ questionsNum }}
                         <div class="testItem__progressBar">
                             <div
                                 class="testItem__progressBar_completed"
@@ -45,9 +48,6 @@
                                         />
                                     </svg>
                                 </i>
-                            </template>
-                            <template v-else>
-                                {{ shortDescription }}
                             </template>
                         </v-flex>
                     </template>
@@ -131,7 +131,7 @@ export default {
                 color: this.color,
                 shortDescription: this.shortDescription,
                 questionsNum: this.questionsNum,
-                completedNum: this.completedNum,
+                completedNum: this.completedNum+1 ,
                 treatment: this.treatment,
                 recommendations: this.recommendations,
                 startSelf: this.startSelf,
@@ -141,10 +141,10 @@ export default {
     },
     computed: {
         isInProgress() {
-            return this.completedNum < this.questionsNum;
+            return this.completedNum >= 1 && this.completedNum < this.questionsNum;
         },
         itIsCompleted() {
-            return this.completedNum > this.questionsNum;
+            return this.completedNum > 0 && this.completedNum >= this.questionsNum;
         },
         countProgress() {
             return (
