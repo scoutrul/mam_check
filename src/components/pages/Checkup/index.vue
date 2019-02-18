@@ -29,6 +29,7 @@
         <v-flex class="checkup__section">
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
+                <Header4 v-if="filterInProgressTests">В ПРОГРЕССЕ</Header4>
                 <TestItem
                     v-for="item in filterInProgressTests"
                     :id="item.id"
@@ -37,7 +38,6 @@
                     :name="item.name"
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"
-                    :reset-self="resetTestItem"
                     :start-self="startTestItem"
                 />
                 <Header4>нов тесты</Header4>
@@ -50,7 +50,6 @@
                     :name="item.name"
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"
-                    :reset-self="resetTestItem"
                     :start-self="startTestItem"
                 />
                 <TestItem
@@ -58,7 +57,6 @@
                     short-description="Проверьте, нет ли у вас заболеваний легких или бронхов"
                     :questions-num="10"
                     :completed-num="7"
-                    :reset-self="resetTestItem"
                 />
             </v-layout>
         </v-flex>
@@ -75,7 +73,6 @@
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"
                     :completed-num="item.questionsNum"
-                    :reset-self="resetTestItem"
                     :start-self="startTestItem"
                 />
                 <TestItem
@@ -84,7 +81,6 @@
                     short-description="Не кушайте с пола"
                     :questions-num="10"
                     :completed-num="10"
-                    :reset-self="resetTestItem"
                     treatment="У Вас повышен риск развития сердечно-сосудитстых заболеваний. Откажитесь от курения - это очень важно для Вас! Проходить пешком 
                                 в день в среднем или высоком темпе 30 минут и более или 3 км. 
 
@@ -101,7 +97,6 @@
                     short-description="Не кушайте с пола"
                     :questions-num="10"
                     :completed-num="10"
-                    :reset-self="resetTestItem"
                     treatment="Вы можете выпить рюмку-другую за праздничным столом или на дне рождения у друзей. И все-таки больше того, что Вы употребляете, пить не нужно! Ведите здоровый образ жизни, проходите в день пешком 30 минут и больше или не менее 3 км, ешьте не менее 400 г фруктов и овощей в день, не курите!"
                 />
             </v-layout>
@@ -111,7 +106,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import fakeApi from '@/services/fakeApi';
+import filter from 'lodash/filter';
+import get from 'lodash/get';
 
 import {
     Header1,
@@ -141,8 +137,7 @@ export default {
                 this.getTests.filter(
                     item =>
                         item.questions &&
-                        item.questions[item.questions.length - 1].weight !==
-                            undefined,
+                        item.currentStep >= item.questions.length,
                 ) || []
             );
         },
@@ -150,18 +145,17 @@ export default {
             return (
                 this.getTests.filter(
                     item =>
+                        item.currentStep > 1 &&
                         item.questions &&
-                        item.questions[0].weight !== undefined &&
-                        !item.questions[item.questions.length - 1],
-                ).weight === undefined || []
+                        item.currentStep <= item.questions.length,
+                ) || []
             );
         },
         filterTests() {
-            return this.getTests.filter(
-                item =>
-                    !item.questions ||
-                    item.questions[0].weight === undefined ||
-                    [],
+            return (
+                this.getTests.filter(
+                    item => !item.currentStep || item.currentStep <= 1,
+                ) || []
             );
         },
     },
@@ -170,9 +164,6 @@ export default {
     },
 
     methods: {
-        resetTestItem() {
-            console.log('resetItem');
-        },
         startTestItem({ id }) {
             this.$router.push(`/test/${id}/`);
         },

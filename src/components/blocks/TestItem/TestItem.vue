@@ -109,10 +109,6 @@ export default {
             type: Array,
             default: () => [],
         },
-        resetSelf: {
-            type: Function,
-            default: ({ id }) => console.log(id),
-        },
         treatment: {
             type: String,
             default: '',
@@ -132,7 +128,6 @@ export default {
                 shortDescription: this.shortDescription,
                 questionsNum: this.questionsNum,
                 completedNum: this.completedNum,
-                resetSelf: this.resetSelf(),
                 treatment: this.treatment,
                 recommendations: this.recommendations,
                 startSelf: this.startSelf,

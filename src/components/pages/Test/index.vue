@@ -156,19 +156,15 @@ export default {
         closeSelf() {
             this.$router.push('/checkup');
         },
-        goNext(weight, testIndex) {
+        goNext(weight, answerIndex) {
+            this.stepper += 1;
             const payload = {
                 testId: +this.$route.params.testId,
-                testIndex,
+                answerIndex,
                 weight,
+                currentStep: this.stepper,
             };
             this.$store.dispatch('store_test_answer', payload);
-            this.weights += weight;
-            this.stepper += 1;
-            // сохранять баллы к каждый вопрос в СТОРЕ
-            // currentTestId
-            // считать баллы и выдавать рекомендации в чекап пейдж
-            // реализовать паузу - продолжение тестов
         },
     },
 };

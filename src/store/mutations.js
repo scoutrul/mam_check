@@ -13,14 +13,14 @@ export default {
 		state.tests = newTestsArr;
 	},
 	STORE_TEST_ANSWER: (state, payload) => {
-		const { testId, testIndex, weight } = payload;
-		console.log(testId, testIndex, weight);
+		const { testId, answerIndex, weight } = payload;
 		const newTestsArr = state.tests.map(item => {
 			if (item.id === testId) {
-				item.questions[testIndex] = {
-					...item.questions[testIndex],
+				item.questions[answerIndex] = {
+					...item.questions[answerIndex],
 					weight,
 				};
+				item.currentStep = payload.currentStep;
 			}
 			return item;
 		});
