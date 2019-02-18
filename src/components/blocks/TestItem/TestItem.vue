@@ -29,7 +29,7 @@
                         <v-flex class="testItem__short">
                             <template v-if="itIsCompleted">
                                 <i
-                                    @click="startSelf({ id })"
+                                    @click="resetSelf({ id })"
                                     style="cursor: pointer"
                                 >
                                     <svg
@@ -117,6 +117,10 @@ export default {
             type: Function,
             default: ({ id }) => console.log(id),
         },
+        resetSelf: {
+            type: Function,
+            default: ({ id }) => console.log(id),
+        },
     },
     data() {
         return {
@@ -131,6 +135,7 @@ export default {
                 treatment: this.treatment,
                 recommendations: this.recommendations,
                 startSelf: this.startSelf,
+                resetSelf: this.resetSelf,
             },
         };
     },

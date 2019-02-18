@@ -39,6 +39,7 @@
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"
                     :start-self="startTestItem"
+                    :reset-self="resetTestItem"
                 />
                 <Header4>нов тесты</Header4>
 
@@ -51,6 +52,7 @@
                     :short-description="item.shortDescription"
                     :questions-num="item.questionsNum"
                     :start-self="startTestItem"
+                    :reset-self="resetTestItem"
                 />
                 <TestItem
                     name="Здоровое дыхание"
@@ -74,6 +76,7 @@
                     :questions-num="item.questionsNum"
                     :completed-num="item.questionsNum"
                     :start-self="startTestItem"
+                    :reset-self="resetTestItem"
                 />
                 <TestItem
                     name="Мозговое кровообращение"
@@ -137,6 +140,7 @@ export default {
                 this.getTests.filter(
                     item =>
                         item.questions &&
+                        item.currentStep &&
                         item.currentStep >= item.questions.length,
                 ) || []
             );
@@ -165,7 +169,15 @@ export default {
 
     methods: {
         startTestItem({ id }) {
-            this.$router.push(`/test/${id}/`);
+            this.$router.push({
+                path: `/test/${id}/`,
+            });
+        },
+        resetTestItem({ id }) {
+            this.$store.dispatch('reset_test_questions', { id });
+            this.$router.push({
+                path: `/test/${id}/`,
+            });
         },
     },
 };

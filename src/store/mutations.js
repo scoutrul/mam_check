@@ -39,4 +39,15 @@ export default {
 	SET_HEIGHT: (state, payload) => {
 		state.user.height = payload;
 	},
+	RESET_TEST_QUESTIONS: (state, payload) => {
+		const { id } = payload;
+		debugger;
+		const updatedTest = state.tests.map(item => {
+			if (item.id === id) {
+				item.currentStep = 1;
+			}
+			return item;
+		});
+		state.tests = updatedTest;
+	},
 };

@@ -1,14 +1,17 @@
 <template>
     <v-layout column align-center class="container testSelf">
         <v-stepper
-            v-if="currentTest.length && stepper <= currentTest.length + 1"
+            v-if="
+                currentTestQuestions.length &&
+                    stepper <= currentTestQuestions.length + 1
+            "
             v-model="stepper"
             light
             :ripple="false"
             class="stepper__clear stepper__container"
         >
             <SimpleButton
-                v-if="stepper > 1 && stepper < currentTest.length + 1"
+                v-if="stepper > 1 && stepper < currentTestQuestions.length + 1"
                 class="button__simple--arrow back_button"
                 @click.native="goBack"
             >
@@ -20,7 +23,7 @@
             </SimpleButton>
             <portal to="closeCurrentTest">
                 <SimpleButton
-                    v-if="stepper < currentTest.length + 1"
+                    v-if="stepper < currentTestQuestions.length + 1"
                     class="button__simple--arrow close_button"
                     @click.native="closeSelf"
                 >
@@ -40,9 +43,9 @@
             </portal>
 
             <div class="testSelf__stepperBar">
-                <div v-if="stepper <= currentTest.length">
+                <div v-if="stepper <= currentTestQuestions.length">
                     <span>Вопрос {{ stepper }}</span> из
-                    {{ currentTest.length }}
+                    {{ currentTestQuestions.length }}
                 </div>
             </div>
             <div class="testSelf__progressBar">
@@ -59,13 +62,13 @@
             </div>
 
             <portal-target
-                v-for="item in currentTest"
+                v-for="item in currentTestQuestions"
                 :key="item.id"
                 :name="'dest' + item.id"
             />
             <v-stepper-items>
                 <v-stepper-content
-                    v-for="(item, index) in currentTest"
+                    v-for="(item, index) in currentTestQuestions"
                     :key="item.id"
                     class="testSelf__body"
                     :step="index + 1"
@@ -98,6 +101,7 @@
 
 <script>
 import delay from 'lodash/delay';
+import get from 'lodash/get';
 import services from '@/services';
 
 import { SimpleButton } from '../../blocks';
@@ -108,6 +112,7 @@ export default {
     },
     data: () => ({
         stepper: 1,
+        currentStep: 1,
         shortName: '',
         weights: 0,
     }),
@@ -117,7 +122,7 @@ export default {
         });
     },
     computed: {
-        currentTest() {
+        currentTestQuestions() {
             return (
                 this.$store.state.tests.find(
                     item => item.id === +this.$route.params.testId,
@@ -125,24 +130,30 @@ export default {
             );
         },
         countProgress() {
-            const koef = (this.stepper / this.currentTest.length) * 100;
+            const koef =
+                (this.stepper / this.currentTestQuestions.length) * 100;
 
-            return koef - 100 - 100 / this.currentTest.length;
+            return koef - 100 - 100 / this.currentTestQuestions.length;
         },
     },
+    beforeMount() {
+        this.currentStep = 3;
+    },
     async mounted() {
+        const currTest = this.$store.state.tests.find(
+            test => test.id === +this.$route.params.testId,
+        );
         try {
-            const shortName = id =>
-                this.$store.state.tests.find(test => test.id === id).shortName;
-            this.shortName = await shortName(+this.$route.params.testId);
+            this.shortName = await currTest.shortName;
+            this.stepper = currTest.currentStep || 1;
         } catch (e) {
             console.log(e, 'err');
             this.closeSelf();
         }
     },
     updated() {
-        if (this.stepper > this.currentTest.length) {
-            delay(this.closeSelf, 800);
+        if (this.stepper > this.currentTestQuestions.length) {
+            delay(this.closeSelf, 500);
         }
     },
     methods: {
