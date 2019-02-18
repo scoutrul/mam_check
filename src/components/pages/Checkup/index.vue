@@ -136,14 +136,33 @@ export default {
         ...mapState({
             getTests: state => state.tests,
         }),
-        filterCompletedTests(){
-            return this.getTests.filter(item => item.questions && item.questions[item.questions.length - 1].weight !== undefined) || []
+        filterCompletedTests() {
+            return (
+                this.getTests.filter(
+                    item =>
+                        item.questions &&
+                        item.questions[item.questions.length - 1].weight !==
+                            undefined,
+                ) || []
+            );
         },
-        filterInProgressTests(){
-            return this.getTests.filter(item => item.questions && item.questions[0].weight !== undefined && !item.questions[item.questions.length - 1]).weight === undefined || []
+        filterInProgressTests() {
+            return (
+                this.getTests.filter(
+                    item =>
+                        item.questions &&
+                        item.questions[0].weight !== undefined &&
+                        !item.questions[item.questions.length - 1],
+                ).weight === undefined || []
+            );
         },
-        filterTests(){
-            return this.getTests.filter(item => !item.questions || item.questions[0].weight === undefined || [])
+        filterTests() {
+            return this.getTests.filter(
+                item =>
+                    !item.questions ||
+                    item.questions[0].weight === undefined ||
+                    [],
+            );
         },
     },
     beforeMount() {

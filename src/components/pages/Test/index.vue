@@ -1,7 +1,6 @@
 <template>
     <v-layout column align-center class="container testSelf">
         <v-stepper
-            v-if="stepper <= currentTest.length"
             v-model="stepper"
             light
             :ripple="false"
@@ -20,6 +19,7 @@
             </SimpleButton>
             <portal to="closeCurrentTest">
                 <SimpleButton
+                    v-if="stepper <= currentTest.length"
                     class="button__simple--arrow close_button"
                     @click.native="closeSelf"
                 >
@@ -39,7 +39,7 @@
             </portal>
 
             <div class="testSelf__stepperBar">
-                <div>
+                <div v-if="stepper <= currentTest.length">
                     <span>Вопрос {{ stepper }}</span> из
                     {{ currentTest.length }}
                 </div>
@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import fakeApi from '@/services/fakeApi';
+import delay from 'lodash/delay';
 import services from '@/services';
 
 import { SimpleButton } from '../../blocks';
@@ -110,14 +110,18 @@ export default {
         shortName: '',
         weights: 0,
     }),
-    beforeRouteEnter (to, from, next) {
+    beforeRouteEnter(to, from, next) {
         next(vm => {
             services.fetchTestQuestions({ id: +vm.$route.params.testId });
-        })
+        });
     },
     computed: {
         currentTest() {
-            return this.$store.state.tests.find(item => item.id === +this.$route.params.testId).questions || [];
+            return (
+                this.$store.state.tests.find(
+                    item => item.id === +this.$route.params.testId,
+                ).questions || []
+            );
         },
         countProgress() {
             const koef = (this.stepper / this.currentTest.length) * 100;
@@ -137,7 +141,7 @@ export default {
     },
     updated() {
         if (this.stepper > this.currentTest.length) {
-            this.closeSelf();
+            delay(this.closeSelf, 1500);
         }
     },
     methods: {
@@ -155,7 +159,7 @@ export default {
             const payload = {
                 testId: +this.$route.params.testId,
                 testIndex,
-                weight
+                weight,
             };
             this.$store.dispatch('store_test_answer', payload);
             this.weights += weight;

@@ -28,7 +28,10 @@
                     <template v-else>
                         <v-flex class="testItem__short">
                             <template v-if="itIsCompleted">
-                                <i @click="startSelf({ id })" style="cursor: pointer">
+                                <i
+                                    @click="startSelf({ id })"
+                                    style="cursor: pointer"
+                                >
                                     <svg
                                         width="23"
                                         height="24"
