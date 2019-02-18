@@ -1,13 +1,14 @@
 <template>
     <v-layout column align-center class="container testSelf">
         <v-stepper
+            v-if="currentTest.length && stepper <= currentTest.length + 1"
             v-model="stepper"
             light
             :ripple="false"
             class="stepper__clear stepper__container"
         >
             <SimpleButton
-                v-if="stepper > 1"
+                v-if="stepper > 1 && stepper < currentTest.length + 1"
                 class="button__simple--arrow back_button"
                 @click.native="goBack"
             >
@@ -19,7 +20,7 @@
             </SimpleButton>
             <portal to="closeCurrentTest">
                 <SimpleButton
-                    v-if="stepper <= currentTest.length"
+                    v-if="stepper < currentTest.length + 1"
                     class="button__simple--arrow close_button"
                     @click.native="closeSelf"
                 >
@@ -141,7 +142,7 @@ export default {
     },
     updated() {
         if (this.stepper > this.currentTest.length) {
-            delay(this.closeSelf, 1500);
+            delay(this.closeSelf, 800);
         }
     },
     methods: {
