@@ -50,26 +50,57 @@ export default {
 				test.questions.length > 0
 			) {
 				test.questions.forEach(question => {
-					if (
-						typeof question.weight !== 'undefined' &&
-						typeof question.examinationQuestionId !== 'undefined'
-					) {
-						let tAnswer;
+					if (typeof question.examinationQuestionId !== 'undefined') {
+						switch (question.type) {
+							case 'variant':
+								if (typeof question.weight !== 'undefined') {
+									let tAnswer;
 
-						question.answers.forEach(answer => {
-							if (answer.weight === question.weight) {
-								tAnswer = answer;
-							}
-						});
+									question.answers.forEach(answer => {
+										if (answer.weight === question.weight) {
+											tAnswer = answer;
+										}
+									});
 
-						if (
-							tAnswer &&
-							typeof tAnswer.examinationVariantId !== 'undefined'
-						) {
-							answersData.push({
-								questionId: question.examinationQuestionId,
-								variants: [tAnswer.examinationVariantId],
-							});
+									if (
+										tAnswer &&
+										typeof tAnswer.examinationVariantId !==
+											'undefined'
+									) {
+										answersData.push({
+											questionId:
+												question.examinationQuestionId,
+											variants: [
+												tAnswer.examinationVariantId,
+											],
+										});
+									}
+								}
+
+								break;
+							case 'string':
+								answersData.push({
+									questionId: question.examinationQuestionId,
+									string: 'test',
+								});
+
+								break;
+
+							case 'list':
+								answersData.push({
+									questionId: question.examinationQuestionId,
+									answer: {
+										diseases: [
+											'Рак желудка',
+											'Рак кишечника',
+										],
+									},
+								});
+
+								break;
+
+							default:
+								break;
 						}
 					}
 				});
