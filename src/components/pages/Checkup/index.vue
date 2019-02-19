@@ -36,12 +36,16 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
-                    :reset-self="resetTestItem"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
+                    :reset-self="resetTestItem"
+                    :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
-                <Header4>нов тесты</Header4>
-
                 <TestItem
                     v-for="item in filterTests"
                     :id="item.id"
@@ -49,21 +53,20 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
-                    :reset-self="resetTestItem"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
-                />
-                <TestItem
-                    name="Здоровое дыхание"
-                    short-description="Проверьте, нет ли у вас заболеваний легких или бронхов"
-                    :questions-num="10"
-                    :completed-num="7"
                     :reset-self="resetTestItem"
+                    :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
             </v-layout>
         </v-flex>
 
-        <v-flex class="checkup__section">
+        <v-flex class="checkup__section" v-if="filterCompletedTests.length">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -73,36 +76,15 @@
                     :short-name="item.shortName"
                     :name="item.name"
                     :short-description="item.shortDescription"
-                    :questions-num="item.questionsNum"
-                    :completed-num="item.questionsNum"
-                    :reset-self="resetTestItem"
+                    :questions-num="
+                        (item.questions && item.questions.length) || 0
+                    "
+                    :completed-num="item.currentStep"
                     :start-self="startTestItem"
-                />
-                <TestItem
-                    name="Мозговое кровообращение"
-                    color="#FEE245"
-                    short-description="Не кушайте с пола"
-                    :questions-num="10"
-                    :completed-num="10"
                     :reset-self="resetTestItem"
-                    treatment="У Вас повышен риск развития сердечно-сосудитстых заболеваний. Откажитесь от курения - это очень важно для Вас! Проходить пешком
-                                в день в среднем или высоком темпе 30 минут и более или 3 км.
-
-                                Контролируйте уровень Вашего артериального давления и обязательно периодически проверяйте уровень холестерина в крови."
-                    :recommendations="[
-                        'больше спите',
-                        'лучше питайтесь',
-                        'радуйтесь',
-                    ]"
-                />
-                <TestItem
-                    name="Вредные привычки"
-                    color="#58B379"
-                    short-description="Не кушайте с пола"
-                    :questions-num="10"
-                    :completed-num="10"
-                    :reset-self="resetTestItem"
-                    treatment="Вы можете выпить рюмку-другую за праздничным столом или на дне рождения у друзей. И все-таки больше того, что Вы употребляете, пить не нужно! Ведите здоровый образ жизни, проходите в день пешком 30 минут и больше или не менее 3 км, ешьте не менее 400 г фруктов и овощей в день, не курите!"
+                    :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
             </v-layout>
         </v-flex>
@@ -160,6 +142,9 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import filter from 'lodash/filter';
+import get from 'lodash/get';
+import each from 'lodash/each';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
 
@@ -189,8 +174,6 @@ export default {
             getTests: state => state.tests,
         }),
         ...mapGetters({
-            completedTestsCount: 'completedTestsCount',
-            medicalFormComplete: 'medicalFormComplete',
             answersDataForPortalApi: 'answersDataForPortalApi',
         }),
         filterCompletedTests() {
@@ -198,8 +181,8 @@ export default {
                 this.getTests.filter(
                     item =>
                         item.questions &&
-                        item.questions[item.questions.length - 1].weight !==
-                            undefined,
+                        item.currentStep &&
+                        item.currentStep >= item.questions.length,
                 ) || []
             );
         },
@@ -207,35 +190,60 @@ export default {
             return (
                 this.getTests.filter(
                     item =>
+                        item.currentStep > 1 &&
                         item.questions &&
-                        item.questions[0].weight !== undefined &&
-                        !item.questions[item.questions.length - 1],
-                ).weight === undefined || []
+                        item.currentStep <= item.questions.length,
+                ) || []
             );
         },
         filterTests() {
-            return this.getTests.filter(
-                item =>
-                    !item.questions ||
-                    item.questions[0].weight === undefined ||
-                    [],
+            return (
+                this.getTests.filter(
+                    item => !item.currentStep || item.currentStep <= 1,
+                ) || []
             );
         },
     },
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
-
-    created() {
-        console.log(this.answersDataForPortalApi);
+    mounted() {
+        this.getAllQuestionsResult();
     },
 
     methods: {
-        resetTestItem() {
-            console.log('resetItem');
-        },
         startTestItem({ id }) {
-            this.$router.push(`/test/${id}/`);
+            this.$router.push({
+                path: `/test/${id}/`,
+            });
+        },
+        resetTestItem({ id }) {
+            this.$store.dispatch('reset_test_questions', { id });
+            this.$router.push({
+                path: `/test/${id}/`,
+            });
+        },
+        getAllQuestionsResult() {
+            each(this.getTests, test => {
+                let weight = 0;
+                each(test.questions, question => {
+                    weight = weight + question.weight || 0;
+                });
+                fakeApi
+                    .getTreatmentByResult({
+                        testId: test.id,
+                        answerSum: weight,
+                    })
+                    .then(result => {
+                        const payload = {
+                            id: test.id,
+                            treatment: result.treatment.decode,
+                            recommendations: result.recommendations,
+                            color: result.color,
+                        };
+                        this.$store.dispatch('set_treatments', payload);
+                    });
+            });
         },
         getMedicalForm() {
             if (this.answersDataForPortalApi.length > 0) {

@@ -27,4 +27,10 @@ export default {
 	store_test_answer: ({ commit }, payload) => {
 		commit('STORE_TEST_ANSWER', payload);
 	},
+	reset_test_questions: ({ commit }, payload) => {
+		commit('RESET_TEST_QUESTIONS', payload);
+	},
+	set_treatments: ({ commit }, payload) => {
+		commit('SET_TREATMENTS', payload);
+	},
 };

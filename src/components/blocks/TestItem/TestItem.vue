@@ -13,8 +13,11 @@
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
                 <v-flex class="testItem__info">
-                    <v-flex v-if="isInProgress" class="testItem__progress"
-                        >Выполнено {{ completedNum }} / {{ questionsNum }}
+                    <template v-if="completedNum < 1">
+                        {{ shortDescription }}
+                    </template>
+                    <v-flex v-else-if="isInProgress" class="testItem__progress"
+                        >Выполнено {{ completedNum - 1 }} / {{ questionsNum }}
                         <div class="testItem__progressBar">
                             <div
                                 class="testItem__progressBar_completed"
@@ -28,7 +31,10 @@
                     <template v-else>
                         <v-flex class="testItem__short">
                             <template v-if="itIsCompleted">
-                                <i @click="startSelf({ id })" style="cursor: pointer">
+                                <i
+                                    @click="resetSelf({ id })"
+                                    style="cursor: pointer"
+                                >
                                     <svg
                                         width="23"
                                         height="24"
@@ -43,19 +49,21 @@
                                     </svg>
                                 </i>
                             </template>
-                            <template v-else>
-                                {{ shortDescription }}
-                            </template>
                         </v-flex>
                     </template>
                 </v-flex>
             </v-layout>
         </v-layout>
-        <v-layout v-if="treatment" column class="testItem__treatment">
-            <v-flex v-if="treatment" class="testItem__treatment_info">{{
-                treatment
-            }}</v-flex>
-            <v-flex v-if="recommendations" class="testItem__recommendations">
+        <v-layout
+            v-if="treatment && itIsCompleted"
+            column
+            class="testItem__treatment"
+        >
+            <v-flex class="testItem__treatment_info">{{ treatment }}</v-flex>
+            <v-flex
+                v-if="recommendations.length"
+                class="testItem__recommendations"
+            >
                 <div class="testItem__recommendations_label">
                     Рекомендуемые обследования
                 </div>
@@ -106,15 +114,15 @@ export default {
             type: Array,
             default: () => [],
         },
-        resetSelf: {
-            type: Function,
-            default: ({ id }) => console.log(id),
-        },
         treatment: {
             type: String,
             default: '',
         },
         startSelf: {
+            type: Function,
+            default: ({ id }) => console.log(id),
+        },
+        resetSelf: {
             type: Function,
             default: ({ id }) => console.log(id),
         },
@@ -128,20 +136,24 @@ export default {
                 color: this.color,
                 shortDescription: this.shortDescription,
                 questionsNum: this.questionsNum,
-                completedNum: this.completedNum,
-                resetSelf: this.resetSelf(),
+                completedNum: this.completedNum + 1,
                 treatment: this.treatment,
                 recommendations: this.recommendations,
                 startSelf: this.startSelf,
+                resetSelf: this.resetSelf,
             },
         };
     },
     computed: {
         isInProgress() {
-            return !this.itIsCompleted && this.completedNum > 0;
+            return (
+                this.completedNum >= 1 && this.completedNum < this.questionsNum
+            );
         },
         itIsCompleted() {
-            return this.completedNum === this.questionsNum;
+            return (
+                this.completedNum > 0 && this.completedNum >= this.questionsNum
+            );
         },
         countProgress() {
             return (

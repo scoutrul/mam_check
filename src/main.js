@@ -24,8 +24,8 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
 	console.log('# from', from);
 	console.log('# to', to);
-	if (to.name === 'checkup') {
-		if (store.state.user.isUserInfoDone === false) {
+	if(to.name === 'checkup'){
+		if(store.state.user.isUserInfoDone === false){
 			next('/pretest');
 		}
 		services.fetchMedicalTests();

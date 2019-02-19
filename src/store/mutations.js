@@ -13,14 +13,14 @@ export default {
 		state.tests = newTestsArr;
 	},
 	STORE_TEST_ANSWER: (state, payload) => {
-		const { testId, testIndex, weight } = payload;
-		console.log(testId, testIndex, weight);
+		const { testId, answerIndex, weight } = payload;
 		const newTestsArr = state.tests.map(item => {
 			if (item.id === testId) {
-				item.questions[testIndex] = {
-					...item.questions[testIndex],
+				item.questions[answerIndex] = {
+					...item.questions[answerIndex],
 					weight,
 				};
+				item.currentStep = payload.currentStep;
 			}
 			return item;
 		});
@@ -39,4 +39,26 @@ export default {
 	SET_HEIGHT: (state, payload) => {
 		state.user.height = payload;
 	},
+	RESET_TEST_QUESTIONS: (state, payload) => {
+		const { id } = payload;
+		const updatedTest = state.tests.map(item => {
+			if (item.id === id) {
+				item.currentStep = 1;
+			}
+			return item;
+		});
+		state.tests = updatedTest;
+	},
+	SET_TREATMENTS: (state, payload) => {
+		const { recommendations, treatment, id, color } = payload;
+		const updatedTest = state.tests.map(item => {
+			if (item.id === id) {
+				item.treatment = treatment;
+				item.recommendations = recommendations;
+				item.color = color;
+			}
+			return item;
+		});
+		state.tests = updatedTest;
+	}
 };
