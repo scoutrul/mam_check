@@ -10,7 +10,7 @@
             <v-flex class="testItem__icon">
                 <TestIcon
                     :name="shortName"
-                    :color="itIsCompleted ? color : ''"
+                    :color="itIsCompleted ? color : '#122123'"
                 />
             </v-flex>
             <v-layout class="testItem__header_inner">
