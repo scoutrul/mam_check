@@ -17,7 +17,7 @@
                         {{ shortDescription }}
                     </template>
                     <v-flex v-else-if="isInProgress" class="testItem__progress"
-                        >Выполнено {{ completedNum-1 }} / {{ questionsNum }}
+                        >Выполнено {{ completedNum - 1 }} / {{ questionsNum }}
                         <div class="testItem__progressBar">
                             <div
                                 class="testItem__progressBar_completed"
@@ -54,9 +54,16 @@
                 </v-flex>
             </v-layout>
         </v-layout>
-        <v-layout v-if="treatment" column class="testItem__treatment">
-            <v-flex class="testItem__treatment_info">{{treatment}}</v-flex>
-            <v-flex v-if="recommendations" class="testItem__recommendations">
+        <v-layout
+            v-if="treatment && itIsCompleted"
+            column
+            class="testItem__treatment"
+        >
+            <v-flex class="testItem__treatment_info">{{ treatment }}</v-flex>
+            <v-flex
+                v-if="recommendations.length"
+                class="testItem__recommendations"
+            >
                 <div class="testItem__recommendations_label">
                     Рекомендуемые обследования
                 </div>
@@ -129,7 +136,7 @@ export default {
                 color: this.color,
                 shortDescription: this.shortDescription,
                 questionsNum: this.questionsNum,
-                completedNum: this.completedNum+1 ,
+                completedNum: this.completedNum + 1,
                 treatment: this.treatment,
                 recommendations: this.recommendations,
                 startSelf: this.startSelf,
@@ -139,10 +146,14 @@ export default {
     },
     computed: {
         isInProgress() {
-            return this.completedNum >= 1 && this.completedNum < this.questionsNum;
+            return (
+                this.completedNum >= 1 && this.completedNum < this.questionsNum
+            );
         },
         itIsCompleted() {
-            return this.completedNum > 0 && this.completedNum >= this.questionsNum;
+            return (
+                this.completedNum > 0 && this.completedNum >= this.questionsNum
+            );
         },
         countProgress() {
             return (

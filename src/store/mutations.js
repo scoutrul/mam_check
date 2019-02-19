@@ -52,7 +52,7 @@ export default {
 	SET_TREATMENTS: (state, payload) => {
 		const { id, treatment } = payload;
 		const updatedTest = state.tests.map(item => {
-			item.treatment = '';
+			item.treatment = treatment;
 			if (item.id === id) {
 				item.treatment = treatment;
 			}

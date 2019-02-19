@@ -1855,8 +1855,8 @@ export default {
 			});
 		}),
 
-	getTreatmentByResult: ({ testId, answerSum }) =>
-		new Promise((resolve, reject) => {
+	getTreatmentByResult: ({ testId, answerSum }) =>{
+		return new Promise((resolve, reject) => {
 			setTimeout(() => {
 				const treatments = [
 					// Мозговое кровообращение
@@ -3940,5 +3940,6 @@ export default {
 
 				resolve(neededTreatment);
 			}, 500);
-		}),
+		})
+	},
 };

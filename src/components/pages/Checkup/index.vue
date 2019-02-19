@@ -170,8 +170,8 @@ export default {
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
-    mounted(){
-        this.getTreatments()
+    mounted() {
+        this.getTreatments();
     },
 
     methods: {
@@ -186,25 +186,26 @@ export default {
                 path: `/test/${id}/`,
             });
         },
-        getTreatments(){
+        getTreatments() {
             each(this.getTests, test => {
                 let weight = 0;
                 each(test.questions, question => {
                     weight = weight + question.weight || 0;
-
-                    fakeApi.getTreatmentByResult({ testId: test.id, answerSum: weight }).then(async test => {
-                        
-                        console.log(test);
+                });
+                fakeApi
+                    .getTreatmentByResult({
+                        testId: test.id,
+                        answerSum: weight,
+                    })
+                    .then(result => {
                         const payload = {
                             id: test.id,
-                            treatment: test.decode,
-                        }
-                        await this.$store.dispatch('set_treatments', payload)
+                            treatment: result.decode,
+                        };
+                        this.$store.dispatch('set_treatments', payload);
                     });
-                })
             });
-            
-        }
+        },
     },
 };
 </script>
