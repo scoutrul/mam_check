@@ -174,6 +174,7 @@ export default {
             getTests: state => state.tests,
         }),
         ...mapGetters({
+            medicalFormComplete: 'medicalFormComplete',
             answersDataForPortalApi: 'answersDataForPortalApi',
         }),
         filterCompletedTests() {
