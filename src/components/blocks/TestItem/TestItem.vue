@@ -3,12 +3,15 @@
         v-ripple
         column
         :class="['testItem', itIsCompleted && 'itIsCompleted']"
-        :style="`border-color: ${color}`"
+        :style="itIsCompleted && `border-color: ${color}`"
         @click="!itIsCompleted && startSelf({ id })"
     >
         <v-layout class="testItem__header">
             <v-flex class="testItem__icon">
-                <img :src="`/assets/images/test_${shortName}.svg`" />
+                <TestIcon
+                    :name="shortName"
+                    :color="itIsCompleted ? color : ''"
+                />
             </v-flex>
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
@@ -80,7 +83,12 @@
 </template>
 
 <script>
+import TestIcon from '@/components/blocks/TestIcon';
+
 export default {
+    components: {
+        TestIcon,
+    },
     props: {
         id: {
             type: Number,
@@ -96,7 +104,7 @@ export default {
         },
         color: {
             type: String,
-            default: '#FFF',
+            default: '#122123',
         },
         shortDescription: {
             type: String,
@@ -131,7 +139,7 @@ export default {
         return {
             props: {
                 id: this.id,
-                name: this.name,
+                name: this.name || '',
                 shortName: this.shortName,
                 color: this.color,
                 shortDescription: this.shortDescription,
