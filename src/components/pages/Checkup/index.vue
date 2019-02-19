@@ -66,7 +66,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex class="checkup__section">
+        <v-flex class="checkup__section" v-if="filterCompletedTests.length">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -85,30 +85,6 @@
                     :treatment="item.treatment"
                     :recommendations="item.recommendations"
                     :color="item.color"
-                />
-                <TestItem
-                    name="Мозговое кровообращение"
-                    color="#FEE245"
-                    short-description="Не кушайте с пола"
-                    :questions-num="10"
-                    :completed-num="10"
-                    treatment="У Вас повышен риск развития сердечно-сосудитстых заболеваний. Откажитесь от курения - это очень важно для Вас! Проходить пешком 
-                                в день в среднем или высоком темпе 30 минут и более или 3 км. 
-
-                                Контролируйте уровень Вашего артериального давления и обязательно периодически проверяйте уровень холестерина в крови."
-                    :recommendations="[
-                        'больше спите',
-                        'лучше питайтесь',
-                        'радуйтесь',
-                    ]"
-                />
-                <TestItem
-                    name="Вредные привычки"
-                    color="#58B379"
-                    short-description="Не кушайте с пола"
-                    :questions-num="10"
-                    :completed-num="10"
-                    treatment="Вы можете выпить рюмку-другую за праздничным столом или на дне рождения у друзей. И все-таки больше того, что Вы употребляете, пить не нужно! Ведите здоровый образ жизни, проходите в день пешком 30 минут и больше или не менее 3 км, ешьте не менее 400 г фруктов и овощей в день, не курите!"
                 />
             </v-layout>
         </v-flex>
