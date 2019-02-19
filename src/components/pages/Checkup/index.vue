@@ -43,6 +43,8 @@
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                     :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
                 <TestItem
                     v-for="item in filterTests"
@@ -58,6 +60,8 @@
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                     :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
             </v-layout>
         </v-flex>
@@ -79,6 +83,8 @@
                     :start-self="startTestItem"
                     :reset-self="resetTestItem"
                     :treatment="item.treatment"
+                    :recommendations="item.recommendations"
+                    :color="item.color"
                 />
                 <TestItem
                     name="Мозговое кровообращение"
@@ -171,7 +177,7 @@ export default {
         this.$store.dispatch('get_tests');
     },
     mounted() {
-        this.getTreatments();
+        this.getAllQuestionsResult();
     },
 
     methods: {
@@ -186,7 +192,7 @@ export default {
                 path: `/test/${id}/`,
             });
         },
-        getTreatments() {
+        getAllQuestionsResult() {
             each(this.getTests, test => {
                 let weight = 0;
                 each(test.questions, question => {
@@ -200,7 +206,9 @@ export default {
                     .then(result => {
                         const payload = {
                             id: test.id,
-                            treatment: result.decode,
+                            treatment: result.treatment.decode,
+                            recommendations: result.recommendations,
+                            color: result.color,
                         };
                         this.$store.dispatch('set_treatments', payload);
                     });

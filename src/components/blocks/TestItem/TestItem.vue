@@ -7,9 +7,7 @@
         @click="!itIsCompleted && startSelf({ id })"
     >
         <v-layout class="testItem__header">
-            <v-flex class="testItem__icon">
-                <img :src="`/assets/images/test_${shortName}.svg`" />
-            </v-flex>
+            <v-flex class="testItem__icon"> {{ svg }} </v-flex>
             <v-layout class="testItem__header_inner">
                 <v-flex class="testItem__name">{{ name }}</v-flex>
                 <v-flex class="testItem__info">

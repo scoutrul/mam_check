@@ -50,11 +50,12 @@ export default {
 		state.tests = updatedTest;
 	},
 	SET_TREATMENTS: (state, payload) => {
-		const { id, treatment } = payload;
+		const { recommendations, treatment, id, color } = payload;
 		const updatedTest = state.tests.map(item => {
-			item.treatment = treatment;
 			if (item.id === id) {
 				item.treatment = treatment;
+				item.recommendations = recommendations;
+				item.color = color;
 			}
 			return item;
 		});
