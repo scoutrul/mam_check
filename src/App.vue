@@ -101,7 +101,7 @@ export default {
             };
         },
         footerAllowPages() {
-            const pagesWithFooter = ['home', 'checkup'];
+            const pagesWithFooter = ['home', 'profile'];
             return pagesWithFooter.includes(this.$route.name);
         },
     },

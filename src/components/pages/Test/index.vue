@@ -100,6 +100,7 @@
 </template>
 
 <script>
+import CONST from '@/const.js';
 import delay from 'lodash/delay';
 import get from 'lodash/get';
 import services from '@/services';
@@ -165,7 +166,7 @@ export default {
             }
         },
         closeSelf() {
-            this.$router.push('/checkup');
+            this.$router.push(CONST.PAGE_PROFILE);
         },
         goNext(weight, answerIndex) {
             this.stepper += 1;

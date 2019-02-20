@@ -7,7 +7,7 @@
         dark
         ripple
         class="button__yellow"
-        to="/checkup"
+        :to="PAGE_PROFILE"
     >
         <span v-if="!isUserInfoDone">Начать</span>
         <span v-else>Продолжить</span>
@@ -15,7 +15,12 @@
 </template>
 
 <script>
+import CONST from '@/const.js';
+
 export default {
+    data: () => ({
+        PAGE_PROFILE: CONST.PAGE_PROFILE,
+    }),
     computed: {
         isHomePage() {
             return this.$route.name === 'home';

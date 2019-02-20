@@ -139,6 +139,7 @@
 </template>
 
 <script>
+import CONST from '@/const.js';
 import { mapState } from 'vuex';
 import { SimpleButton } from '../../blocks';
 
@@ -175,7 +176,7 @@ export default {
         },
         goNextPage() {
             this.$store.state.user.isUserInfoDone = true;
-            this.$router.push('/checkup');
+            this.$router.push(CONST.PAGE_PROFILE);
         },
     },
 };
