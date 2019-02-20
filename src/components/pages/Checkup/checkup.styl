@@ -1,67 +1,83 @@
 @import '~@/assets/styles/vars/index.styl';
 
-.checkup
-    margin-top 32px
-    .checkup__section
-        margin-bottom: 48px;
-    .banner {
-	    .banner__button {
-			flex-flow row wrap;
-		    margin 32px 16px 24px 0
-		    @media (max-width $XS_break) {
-			    margin: 0 0px 16px 0;
-		    }
-		}
-        margin-top 32px
-        margin-bottom 64px
-        text-align left
-        color #FFF
-        background: $Special_Blue
-        box-shadow: 0px 20px 50px rgba(19, 24, 31, 0.1);
-        border-radius: 16px;
-        flex-flow: column wrap !important;
-        padding 24px 52px
-	    @media (max-width $XS_break) {
-		    padding 16px 24px
-	    }
-        @media (min-width $LG_break) {
-            background-image url("~@/assets/images/banner_bg.svg")
-        }
-        background-position: 101% top;
-        background-repeat: no-repeat;
-        background-size contain
-        p, h1, h2 {
-            color #FFF
-        }
-        p {
-            max-width 740px
-            @media (max-width $cta_button_brake) {
-                font-size: 16px
-            }
-        }
+.checkup {
+	margin-top: 32px;
 
-        button {
-            border-color #FFF !important
-	        margin: 0 20px 16px 0;
-	        @media (max-width $XS_break) {
-		        margin: 0 0 16px 0;
-	        }
-	        .v-btn__content {
-                color $Special_Blue
-            }
-	        &.button--alt {
-				background: $Special_Blue
+	.checkup__section {
+		margin-bottom: 48px;
+	}
+
+	.banner {
+		.banner__button {
+			margin: 32px 16px 24px 0;
+			flex-flow: row wrap;
+			@media (max-width: $XS_break) {
+				margin: 0 0px 16px 0;
+			}
+		}
+		margin-top: 32px;
+		margin-bottom: 64px;
+		text-align: left;
+		color: #FFF;
+		background: $Special_Blue;
+		box-shadow: 0px 20px 50px rgba(19, 24, 31, 0.1);
+		border-radius: 16px;
+		flex-flow: column wrap !important;
+		padding: 24px 52px;
+
+		@media (max-width: $XS_break) {
+			padding: 16px 24px;
+		}
+
+		@media (min-width: $LG_break) {
+			background-image: url('~@/assets/images/banner_bg.svg');
+		}
+
+		background-position: 101% top;
+		background-repeat: no-repeat;
+		background-size: contain;
+
+		p,h1,h2 {
+			color: #FFF;
+		}
+
+		p {
+			max-width: 740px;
+
+			@media (max-width: $cta_button_brake) {
+				font-size: 16px;
+			}
+		}
+
+		button {
+			border-color: #FFF !important;
+			margin: 0 20px 16px 0;
+
+			@media (max-width: $XS_break) {
+				margin: 0 0 16px 0;
+			}
+
+			.v-btn__content {
+				color: $Special_Blue;
+			}
+
+			&.button--alt {
+				background: $Special_Blue;
+
 				.v-btn__content {
-					color white
+					color: white;
 				}
-		        &:hover, &:focus {
-			        background-color white !important
-			        border: 1px solid $Special_Blue;
-			        position: inherit
-			        .v-btn__content {
-				        color $Special_Blue !important
-			        }
-		        }
-	        }
-        }
-    }
+
+				&:hover,&:focus {
+					background-color: white !important;
+					border: 1px solid $Special_Blue;
+					position: inherit;
+
+					.v-btn__content {
+						color: $Special_Blue !important;
+					}
+				}
+			}
+		}
+	}
+}

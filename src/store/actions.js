@@ -5,8 +5,8 @@ export default {
 	SET_GENDER: (store, payload) => {
 		store.commit('SET_GENDER', payload);
 	},
-	SET_BIRTHDAY: (store, payload) => {
-		store.commit('SET_BIRTHDAY', payload);
+	SET_BIRTHYEAR: (store, payload) => {
+		store.commit('SET_BIRTHYEAR', payload);
 	},
 	SET_WEIGHT: (store, payload) => {
 		store.commit('SET_WEIGHT', payload);
@@ -32,5 +32,8 @@ export default {
 	},
 	set_treatments: ({ commit }, payload) => {
 		commit('SET_TREATMENTS', payload);
+	},
+	count_profile_progress: ({ commit }, payload) => {
+		commit('COUNT_PROFILE_PROGRESS', payload);
 	},
 };
