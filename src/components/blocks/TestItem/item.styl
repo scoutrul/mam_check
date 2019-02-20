@@ -1,127 +1,155 @@
-@import '../../../assets/styles/vars/index.styl';
+@import '../../../assets/styles/vars/index.styl'
+
 .testItem_list
-    margin-top 16px
+	margin-top: 16px
+
 .testItem
-    transition $transition_hover
-    box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08)
-    border-radius: 8px
-    margin 12px 0
-    padding: 20px
-    &--done
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
-        border-left: 2px solid currentColor;
-    &__header
-        align-items: center;
-        &_inner
-            flex-direction: row
-            @media (max-width $MD_break)
-                flex-direction:column
-    &__info 
-        display flex
-        justify-content: flex-end
-        align-items: center
-        @media (max-width $MD_break)
-            justify-content: flex-start;   
+	transition: $transition_hover
+	box-shadow: 0 8px 30px rgba(19, 24, 31, 0.08)
+	border-radius: 8px
+	margin: 12px 0
+	padding: 20px
 
+	&--done
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
+		border-left: 2px solid currentColor
 
-    &__icon 
-        flex: 0 0 24px;
-        display: flex;
-        margin-right: 32px
-		height 24px
-		width 24px
-        svg path 
-            fill currentColor
-    &__name 
-        font-weight: bold;
-        flex-basis: 50%
-        margin 8px 0
-    &__short
-        color $Lighter_Text
-        display flex
-        justify-content: flex-end;   
-        text-align: right 
-        align-items: center;
-        @media (max-width $MD_break)
-            justify-content: flex-start;    
-            text-align: left 
-    &__progress
-        color $Special_Blue
-        display flex
-        justify-content: flex-end;   
-        align-items: center;
-        @media (max-width $MD_break)
-            justify-content: flex-start;   
-        line-height: 24px;
-        font-size: 16px;
-    &__progressBar
-        width: 70px;
-        height: 6px;
-        border-radius: 90px;
-        background: $Lighter_Blue;
-        overflow: hidden
-        margin: auto 16px;
-        &_completed 
-            background: $Special_Blue;
-            height: 6px;
-            border-radius: 90px;
+	&__header
+		align-items: center
 
-    &__treatment
-        flex-direction: row
-        @media (max-width $MD_break)
-            flex-direction:column
-        &_info
-            line-height: 22px;
-            font-size: 15px;
-            color: #1E1E1E;
-            margin 32px 0 24px
-    &__recommendations 
-        margin-top 16px
-        align-items: center;
-        &_label
-            line-height: 34px;
-            font-size: 13px;
-            color: #ABB8C7;
-            margin-right: 16px;
-            flex: 1 1 auto;
-            @media (max-width $MD_break)
-                min-width: 100%
-        display: flex
-        flex-wrap: wrap;
-        @media (max-width $XS_break)
-            flex-direction: column
-            align-items: flex-start;
-        &_item
-            @media (min-width $XS_break)
-                max-width: fit-content; 
-            justify-content: center;
-            align-items: center;
-            display: flex;
-            flex 1 1 auto
-            white-space: nowrap
-            background: #F2F5F9;
-            border-radius: 200px;
-            line-height: 18px;
-            font-size: 13px;
-            text-align: center;
-            color: #1E1E1E;
-            padding 8px 16px
-            margin 8px 4px
-            &:first-child
-                margin-left 0
-            &:last-child
-                margin-right 0
+		&_inner
+			flex-direction: row
 
-.testItem:hover {
-	cursor pointer
-	box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.18)
-}
+			@media (max-width: $MD_break)
+				flex-direction: column
+
+	&__info
+		display: flex
+		justify-content: flex-end
+		align-items: center
+
+		@media (max-width: $MD_break)
+			justify-content: flex-start
+
+	&__icon
+		flex: 0 0 24px
+		display: flex
+		width: 24px
+		height: 24px
+		margin-right: 32px
+
+		svg path
+			fill: currentColor
+
+	&__name
+		font-weight: bold
+		flex-basis: 50%
+		margin: 8px 0
+
+	&__short
+		color: $Lighter_Text
+		display: flex
+		justify-content: flex-end
+		text-align: right
+		align-items: center
+
+		@media (max-width: $MD_break)
+			justify-content: flex-start
+			text-align: left
+
+	&__progress
+		color: $Special_Blue
+		display: flex
+		justify-content: flex-end
+		align-items: center
+
+		@media (max-width: $MD_break)
+			justify-content: flex-start
+
+			line-height: 24px
+			font-size: 16px
+
+	&__progressBar
+		width: 70px
+		height: 6px
+		border-radius: 90px
+		background: $Lighter_Blue
+		overflow: hidden
+		margin: auto 16px
+
+		&_completed
+			background: $Special_Blue
+			height: 6px
+			border-radius: 90px
+
+	&__treatment
+		flex-direction: row
+
+		@media (max-width: $MD_break)
+			flex-direction: column
+
+		&_info
+			line-height: 22px
+			font-size: 15px
+			color: #1E1E1E
+			margin: 32px 0 24px
+
+	&__recommendations
+		display flex
+		margin-top: 16px
+		align-items: center
+
+		&_label
+			line-height: 34px
+			font-size: 13px
+			color: #ABB8C7
+			margin-right: 16px
+			flex: 1 1 auto
+
+			@media (max-width: $MD_break)
+				min-width: 100%
+				display: flex
+				flex-wrap: wrap
+
+		@media (max-width: $XS_break)
+			flex-direction: column
+			align-items: flex-start
+
+		&_item
+			@media (min-width: $XS_break)
+				max-width: fit-content
+
+				justify-content: center
+				align-items: center
+				display: flex
+				flex: 1 1 auto
+				white-space: nowrap
+				background: #F2F5F9
+				border-radius: 200px
+				line-height: 18px
+				font-size: 13px
+				text-align: center
+				color: #1E1E1E
+				padding: 8px 16px
+				margin: 8px 4px
+
+			&:first-child
+				margin-left: 0
+
+			&:last-child
+				margin-right: 0
+
+.testItem:hover
+	cursor: pointer
+	box-shadow: 0 8px 30px rgba(19, 24, 31, 0.18)
+
 .testItem
 	&.itIsCompleted
-		border-top-left-radius: 0;
-		border-bottom-left-radius: 0;
-		border-left-style: solid;
-		border-left-width: 4px;
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
+		border-left-style: solid
+		border-left-width: 4px
+
 		&:hover
-			cursor default
+			cursor: default
