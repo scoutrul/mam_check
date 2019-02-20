@@ -1,12 +1,16 @@
 <template>
     <v-layout column class="container checkup">
-        <v-flex class="black">
+        <v-flex class="black checkup__section">
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
                     >{{ $store.state.user.profileProgress }}%</span
                 ></Header1
             >
+        </v-flex>
+        <v-flex class="checkup__section">
+            <Header4>Мои данные</Header4>
+            <ProfileInfo />
         </v-flex>
         <template v-if="$store.state.user.birthYear">
             <v-flex class="black" v-if="dispAvailable">
@@ -105,10 +109,8 @@
 
 <script>
 import { mapState } from 'vuex';
-import filter from 'lodash/filter';
 import sum from 'lodash/sum';
 import size from 'lodash/size';
-import get from 'lodash/get';
 import map from 'lodash/map';
 import each from 'lodash/each';
 import fakeApi from '@/services/fakeApi';
@@ -119,7 +121,7 @@ import {
     Header4,
     TestItem,
     RegularLg,
-    SimpleButton,
+    ProfileInfo,
 } from '../../blocks';
 
 export default {
@@ -129,7 +131,7 @@ export default {
         Header4,
         RegularLg,
         TestItem,
-        SimpleButton,
+        ProfileInfo,
     },
     data: () => ({}),
     computed: {

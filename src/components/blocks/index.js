@@ -12,6 +12,7 @@ import Header4 from './Typography/Header4';
 import RegularMd from './Typography/RegularMd';
 import RegularLg from './Typography/RegularLg';
 import TestItem from './TestItem/TestItem';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 export {
 	StartButton,
@@ -28,4 +29,5 @@ export {
 	RegularMd,
 	RegularLg,
 	TestItem,
+	ProfileInfo
 };
