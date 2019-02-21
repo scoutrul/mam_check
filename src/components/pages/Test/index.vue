@@ -42,18 +42,33 @@
                 </SimpleButton>
             </portal>
 
-            <div class="testSelf__stepperBar">
-                <div v-if="stepper <= currentTestQuestions.length">
-                    <span>Вопрос {{ stepper }}</span> из
-                    {{ currentTestQuestions.length }}
+            <div class="testSelf__header">
+                <div class="testSelf__stepperBar">
+                    <div v-if="stepper <= currentTestQuestions.length">
+                        <span>Вопрос {{ stepper }}</span> из
+                        {{ currentTestQuestions.length }}
+                    </div>
+                </div>
+                <div class="testSelf__progressBar">
+                    <div
+                        class="testSelf__progressBar_completed"
+                        :style="`transform: translateX(${countProgress}%)`"
+                    ></div>
+                </div>
+                <div class="testSelf__speech-control">
+                    <speech-control
+                        :conversion-text="
+                            currentTestQuestions[stepper - 1].name
+                        "
+                        :recognition-phrases="[
+                            'Ответ из двух и более слов',
+                            'Да',
+                            'Нет',
+                        ]"
+                    />
                 </div>
             </div>
-            <div class="testSelf__progressBar">
-                <div
-                    class="testSelf__progressBar_completed"
-                    :style="`transform: translateX(${countProgress}%)`"
-                ></div>
-            </div>
+
             <div class="testSelf__body_picture">
                 <img
                     v-if="shortName"
@@ -104,11 +119,12 @@ import delay from 'lodash/delay';
 import get from 'lodash/get';
 import services from '@/services';
 
-import { SimpleButton } from '../../blocks';
+import { SimpleButton, SpeechControl } from '../../blocks';
 
 export default {
     components: {
         SimpleButton,
+        SpeechControl,
     },
     data: () => ({
         stepper: 1,

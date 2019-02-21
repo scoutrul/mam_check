@@ -1,6 +1,8 @@
 import fakeApi from '@/services/fakeApi';
 import store from '../store';
+import SpeechService from './speech.service';
 
+export { SpeechService };
 export default {
 	fetchMedicalTests() {
 		fakeApi.getMedicalTests().then(tests => {

@@ -9,11 +9,11 @@ Vue.use(Vuex);
 
 const state = {
 	user: {
-		isUserInfoDone: false,
-		gender: '',
-		birthday: '',
-		height: '',
-		weight: '',
+		isUserInfoDone: true,
+		gender: 'male',
+		birthday: '29.03.1995',
+		height: '175',
+		weight: '75',
 	},
 	tests: [],
 };
