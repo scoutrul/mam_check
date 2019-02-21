@@ -1,7 +1,9 @@
 <template>
     <v-layout class="profile-info">
         <v-flex class="profile-info-text xs12 sm6 md6">
-            <div class="profile-info-title">Индекс массы тела — 22.6</div>
+            <div class="profile-info-title">
+                Индекс массы тела — {{ indexBodyMass }}
+            </div>
             <div class="profile-info-recommendation">
                 Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто
                 имеет большую мышечную массу, например, для тяжелоатлетов
@@ -59,6 +61,7 @@
 <script>
 import { SimpleButton } from '@/components/blocks';
 import { mapState } from 'vuex';
+import round from 'lodash/round';
 
 export default {
     components: {
@@ -71,6 +74,15 @@ export default {
                 this.user.birthYear.length === 4 &&
                 this.user.birthYear < 2019 &&
                 this.user.birthYear > 1920
+            );
+        },
+        indexBodyMass() {
+            return round(
+                this.$store.state.user.weight /
+                    (((this.$store.state.user.height / 100) *
+                        this.$store.state.user.height) /
+                        100),
+                2,
             );
         },
     },
