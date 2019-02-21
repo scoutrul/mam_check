@@ -35,8 +35,8 @@
                         <v-flex class="testItem__short">
                             <template v-if="itIsCompleted">
                                 <i
-                                    @click="resetSelf({ id })"
                                     style="cursor: pointer"
+                                    @click="resetSelf({ id })"
                                 >
                                     <svg
                                         width="23"

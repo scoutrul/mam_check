@@ -13,7 +13,7 @@
             <ProfileInfo />
         </v-flex>
         <template v-if="$store.state.user.birthYear">
-            <v-flex class="black" v-if="dispAvailable">
+            <v-flex v-if="dispAvailable" class="black">
                 <div class="banner">
                     <Header2 class="pad16"
                         >В этом году вам доступна диспансеризация</Header2
@@ -82,7 +82,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex class="checkup__section" v-if="filterCompletedTests.length">
+        <v-flex v-if="filterCompletedTests.length" class="checkup__section">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -248,14 +248,14 @@ export default {
         getProfileProgress() {
             let completedQuestionsCount = 0;
             let questionsCount = 0;
-            completedQuestionsCount = map(this.getTests, test => {
-                return size(
+            completedQuestionsCount = map(this.getTests, test =>
+                size(
                     each(test.questions, question => {
                         questionsCount += 1;
                         return !!question.weight;
                     }),
-                );
-            });
+                ),
+            );
             const profileProgress = {
                 questionsCount,
                 completedQuestionsCount: sum(completedQuestionsCount),

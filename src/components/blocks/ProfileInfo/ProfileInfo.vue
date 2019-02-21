@@ -20,8 +20,8 @@
                     mask="###"
                     return-masked-value
                     :value="u_weight"
-                    @input="handleWeight"
                     :disabled="!isEditingAllowed"
+                    @input="handleWeight"
                 ></v-text-field>
             </div>
 
@@ -35,8 +35,8 @@
                     mask="###"
                     return-masked-value
                     :value="u_height"
-                    @input="handleHeight"
                     :disabled="!isEditingAllowed"
+                    @input="handleHeight"
                 ></v-text-field>
             </div>
 
@@ -50,8 +50,8 @@
                     mask="####"
                     return-masked-value
                     :value="u_year"
-                    @input="handleBirthYear"
                     :disabled="!isEditingAllowed"
+                    @input="handleBirthYear"
                 ></v-text-field>
             </div>
         </v-flex>

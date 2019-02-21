@@ -60,8 +60,8 @@ export default {
 	},
 	COUNT_PROFILE_PROGRESS: (state, payload) => {
 		const { questionsCount, completedQuestionsCount } = payload;
-		
-		const kef = (questionsCount / 100);
+
+		const kef = questionsCount / 100;
 		const profileProgress = completedQuestionsCount * kef;
 		state.user = {
 			...state.user,

@@ -1,5 +1,5 @@
 <template>
-    <div v-html="icons[name]" :style="`color: ${color}`"></div>
+    <div :style="`color: ${color}`" v-html="icons[name]"></div>
 </template>
 
 <script>
