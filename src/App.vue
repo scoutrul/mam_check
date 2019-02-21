@@ -112,11 +112,6 @@ export default {
         this.innerHeight = window.innerHeight;
         this.registerHandlers();
     },
-    mutations: {
-        SET_NAME: (state, name) => {
-            state.name = name;
-        },
-    },
     beforeDestroy() {
         this.unregisterHandlers();
         console.log('beforeDestroy');
@@ -144,23 +139,6 @@ export default {
             this.appHeight = this.$el.clientHeight;
         },
     },
-
-    // actions: {
-    //     SET_NAME: async (context, name) => {
-    //         let { data } = await Axios.post('http://myapiendpoint.com/api/name', {
-    //             name: name
-    //         });
-
-    //         if (data.status == 200) {
-    //             context.commit('SET_NAME', name);
-    //         }
-    //     }
-    // },
-
-    // beforeRouteEnter(to, from, next) {
-    // },
-    // beforeRouteUpdate(to, from, next) {
-    // }
 };
 </script>
 

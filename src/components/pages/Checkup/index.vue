@@ -142,8 +142,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import filter from 'lodash/filter';
-import get from 'lodash/get';
 import each from 'lodash/each';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
