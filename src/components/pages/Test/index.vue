@@ -58,7 +58,7 @@
                 <div class="testSelf__speech-control">
                     <speech-control
                         :conversion-text="
-                            currentTestQuestions[stepper - 1].name
+                            currentTestQuestions[stepper - 1] ? currentTestQuestions[stepper - 1].name : ''
                         "
                         :recognition-phrases="[
                             'Ответ из двух и более слов',
@@ -152,9 +152,7 @@ export default {
             return koef - 100 - 100 / this.currentTestQuestions.length;
         },
     },
-    beforeMount() {
-        this.currentStep = 3;
-    },
+
     async mounted() {
         const currTest = this.$store.state.tests.find(
             test => test.id === +this.$route.params.testId,

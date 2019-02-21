@@ -42,7 +42,7 @@
                 </div>
             </v-flex>
         </template>
-        <v-flex class="checkup__section">
+        <v-flex class="checkup__section" v-if="filterInProgressTests.length || filterTests.length">
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -56,8 +56,8 @@
                         (item.questions && item.questions.length) || 0
                     "
                     :completed-num="item.currentStep"
-                    :start-self="startTestItem"
-                    :reset-self="resetTestItem"
+                    :start-self="startCurrentTest"
+                    :reset-self="resetCurrentTest"
                     :treatment="item.treatment"
                     :recommendations="item.recommendations"
                     :color="item.color"
@@ -73,8 +73,8 @@
                         (item.questions && item.questions.length) || 0
                     "
                     :completed-num="item.currentStep"
-                    :start-self="startTestItem"
-                    :reset-self="resetTestItem"
+                    :start-self="startCurrentTest"
+                    :reset-self="resetCurrentTest"
                     :treatment="item.treatment"
                     :recommendations="item.recommendations"
                     :color="item.color"
@@ -96,8 +96,8 @@
                         (item.questions && item.questions.length) || 0
                     "
                     :completed-num="item.currentStep"
-                    :start-self="startTestItem"
-                    :reset-self="resetTestItem"
+                    :start-self="startCurrentTest"
+                    :reset-self="resetCurrentTest"
                     :treatment="item.treatment"
                     :recommendations="item.recommendations"
                     :color="item.color"
@@ -162,6 +162,7 @@ import sum from 'lodash/sum';
 import size from 'lodash/size';
 import map from 'lodash/map';
 import each from 'lodash/each';
+import isUndefined from 'lodash/isUndefined';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
 
@@ -227,19 +228,16 @@ export default {
     },
     beforeMount() {
         this.$store.dispatch('get_tests');
-    },
-    mounted() {
         this.getAllQuestionsResult();
         this.getProfileProgress();
     },
-
     methods: {
-        startTestItem({ id }) {
+        startCurrentTest({ id }) {
             this.$router.push({
                 path: `/test/${id}/`,
             });
         },
-        resetTestItem({ id }) {
+        resetCurrentTest({ id }) {
             this.$store.dispatch('reset_test_questions', { id });
             this.$router.push({
                 path: `/test/${id}/`,
@@ -248,42 +246,43 @@ export default {
         getProfileProgress() {
             let completedQuestionsCount = 0;
             let questionsCount = 0;
-            completedQuestionsCount = map(this.getTests, test => {
-                return size(
-                    each(test.questions, question => {
-                        questionsCount += 1;
-                        return !!question.weight;
-                    }),
-                );
-            });
+            each(this.getTests, test => 
+                each(test.questions, question => {
+                    questionsCount += 1;
+                    if(!isUndefined(question.weight)) {
+                        completedQuestionsCount += 1;
+                    }
+                }),
+            );
             const profileProgress = {
                 questionsCount,
-                completedQuestionsCount: sum(completedQuestionsCount),
+                completedQuestionsCount,
             };
             this.$store.dispatch('count_profile_progress', profileProgress);
         },
         getAllQuestionsResult() {
             let weight = 0;
-            each(this.getTests, test => {
-                each(test.questions, question => {
-                    weight = weight + question.weight || 0;
-                });
-
-                fakeApi
-                    .getTreatmentByResult({
-                        testId: test.id,
-                        answerSum: weight,
-                    })
-                    .then(result => {
-                        const treatments = {
-                            id: test.id,
-                            treatment: result.treatment.decode,
-                            recommendations: result.recommendations,
-                            color: result.color,
-                        };
-                        this.$store.dispatch('set_treatments', treatments);
+            Promise.all(each(this.getTests, test => {
+                    each(test.questions, question => {
+                        weight = weight + question.weight || 0;
                     });
-            });
+
+                    fakeApi
+                        .getTreatmentByResult({
+                            testId: test.id,
+                            answerSum: weight,
+                        })
+                        .then(result => {
+                            const treatments = {
+                                id: test.id,
+                                treatment: result.treatment.decode,
+                                recommendations: result.recommendations,
+                                color: result.color,
+                            };
+                            return this.$store.dispatch('set_treatments', treatments);
+                        });
+                })
+            );
         },
         getMedicalForm() {
             if (this.answersDataForPortalApi.length > 0) {

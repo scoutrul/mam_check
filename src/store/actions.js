@@ -16,7 +16,7 @@ export default {
 	SET_HEIGHT: (store, payload) => {
 		store.commit('SET_HEIGHT', payload);
 	},
-	get_tests: async store => {
+	get_tests: store => {
 		if (store.getters.allTestsCount < 1) {
 			fakeApi.getMedicalTests().then(tests => {
 				store.commit('STORE_TESTS', tests);
