@@ -4,9 +4,76 @@
 	box-shadow: 0 8px 30px rgba(19,24,31,0.08);
 	border-radius: 8px;
 	margin: 12px 0;
-	padding: 20px;
+	padding: 24px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	@media (max-width: $MD_break)
+	@media (max-width: $cta_button_brake)
 		flex-direction column
+
+	&-recommendation
+		line-height: 22px;
+		font-size: 14px;
+		color: #1E1E1E;
+		padding 8px 8px 8px 0
+		@media (min-width: $LG_break)
+			padding: 8px 100px 0 0;
+	&-title
+		line-height: 28px;
+		font-size: 22px;
+		color: #58B379;
+		margin 0
+		@media (max-width: $cta_button_brake)
+			line-height: 32px;
+			font-size: 20px;
+	&-inputs
+		display flex
+		width 100%
+		margin 6px 0
+		transform: translateY(10px);
+		@media (max-width: $XS_break)
+			flex-direction column
+		&-item
+			margin auto 6px
+			@media (max-width: $XS_break)
+				margin 16px 0
+			&:last-child
+				margin-right 0 !important
+			&:first-child
+				margin-left 0 !important
+			&__input
+				padding 0
+			.v-input__slot
+				&:after, &:before
+					display none
+				.v-text-field__slot
+					&:after, &:before
+					display none
+					input
+						background: #F2F5F9;
+						border-radius: 4px;
+						border: 0;
+						padding 8px 16px
+					label
+						line-height: 22px;
+						font-size: 15px
+						color: #1E1E1E
+						top 0
+						font-weight bold
+	&-button
+		display: flex;
+		transform: translateY(10px);
+		max-width: 100%;
+		width 100%
+		margin 6px auto
+		@media (min-width: $cta_button_brake)
+			margin 12px
+			max-width: 128px;
+		@media (min-width: $XL_break)
+			margin 0
+		button
+			height: 50px;
+			flex 0 1 128px
+			@media (max-width: $cta_button_brake)
+				flex: 1 1 100%;
+				max-width: 100%;

@@ -1,19 +1,19 @@
 <template>
     <v-layout class="profile-info">
-        <v-flex class="profile-info-text xs12 md6">
+        <v-flex class="profile-info-text xs12 sm6 md6">
             <div class="profile-info-title">Индекс массы тела — 22.6</div>
-            <div>
+            <div class="profile-info-recommendation">
                 Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто
                 имеет большую мышечную массу, например, для тяжелоатлетов
             </div>
         </v-flex>
-        <v-flex class="profile-info-inputs xs12 md5 ">
+        <v-flex class="profile-info-inputs xs12 sm4 md4 ">
             <div class="profile-info-inputs-item">
                 <v-text-field
                     ref="weightInput"
                     hide-details
                     label="Вес"
-                    class="pretest__input"
+                    class="profile-info-inputs-item__input"
                     placeholder="кг"
                     mask="###"
                     return-masked-value
@@ -25,7 +25,7 @@
                     ref="weightInput"
                     hide-details
                     label="Рост"
-                    class="pretest__input"
+                    class="profile-info-inputs-item__input"
                     placeholder="см"
                     mask="###"
                     return-masked-value
@@ -37,14 +37,16 @@
                     ref="weightInput"
                     hide-details
                     label="Год рождения"
-                    class="pretest__input"
+                    class="profile-info-inputs-item__input"
                     placeholder="гггг"
-                    mask="###№"
+                    mask="####"
                     return-masked-value
                 ></v-text-field>
             </div>
         </v-flex>
-        <v-flex class="xs12"> <SimpleButton>Изменить</SimpleButton> </v-flex>
+        <v-flex class="profile-info-button xs12 sm2 md2">
+            <SimpleButton>Изменить</SimpleButton>
+        </v-flex>
     </v-layout>
 </template>
 
