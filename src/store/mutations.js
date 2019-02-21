@@ -59,7 +59,6 @@ export default {
 		});
 	},
 	COUNT_PROFILE_PROGRESS: (state, payload) => {
-		// TODO
 		const { questionsCount, completedQuestionsCount } = payload;
 		
 		const kef = (questionsCount / 100);

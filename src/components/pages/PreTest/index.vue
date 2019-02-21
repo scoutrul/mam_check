@@ -46,9 +46,9 @@
                     <img
                         svg-inline
                         src="@/assets/images/pre_birthday.svg"
-                        alt="Укажите ваш день рождения"
+                        alt="Укажите ваш год рождения"
                     />
-                    <div class="title">Укажите вашу дату рождения</div>
+                    <div class="title">Укажите ваш год рождения</div>
                     <v-layout justify-center class="pretest__buttons">
                         <v-flex
                             class="pretest__buttons_item xs12"

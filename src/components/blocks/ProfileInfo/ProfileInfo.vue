@@ -19,7 +19,7 @@
                     placeholder="кг"
                     mask="###"
                     return-masked-value
-                    :value="user.weight"
+                    :value="u_weight"
                     @input="handleWeight"
                     :disabled="!isEditingAllowed"
                 ></v-text-field>
@@ -34,7 +34,7 @@
                     placeholder="см"
                     mask="###"
                     return-masked-value
-                    :value="user.height"
+                    :value="u_height"
                     @input="handleHeight"
                     :disabled="!isEditingAllowed"
                 ></v-text-field>
@@ -49,7 +49,7 @@
                     placeholder="гггг"
                     mask="####"
                     return-masked-value
-                    :value="user.birthYear"
+                    :value="u_year"
                     @input="handleBirthYear"
                     :disabled="!isEditingAllowed"
                 ></v-text-field>
@@ -79,20 +79,24 @@ export default {
         SimpleButton,
     },
     data: () => ({
-        year: 0,
-        weight: 0,
-        height: 0,
+        u_year: '',
+        u_weight: '',
+        u_height: '',
         isEditingAllowed: false,
     }),
-    mounted() {
-        this.updateState();
+    created() {
+        this.u_year = this.$store.state.user.birthYear;
+        this.u_weight = this.$store.state.user.weight;
+        this.u_height = this.$store.state.user.height;
     },
 
     computed: {
         ...mapState(['user']),
         validateBirthYear() {
             return (
-                this.year.length === 4 && this.year < 2019 && this.year > 1920
+                this.u_year.length === 4 &&
+                this.u_year < 2019 &&
+                this.u_year > 1920
             );
         },
         indexBodyMass() {
@@ -107,26 +111,26 @@ export default {
         hasChanged() {
             const cond =
                 (this.validateBirthYear &&
-                    this.$store.state.user.birthYear !== this.year) ||
-                this.$store.state.user.weight !== this.weight ||
-                this.$store.state.user.height !== this.height;
+                    this.$store.state.user.birthYear !== this.u_year) ||
+                this.$store.state.user.weight !== this.u_weight ||
+                this.$store.state.user.height !== this.u_height;
             return cond;
         },
     },
     methods: {
         handleBirthYear(value) {
-            this.year = value;
+            this.u_year = value;
         },
         handleWeight(value) {
-            this.weight = value;
+            this.u_weight = value;
         },
         handleHeight(value) {
-            this.height = value;
+            this.u_height = value;
         },
         storeInputsData() {
-            this.$store.dispatch('SET_BIRTHYEAR', this.year);
-            this.$store.dispatch('SET_HEIGHT', this.height);
-            this.$store.dispatch('SET_WEIGHT', this.weight);
+            this.$store.dispatch('SET_BIRTHYEAR', this.u_year);
+            this.$store.dispatch('SET_HEIGHT', this.u_height);
+            this.$store.dispatch('SET_WEIGHT', this.u_weight);
             this.updateState();
             this.isEditingAllowed = false;
         },
@@ -134,9 +138,9 @@ export default {
             this.isEditingAllowed = true;
         },
         updateState() {
-            this.$store.state.user.birthYear = this.year;
-            this.$store.state.user.weight = this.weight;
-            this.$store.state.user.height = this.height;
+            this.$store.state.user.birthYear = this.u_year;
+            this.$store.state.user.weight = this.u_weight;
+            this.$store.state.user.height = this.u_height;
         },
     },
 };
