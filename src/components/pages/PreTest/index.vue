@@ -173,7 +173,6 @@ export default {
             this.$store.dispatch('SET_HEIGHT', value);
         },
         handleWeight(value) {
-            this.user.weight = value;
             this.$store.dispatch('SET_WEIGHT', value);
         },
         goBack() {

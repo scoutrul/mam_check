@@ -2,7 +2,7 @@
     <v-layout class="profile-info">
         <v-flex class="profile-info-text xs12 sm6 md6">
             <div class="profile-info-title">
-                Индекс массы тела — {{ indexBodyMass }}
+                Индекс массы тела — {{ indexBodyMass || 'не рассчитано' }}
             </div>
             <div class="profile-info-recommendation">
                 Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто
@@ -21,6 +21,7 @@
                     return-masked-value
                     :value="user.weight"
                     @input="handleWeight"
+                    :disabled="!isEditingAllowed"
                 ></v-text-field>
             </div>
 
@@ -35,6 +36,7 @@
                     return-masked-value
                     :value="user.height"
                     @input="handleHeight"
+                    :disabled="!isEditingAllowed"
                 ></v-text-field>
             </div>
 
@@ -49,11 +51,20 @@
                     return-masked-value
                     :value="user.birthYear"
                     @input="handleBirthYear"
+                    :disabled="!isEditingAllowed"
                 ></v-text-field>
             </div>
         </v-flex>
         <v-flex class="profile-info-button xs12 sm2 md2">
-            <SimpleButton>Изменить</SimpleButton>
+            <SimpleButton
+                :disabled="isEditingAllowed && !hasChanged"
+                @click.native="
+                    !isEditingAllowed ? allowEdit() : storeInputsData()
+                "
+                >{{
+                    isEditingAllowed && hasChanged ? 'Сохранить' : 'Изменить'
+                }}</SimpleButton
+            >
         </v-flex>
     </v-layout>
 </template>
@@ -67,13 +78,21 @@ export default {
     components: {
         SimpleButton,
     },
+    data: () => ({
+        year: 0,
+        weight: 0,
+        height: 0,
+        isEditingAllowed: false,
+    }),
+    mounted() {
+        this.updateState();
+    },
+
     computed: {
         ...mapState(['user']),
         validateBirthYear() {
             return (
-                this.user.birthYear.length === 4 &&
-                this.user.birthYear < 2019 &&
-                this.user.birthYear > 1920
+                this.year.length === 4 && this.year < 2019 && this.year > 1920
             );
         },
         indexBodyMass() {
@@ -85,17 +104,39 @@ export default {
                 2,
             );
         },
+        hasChanged() {
+            const cond =
+                (this.validateBirthYear &&
+                    this.$store.state.user.birthYear !== this.year) ||
+                this.$store.state.user.weight !== this.weight ||
+                this.$store.state.user.height !== this.height;
+            return cond;
+        },
     },
     methods: {
         handleBirthYear(value) {
-            this.$store.dispatch('SET_BIRTHYEAR', value);
-        },
-        handleHeight(value) {
-            this.$store.dispatch('SET_HEIGHT', value);
+            this.year = value;
         },
         handleWeight(value) {
-            this.user.weight = value;
-            this.$store.dispatch('SET_WEIGHT', value);
+            this.weight = value;
+        },
+        handleHeight(value) {
+            this.height = value;
+        },
+        storeInputsData() {
+            this.$store.dispatch('SET_BIRTHYEAR', this.year);
+            this.$store.dispatch('SET_HEIGHT', this.height);
+            this.$store.dispatch('SET_WEIGHT', this.weight);
+            this.updateState();
+            this.isEditingAllowed = false;
+        },
+        allowEdit() {
+            this.isEditingAllowed = true;
+        },
+        updateState() {
+            this.$store.state.user.birthYear = this.year;
+            this.$store.state.user.weight = this.weight;
+            this.$store.state.user.height = this.height;
         },
     },
 };
