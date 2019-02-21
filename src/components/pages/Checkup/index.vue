@@ -7,10 +7,9 @@
                     >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
-            <portal to="StartButtonSimple">
+            <portal to="StartButtonSimple" v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW">
                 <StartButtonSimple
-                    @click="anketa = !anketa"
-                    v-if="$store.state.user.profileProgress >= 1"
+                    @click.native="anketa = !anketa"
                 >
                     Скачать анкету
                 </StartButtonSimple>
@@ -176,6 +175,7 @@ import each from 'lodash/each';
 import isUndefined from 'lodash/isUndefined';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
+import CONST from '@/const.js'
 
 import {
     Header1,
@@ -202,6 +202,7 @@ export default {
     data: () => ({
         medicalFormLoading: false,
         anketa: false,
+        PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
     computed: {
         ...mapState({
