@@ -17,30 +17,36 @@
                     placeholder="кг"
                     mask="###"
                     return-masked-value
+                    :value="user.weight"
+                    @input="handleWeight"
                 ></v-text-field>
             </div>
 
             <div class="profile-info-inputs-item">
                 <v-text-field
-                    ref="weightInput"
+                    ref="heightInput"
                     hide-details
                     label="Рост"
                     class="profile-info-inputs-item__input"
                     placeholder="см"
                     mask="###"
                     return-masked-value
+                    :value="user.height"
+                    @input="handleHeight"
                 ></v-text-field>
             </div>
 
             <div class="profile-info-inputs-item">
                 <v-text-field
-                    ref="weightInput"
+                    ref="birthYearInput"
                     hide-details
                     label="Год рождения"
                     class="profile-info-inputs-item__input"
                     placeholder="гггг"
                     mask="####"
                     return-masked-value
+                    :value="user.birthYear"
+                    @input="handleBirthYear"
                 ></v-text-field>
             </div>
         </v-flex>
@@ -52,9 +58,33 @@
 
 <script>
 import { SimpleButton } from '@/components/blocks';
+import { mapState } from 'vuex';
+
 export default {
     components: {
         SimpleButton,
+    },
+    computed: {
+        ...mapState(['user']),
+        validateBirthYear() {
+            return (
+                this.user.birthYear.length === 4 &&
+                this.user.birthYear < 2019 &&
+                this.user.birthYear > 1920
+            );
+        },
+    },
+    methods: {
+        handleBirthYear(value) {
+            this.$store.dispatch('SET_BIRTHYEAR', value);
+        },
+        handleHeight(value) {
+            this.$store.dispatch('SET_HEIGHT', value);
+        },
+        handleWeight(value) {
+            this.user.weight = value;
+            this.$store.dispatch('SET_WEIGHT', value);
+        },
     },
 };
 </script>
