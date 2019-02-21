@@ -1037,8 +1037,15 @@ export default {
 								answers: [
 									{
 										id: 1,
-										type: 'string',
-										examinationString: true,
+										type: 'variant',
+										title: 'Да',
+										weight: 2,
+									},
+									{
+										id: 2,
+										type: 'variant',
+										title: 'Нет',
+										weight: 0,
 									},
 								],
 							},
