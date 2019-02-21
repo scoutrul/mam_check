@@ -88,15 +88,65 @@
                 />
             </v-layout>
         </v-flex>
+
+        <v-flex v-if="medicalFormComplete" class="checkup__section">
+            <div class="separate-banner">
+                <v-layout row wrap xs12>
+                    <v-flex xs12 md8 class="separate-banner__left">
+                        <Header2 class="pad16"
+                            >В этом году вам доступна всеобщая
+                            диспансеризация</Header2
+                        >
+                        <RegularLg class="pad16"
+                            >Для прохождения диспансеризации вам нужно
+                            записаться к поликлинику, к которой вы прикреплены.
+                            Для этого вы можете воспользоваться нашим
+                            сервисом</RegularLg
+                        >
+                        <v-btn
+                            depressed
+                            flat
+                            round
+                            dark
+                            ripple
+                            class="button__yellow"
+                        >
+                            <span>Записаться к врачу</span>
+                        </v-btn>
+                    </v-flex>
+                    <v-flex xs12 md4 class="separate-banner__right">
+                        <Header2 class="pad16">Анкета</Header2>
+                        <RegularLg class="pad16"
+                            >Ваша анкета диспансеризации уже заполнена.
+                            Распечатайте ее и возьмите с собой в поликлинику,
+                            чтобы сделать процесс прохождения быстрее и
+                            комфортнее</RegularLg
+                        >
+                        <v-btn
+                            depressed
+                            flat
+                            round
+                            dark
+                            ripple
+                            :loading="medicalFormLoading"
+                            @click="getMedicalForm"
+                        >
+                            <span>Скачать анкету</span>
+                        </v-btn>
+                    </v-flex>
+                </v-layout>
+            </div>
+        </v-flex>
     </v-layout>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import filter from 'lodash/filter';
 import get from 'lodash/get';
 import each from 'lodash/each';
 import fakeApi from '@/services/fakeApi';
+import portalApi from '@/services/portalApi';
 
 import {
     Header1,
@@ -116,10 +166,16 @@ export default {
         TestItem,
         SimpleButton,
     },
-    data: () => ({}),
+    data: () => ({
+        medicalFormLoading: false,
+    }),
     computed: {
         ...mapState({
             getTests: state => state.tests,
+        }),
+        ...mapGetters({
+            medicalFormComplete: 'medicalFormComplete',
+            answersDataForPortalApi: 'answersDataForPortalApi',
         }),
         filterCompletedTests() {
             return (
@@ -189,6 +245,32 @@ export default {
                         this.$store.dispatch('set_treatments', payload);
                     });
             });
+        },
+        getMedicalForm() {
+            if (this.answersDataForPortalApi.length > 0) {
+                this.medicalFormLoading = true;
+
+                portalApi
+                    .setMedicalTestAnswers({
+                        answers: this.answersDataForPortalApi,
+                        birthday: '29.03.1995',
+                        gender: 'M',
+                        grow: 175,
+                        weight: 75,
+                    })
+                    .then(result => {
+                        this.medicalFormLoading = false;
+                        window.open(
+                            `https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${
+                                result.id
+                            }/`,
+                            '_blank',
+                        );
+                    })
+                    .catch(() => {
+                        this.medicalFormLoading = false;
+                    });
+            }
         },
     },
 };
