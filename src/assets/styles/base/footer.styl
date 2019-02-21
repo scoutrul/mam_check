@@ -22,21 +22,27 @@
 			max-width: 200px !important;
 		}
 		.logo {
-			margin 20px 0
+			margin 20px 20px 20px 0
 		}
 	}
 
 	.copyrights
 		display block
 		flex 1 1 320px
+		@media(max-width: $XS_break)
+			line-height: 100%;
+			margin: 0 0 10px 0;
 	&__menu
 		.menu
-			flex-flow row wrap
+			flex-flow row nowrap
 			justify-content: flex-start;
-			@media(min-width: $LG_break)
+			@media(min-width: $MD_break)
 				justify-content: flex-end;
+				margin 0 0 0 20px
 			li
 				margin 0 20px 0 0
-			@media(max-width: $XS_break)
-				li
+				white-space: nowrap;
+				@media(max-width: $XS_break)
 					flex-flow column wrap
+				@media(min-width: $LG_break)
+					margin 0 0 0 20px !important

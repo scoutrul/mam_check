@@ -11,7 +11,7 @@ const state = {
 	user: {
 		isUserInfoDone: false,
 		gender: '',
-		birthday: '',
+		birthYear: '',
 		height: '',
 		weight: '',
 	},

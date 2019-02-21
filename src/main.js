@@ -9,6 +9,7 @@ import router from './router';
 import './plugins/vuetify';
 
 import services from './services';
+import CONST from '@/const.js';
 
 sync(store, router);
 Vue.use(PortalVue);
@@ -24,12 +25,12 @@ Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
 	console.log('# from', from);
 	console.log('# to', to);
-	if(to.name === 'checkup'){
-		if(store.state.user.isUserInfoDone === false){
-			next('/pretest');
-		}
-		services.fetchMedicalTests();
-	}
+	// if(to.path === CONST.PAGE_PROFILE){
+	// 	if(store.state.user.isUserInfoDone === false){
+	// 		next(CONST.PRE_TEST);
+	// 	}
+	// 	services.fetchMedicalTests();
+	// }
 	next();
 });
 

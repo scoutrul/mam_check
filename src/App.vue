@@ -38,14 +38,15 @@
                         order-lg3
                         xs12
                         sm12
-                        md5
+                        md6
+                        lg6
                         class="footer__menu"
                         ><Menu
                     /></v-flex>
                     <v-flex order-xs2 order-sm1 xs12 md3 class="footer__logo"
                         ><LogoFooter
                     /></v-flex>
-                    <v-flex order-xs3 order-sm2 xs12 xs7 md4
+                    <v-flex order-xs3 order-sm2 xs12 xs7 spacer
                         ><Copyrights
                     /></v-flex>
                 </Container>
@@ -101,7 +102,7 @@ export default {
             };
         },
         footerAllowPages() {
-            const pagesWithFooter = ['home', 'checkup'];
+            const pagesWithFooter = ['home', 'profile'];
             return pagesWithFooter.includes(this.$route.name);
         },
     },
@@ -112,6 +113,7 @@ export default {
         this.innerHeight = window.innerHeight;
         this.registerHandlers();
     },
+
     beforeDestroy() {
         this.unregisterHandlers();
         console.log('beforeDestroy');

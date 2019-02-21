@@ -1,31 +1,47 @@
 <template>
     <v-layout column class="container checkup">
-        <v-flex class="black">
+        <v-flex class="black checkup__section">
             <Header1
                 >Анкета заполнена на
-                <span style="color: #00BAFF">72%</span></Header1
+                <span style="color: #00BAFF"
+                    >{{ $store.state.user.profileProgress }}%</span
+                ></Header1
             >
         </v-flex>
-        <v-flex class="black">
-            <div class="banner">
-                <Header2 class="pad16"
-                    >В этом году вам доступна диспансеризация</Header2
-                >
-                <RegularLg class="pad16"
-                    >Завершите все тесты чекапа и получите информацию по
-                    необходимым обследованиям, анализам и диагностике,
-                    положенным вам по программе всеобщей диспансеризации. Также
-                    вы получите готовую анкету, с которой сможете пройти
-                    диспансеризацию в вашей поликлинике</RegularLg
-                >
-                <v-layout class="banner__button" align-center>
-                    <SimpleButton>Продолжить заполнение</SimpleButton>
-                    <SimpleButton class="button--alt"
-                        >Начать заново</SimpleButton
-                    >
-                </v-layout>
-            </div>
+        <v-flex class="checkup__section">
+            <Header4>Мои данные</Header4>
+            <ProfileInfo />
         </v-flex>
+        <template v-if="$store.state.user.birthYear">
+            <v-flex class="black" v-if="dispAvailable">
+                <div class="banner">
+                    <Header2 class="pad16"
+                        >В этом году вам доступна диспансеризация</Header2
+                    >
+                    <RegularLg class="pad16"
+                        >Завершите все тесты чекапа и получите информацию по
+                        необходимым обследованиям, анализам и диагностике,
+                        положенным вам по программе всеобщей диспансеризации.
+                        Также вы получите готовую анкету, с которой сможете
+                        пройти диспансеризацию в вашей поликлинике</RegularLg
+                    >
+                </div>
+            </v-flex>
+            <v-flex v-else>
+                <div class="banner">
+                    <Header2 class="pad16"
+                        >В этом году вам доступен профосмотр</Header2
+                    >
+                    <RegularLg class="pad16"
+                        >Завершите все тесты и получите информацию по
+                        необходимым обследованиям, анализам и диагностике,
+                        положенным вам по программе профосмотра. Также вы
+                        получите готовую анкету, с которой сможете пройти
+                        профосмотр в вашей поликлинике</RegularLg
+                    >
+                </div>
+            </v-flex>
+        </template>
         <v-flex class="checkup__section">
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
@@ -142,6 +158,11 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
+import filter from 'lodash/filter';
+import get from 'lodash/get';
+import sum from 'lodash/sum';
+import size from 'lodash/size';
+import map from 'lodash/map';
 import each from 'lodash/each';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
@@ -152,7 +173,7 @@ import {
     Header4,
     TestItem,
     RegularLg,
-    SimpleButton,
+    ProfileInfo,
 } from '../../blocks';
 
 export default {
@@ -162,7 +183,7 @@ export default {
         Header4,
         RegularLg,
         TestItem,
-        SimpleButton,
+        ProfileInfo,
     },
     data: () => ({
         medicalFormLoading: false,
@@ -202,12 +223,16 @@ export default {
                 ) || []
             );
         },
+        dispAvailable() {
+            return this.$store.getters.dispAvailable;
+        },
     },
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
     mounted() {
         this.getAllQuestionsResult();
+        this.getProfileProgress();
     },
 
     methods: {
@@ -222,25 +247,43 @@ export default {
                 path: `/test/${id}/`,
             });
         },
+        getProfileProgress() {
+            let completedQuestionsCount = 0;
+            let questionsCount = 0;
+            completedQuestionsCount = map(this.getTests, test => {
+                return size(
+                    each(test.questions, question => {
+                        questionsCount += 1;
+                        return question.weight !== undefined ? 1 : 0;
+                    }),
+                );
+            });
+            const profileProgress = {
+                questionsCount,
+                completedQuestionsCount: sum(completedQuestionsCount),
+            };
+            this.$store.dispatch('count_profile_progress', profileProgress);
+        },
         getAllQuestionsResult() {
+            let weight = 0;
             each(this.getTests, test => {
-                let weight = 0;
                 each(test.questions, question => {
                     weight = weight + question.weight || 0;
                 });
+
                 fakeApi
                     .getTreatmentByResult({
                         testId: test.id,
                         answerSum: weight,
                     })
                     .then(result => {
-                        const payload = {
+                        const treatments = {
                             id: test.id,
                             treatment: result.treatment.decode,
                             recommendations: result.recommendations,
                             color: result.color,
                         };
-                        this.$store.dispatch('set_treatments', payload);
+                        this.$store.dispatch('set_treatments', treatments);
                     });
             });
         },

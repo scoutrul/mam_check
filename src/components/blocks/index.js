@@ -12,6 +12,7 @@ import Header4 from './Typography/Header4';
 import RegularMd from './Typography/RegularMd';
 import RegularLg from './Typography/RegularLg';
 import TestItem from './TestItem/TestItem';
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 import SpeechControl from './SpeechControl/SpeechControl';
 
 export {
@@ -29,5 +30,6 @@ export {
 	RegularMd,
 	RegularLg,
 	TestItem,
-	SpeechControl
+	ProfileInfo,
+	SpeechControl,
 };
