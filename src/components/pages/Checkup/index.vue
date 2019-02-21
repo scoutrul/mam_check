@@ -7,6 +7,17 @@
                     >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
+            <portal to="StartButtonSimple">
+                <StartButtonSimple
+                    @click="anketa = !anketa"
+                    v-if="$store.state.user.profileProgress >= 1"
+                >
+                    Скачать анкету
+                </StartButtonSimple>
+            </portal>
+            <v-dialog class="anketa" v-model="anketa">
+                <AnketaPopUp @click.native="anketa = !anketa" />
+            </v-dialog>
         </v-flex>
         <v-flex class="checkup__section">
             <Header4>Мои данные</Header4>
@@ -172,19 +183,24 @@ import {
     TestItem,
     RegularLg,
     ProfileInfo,
+    AnketaPopUp,
+    StartButtonSimple,
 } from '../../blocks';
 
 export default {
     components: {
+        StartButtonSimple,
         Header1,
         Header2,
         Header4,
         RegularLg,
         TestItem,
         ProfileInfo,
+        AnketaPopUp,
     },
     data: () => ({
         medicalFormLoading: false,
+        anketa: false,
     }),
     computed: {
         ...mapState({
@@ -228,12 +244,15 @@ export default {
     beforeMount() {
         this.$store.dispatch('get_tests');
     },
-    mounted() {
+    created() {
         this.getAllQuestionsResult();
         this.getProfileProgress();
     },
 
     methods: {
+        showAnketa() {
+            return (this.anketa = !this.anketa);
+        },
         startTestItem({ id }) {
             this.$router.push({
                 path: `/test/${id}/`,

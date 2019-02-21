@@ -1,4 +1,5 @@
 import StartButton from './StartButton/StartButton';
+import StartButtonSimple from './StartButton/StartButtonSimple';
 import SimpleButton from './SimpleButton/SimpleButton';
 import Menu from './Menu/Menu';
 import LogoHeader from './Logo/LogoHeader';
@@ -14,6 +15,7 @@ import RegularLg from './Typography/RegularLg';
 import TestItem from './TestItem/TestItem';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import SpeechControl from './SpeechControl/SpeechControl';
+import AnketaPopUp from './AnketaPopUp';
 
 export {
 	StartButton,
@@ -32,4 +34,6 @@ export {
 	TestItem,
 	ProfileInfo,
 	SpeechControl,
+	AnketaPopUp,
+	StartButtonSimple
 };
