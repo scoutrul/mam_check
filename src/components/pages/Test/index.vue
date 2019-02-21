@@ -117,7 +117,6 @@
 <script>
 import CONST from '@/const.js';
 import delay from 'lodash/delay';
-import get from 'lodash/get';
 import services from '@/services';
 
 import { SimpleButton, SpeechControl } from '../../blocks';

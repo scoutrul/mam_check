@@ -1,3 +1,5 @@
+import round from 'lodash/round';
+
 export default {
 	STORE_TESTS: (state, payload) => {
 		state.tests = payload;
@@ -59,13 +61,12 @@ export default {
 	COUNT_PROFILE_PROGRESS: (state, payload) => {
 		// TODO
 		const { questionsCount, completedQuestionsCount } = payload;
-
-		const profileProgress =
-			100 - 100 / ((questionsCount / completedQuestionsCount) -
-				(100 / questionsCount));
+		
+		const kef = (questionsCount / 100);
+		const profileProgress = completedQuestionsCount * kef;
 		state.user = {
 			...state.user,
-			profileProgress,
+			profileProgress: round(profileProgress, 2),
 		};
 	},
 };

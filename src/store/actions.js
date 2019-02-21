@@ -1,5 +1,7 @@
 /* eslint-disable no-unused-vars */
 import fakeApi from '@/services/fakeApi';
+import services from '@/services';
+import each from 'lodash/each';
 
 export default {
 	SET_GENDER: (store, payload) => {
@@ -18,6 +20,9 @@ export default {
 		if (store.getters.allTestsCount < 1) {
 			fakeApi.getMedicalTests().then(tests => {
 				store.commit('STORE_TESTS', tests);
+				each(tests, test => {
+					services.fetchTestQuestions({ id: test.id });
+				});
 			});
 		}
 	},

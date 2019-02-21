@@ -4,7 +4,7 @@
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
-                    >{{ $store.state.user.profileProgress }}%</span
+                    >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
         </v-flex>
@@ -158,8 +158,6 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import filter from 'lodash/filter';
-import get from 'lodash/get';
 import sum from 'lodash/sum';
 import size from 'lodash/size';
 import map from 'lodash/map';
@@ -254,7 +252,7 @@ export default {
                 return size(
                     each(test.questions, question => {
                         questionsCount += 1;
-                        return question.weight !== undefined ? 1 : 0;
+                        return !!question.weight;
                     }),
                 );
             });
