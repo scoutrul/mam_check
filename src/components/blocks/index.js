@@ -13,6 +13,7 @@ import RegularMd from './Typography/RegularMd';
 import RegularLg from './Typography/RegularLg';
 import TestItem from './TestItem/TestItem';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import SpeechControl from './SpeechControl/SpeechControl';
 
 export {
 	StartButton,
@@ -29,5 +30,6 @@ export {
 	RegularMd,
 	RegularLg,
 	TestItem,
-	ProfileInfo
+	ProfileInfo,
+	SpeechControl,
 };

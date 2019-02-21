@@ -66,16 +66,74 @@
 				.v-btn__content {
 					color: white;
 				}
+		        &:hover, &:focus {
+			        background-color white !important
+			        border: 1px solid $Special_Blue;
+			        position: inherit
+			        .v-btn__content {
+				        color $Special_Blue !important
+			        }
+		        }
+	        }
+        }
+    }
+	.separate-banner {
+		border-radius: 16px;
+		box-shadow: 0 20px 50px rgba(19, 24, 31, 0.1);
 
-				&:hover,&:focus {
-					background-color: white !important;
-					border: 1px solid $Special_Blue;
-					position: inherit;
+		&__left {
+			padding: 40px 55px;
+			color: #ffffff;
+			background: $Special_Blue;
+			border-top-left-radius: 16px;
+			border-top-right-radius: 16px;
+			box-sizing: border-box;
 
-					.v-btn__content {
-						color: $Special_Blue !important;
-					}
-				}
+			p,h1,h2 {
+				color: #ffffff;
+			}
+
+			p {
+				font-size: 16px;
+				line-height: 24px;
+			}
+
+			@media (min-width: $MD_break) {
+				padding: 40px 140px 40px 55px;
+				border-top-left-radius: 16px;
+				border-bottom-left-radius: 16px;
+				border-top-right-radius: 0;
+			}
+
+			@media (min-width: $LG_break) {
+				background-image: url('~@/assets/images/banner_bg.svg');
+				background-position: 101% top;
+				background-repeat: no-repeat;
+				background-size: contain;
+			}
+		}
+
+		&__right {
+			padding: 40px 55px;
+			border-top-right-radius: 16px;
+			border-bottom-right-radius: 16px;
+			box-sizing: border-box;
+
+			p,h1,h2 {
+				color: $Black_Text;
+			}
+
+			p {
+				font-size: 16px;
+				line-height: 24px;
+			}
+
+			.v-btn {
+				color: $Black_Text;
+				text-transform: none;
+				background-color: transparent;
+				border: 1px solid $Black_Text;
+				cursor: pointer;
 			}
 		}
 	}
