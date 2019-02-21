@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { SpeechService } from './../../../services';
+import { SpeechService } from '../../../services';
 
 export default {
     name: 'SpeechControl',

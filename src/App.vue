@@ -16,6 +16,7 @@
                     <Menu />
                     <StartButton />
                     <portal-target name="closeCurrentTest" />
+                    <portal-target name="StartButtonSimple" />
                 </Container>
             </Header>
             <Body>

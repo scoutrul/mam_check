@@ -138,8 +138,9 @@ const SpeechService = {
 	},
 
 	identityPhrase(voicePhrase, phrases) {
-		let goalPhrase = null,
-			canLevenshtein = true;
+		let goalPhrase = null;
+
+		let canLevenshtein = true;
 
 		phrases.forEach(phrase => {
 			if (phrase.split(' ').length <= 1) {

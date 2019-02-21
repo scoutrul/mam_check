@@ -7,13 +7,24 @@
                     >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
+            <portal to="StartButtonSimple">
+                <StartButtonSimple
+                    @click="anketa = !anketa"
+                    v-if="$store.state.user.profileProgress >= 1"
+                >
+                    Скачать анкету
+                </StartButtonSimple>
+            </portal>
+            <v-dialog class="anketa" v-model="anketa">
+                <AnketaPopUp @click.native="anketa = !anketa" />
+            </v-dialog>
         </v-flex>
         <v-flex class="checkup__section">
             <Header4>Мои данные</Header4>
             <ProfileInfo />
         </v-flex>
         <template v-if="$store.state.user.birthYear">
-            <v-flex class="black" v-if="dispAvailable">
+            <v-flex v-if="dispAvailable" class="black">
                 <div class="banner">
                     <Header2 class="pad16"
                         >В этом году вам доступна диспансеризация</Header2
@@ -82,7 +93,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex class="checkup__section" v-if="filterCompletedTests.length">
+        <v-flex v-if="filterCompletedTests.length" class="checkup__section">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -173,19 +184,24 @@ import {
     TestItem,
     RegularLg,
     ProfileInfo,
+    AnketaPopUp,
+    StartButtonSimple,
 } from '../../blocks';
 
 export default {
     components: {
+        StartButtonSimple,
         Header1,
         Header2,
         Header4,
         RegularLg,
         TestItem,
         ProfileInfo,
+        AnketaPopUp,
     },
     data: () => ({
         medicalFormLoading: false,
+        anketa: false,
     }),
     computed: {
         ...mapState({

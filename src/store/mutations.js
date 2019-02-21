@@ -62,7 +62,8 @@ export default {
 		const { questionsCount, completedQuestionsCount } = payload;
 
 		const result = round(completedQuestionsCount * (100 / questionsCount), 1);
-		const profileProgress = result > 40 ? 100 : result;
+		// todo для демонстрации result > 10
+		const profileProgress = result > 10 ? 100 : result;
 		state.user = {
 			...state.user,
 			questionsCount,
