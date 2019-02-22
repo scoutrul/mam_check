@@ -18,128 +18,32 @@
 </template>
 
 <script>
-import { SpeechService } from '../../../services';
-
 export default {
     name: 'SpeechControl',
 
     props: {
-        conversionText: {
-            type: String,
+        speaking: {
+            type: Boolean,
             required: true,
         },
-        recognitionPhrases: {
-            type: Array,
+        recording: {
+            type: Boolean,
             required: true,
         },
     },
 
-    data: () => ({
-        isSpeaking: false,
-        isRecorded: false,
-        goalPhrase: null,
-    }),
+    data: () => ({}),
 
     computed: {
         classes() {
             return {
-                'speech-control--speaking': this.isSpeaking,
-                'speech-control--recorded': this.isRecorded,
+                'speech-control--speaking': this.speaking,
+                'speech-control--recorded': this.recording,
             };
         },
     },
 
-    watch: {
-        conversionText() {
-            this.stopSpeaking();
-            this.stopRecognition();
-
-            setTimeout(() => {
-                this.startSpeaking();
-            }, 100);
-        },
-    },
-
-    created() {
-        console.log(this);
-
-        if (this.conversionText) {
-            this.startSpeaking();
-        }
-    },
-
-    destroyed() {
-        this.stopSpeaking();
-        this.stopRecognition();
-    },
-
-    methods: {
-        startSpeaking() {
-            this.stopRecognition();
-
-            SpeechService.textConversion(this.conversionText, {
-                onStart: () => {
-                    this.isSpeaking = true;
-                },
-                onEnd: event => {
-                    this.isSpeaking = false;
-
-                    if (
-                        this.recognitionPhrases &&
-                        !(
-                            typeof event.manuallyStopped !== 'undefined' &&
-                            event.manuallyStopped === true
-                        )
-                    ) {
-                        this.startRecognition();
-                    }
-                },
-            });
-        },
-
-        stopSpeaking() {
-            this.isSpeaking = false;
-            SpeechService.stopTextConversion();
-        },
-
-        startRecognition() {
-            this.goalPhrase = null;
-
-            SpeechService.speechRecognition({
-                onStart: () => {
-                    this.isRecorded = true;
-                },
-                onResult: (event, phrase) => {
-                    this.goalPhrase = SpeechService.identityPhrase(
-                        phrase,
-                        this.recognitionPhrases,
-                    );
-                },
-                onEnd: event => {
-                    this.isRecorded = false;
-
-                    if (
-                        !this.goalPhrase &&
-                        !(
-                            typeof event.manuallyStopped !== 'undefined' &&
-                            event.manuallyStopped === true
-                        )
-                    ) {
-                        this.startRecognition();
-                    }
-
-                    if (this.goalPhrase) {
-                        this.$emit('recognitionResult', this.goalPhrase);
-                    }
-                },
-            });
-        },
-
-        stopRecognition() {
-            this.isRecorded = false;
-            SpeechService.stopSpeechRecognition();
-        },
-    },
+    methods: {},
 };
 </script>
 

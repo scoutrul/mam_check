@@ -57,14 +57,8 @@
                 </div>
                 <div class="testSelf__speech-control">
                     <speech-control
-                        :conversion-text="
-                            currentTestQuestions[stepper - 1] ? currentTestQuestions[stepper - 1].name : ''
-                        "
-                        :recognition-phrases="[
-                            'Ответ из двух и более слов',
-                            'Да',
-                            'Нет',
-                        ]"
+                        :speaking="isSpeaking"
+                        :recording="isRecorded"
                     />
                 </div>
             </div>
@@ -118,6 +112,7 @@
 import CONST from '@/const.js';
 import delay from 'lodash/delay';
 import services from '@/services';
+import { SpeechService } from '@/services';
 
 import { SimpleButton, SpeechControl } from '../../blocks';
 
@@ -131,6 +126,10 @@ export default {
         currentStep: 1,
         shortName: '',
         weights: 0,
+
+        isSpeaking: false,
+        isRecorded: false,
+        goalPhrase: null,
     }),
     beforeRouteEnter(to, from, next) {
         next(vm => {
@@ -160,6 +159,8 @@ export default {
         try {
             this.shortName = await currTest.shortName;
             this.stepper = currTest.currentStep || 1;
+
+            this.startSpeaking();
         } catch (e) {
             console.log(e, 'err');
             this.closeSelf();
@@ -170,6 +171,12 @@ export default {
             delay(this.closeSelf, 500);
         }
     },
+
+    destroyed() {
+        this.stopSpeaking();
+        this.stopRecognition();
+    },
+
     methods: {
         goBack() {
             if (this.stepper > 1) {
@@ -177,6 +184,13 @@ export default {
             } else {
                 this.stepper = 1;
             }
+
+            this.stopSpeaking();
+            this.stopRecognition();
+
+            setTimeout(() => {
+                this.startSpeaking();
+            }, 200);
         },
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
@@ -190,6 +204,80 @@ export default {
                 currentStep: this.stepper,
             };
             this.$store.dispatch('store_test_answer', payload);
+
+            this.stopSpeaking();
+            this.stopRecognition();
+
+            setTimeout(() => {
+                this.startSpeaking();
+            }, 200);
+        },
+
+        startSpeaking() {
+            SpeechService.textConversion(
+                this.currentTestQuestions[this.stepper - 1].name,
+                {
+                    onStart: event => {
+                        this.isSpeaking = true;
+                    },
+                    onEnd: event => {
+                        this.isSpeaking = false;
+
+                        if (
+                            !(
+                                typeof event.manuallyStopped !== 'undefined' &&
+                                event.manuallyStopped === true
+                            )
+                        ) {
+                            this.startRecognition();
+                        }
+                    },
+                },
+            );
+        },
+
+        stopSpeaking() {
+            this.isSpeaking = false;
+            SpeechService.stopTextConversion();
+        },
+
+        startRecognition() {
+            this.goalPhrase = null;
+
+            SpeechService.speechRecognition({
+                onStart: event => {
+                    this.isRecorded = true;
+                },
+                onEnd: event => {
+                    this.isRecorded = false;
+
+                    if (
+                        !this.goalPhrase &&
+                        !(
+                            typeof event.manuallyStopped !== 'undefined' &&
+                            event.manuallyStopped === true
+                        )
+                    ) {
+                        this.startRecognition();
+                    }
+
+                    if (this.goalPhrase) {
+                        // todo Сделать переход на следующий вопрос
+                    }
+                },
+                onResult: (event, phrase) => {
+                    // TODO Передать массив с вариантами ответов вместо (Да, Нет)
+                    this.goalPhrase = SpeechService.identityPhrase(phrase, [
+                        'Да',
+                        'Нет',
+                    ]);
+                },
+            });
+        },
+
+        stopRecognition() {
+            this.isRecorded = false;
+            SpeechService.stopSpeechRecognition();
         },
     },
 };
