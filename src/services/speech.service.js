@@ -137,6 +137,13 @@ const SpeechService = {
 		recognition.stop();
 	},
 
+	/**
+	 * Метод вернёт фразу из phrases, если она будет похожа на voicePhrase
+	 *
+	 * @param voicePhrase
+	 * @param phrases
+	 * @returns {*}
+	 */
 	identityPhrase(voicePhrase, phrases) {
 		let goalPhrase = null;
 
@@ -163,6 +170,11 @@ const SpeechService = {
 		return goalPhrase;
 	},
 
+	/**
+	 * @param a
+	 * @param b
+	 * @returns {*}
+	 */
 	levenshteinDistance(a, b) {
 		if (a.length === 0) return b.length;
 		if (b.length === 0) return a.length;
