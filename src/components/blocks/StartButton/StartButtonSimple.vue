@@ -1,6 +1,5 @@
 <template>
     <v-btn
-        v-if="$store.state.route.name === 'home'"
         depressed
         flat
         round
@@ -9,8 +8,7 @@
         class="button__yellow"
         :to="PAGE_PROFILE"
     >
-        <span v-if="!isUserInfoDone">Начать</span>
-        <span v-else>Продолжить</span>
+        <slot></slot>
     </v-btn>
 </template>
 
@@ -21,14 +19,6 @@ export default {
     data: () => ({
         PAGE_PROFILE: CONST.PAGE_PROFILE,
     }),
-    computed: {
-        isHomePage() {
-            return this.$route.name === 'home';
-        },
-        isUserInfoDone() {
-            return this.$store.state.user.isUserInfoDone;
-        },
-    },
 };
 </script>
 

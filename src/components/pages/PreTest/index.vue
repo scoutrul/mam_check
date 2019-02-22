@@ -46,31 +46,31 @@
                     <img
                         svg-inline
                         src="@/assets/images/pre_birthday.svg"
-                        alt="Укажите ваш день рождения"
+                        alt="Укажите ваш год рождения"
                     />
-                    <div class="title">Укажите вашу дату рождения</div>
+                    <div class="title">Укажите ваш год рождения</div>
                     <v-layout justify-center class="pretest__buttons">
                         <v-flex
                             class="pretest__buttons_item xs12"
-                            @click="$refs.birthdayInput.focus()"
+                            @click="$refs.birthYearInput.focus()"
                         >
                             <v-text-field
-                                ref="birthdayInput"
+                                ref="birthYearInput"
                                 hide-details
                                 class="pretest__input"
-                                :value="user.birthday"
-                                placeholder="дд.мм.гггг"
-                                mask="##.##.####"
+                                :value="user.birthYear"
+                                placeholder="гггг"
+                                mask="####"
                                 return-masked-value
-                                @input="handleBirthday"
+                                @input="handleBirthYear"
                             ></v-text-field>
                         </v-flex>
                         <v-flex class="pretest__buttons_item xs12">
                             <SimpleButton
-                                :disabled="user.birthday.length <= 9"
+                                :disabled="!validateBirthYear"
                                 :class="[
                                     'button__simple--next',
-                                    user.birthday.length <= 9 &&
+                                    !validateBirthYear &&
                                         'button__simple--disabled',
                                 ]"
                                 @click.native="stepper = 3"
@@ -139,6 +139,7 @@
 </template>
 
 <script>
+import CONST from '@/const.js';
 import { mapState } from 'vuex';
 import { SimpleButton } from '../../blocks';
 
@@ -149,21 +150,29 @@ export default {
     data: () => ({
         stepper: 1,
     }),
-    computed: mapState(['user']),
+    computed: {
+        ...mapState(['user']),
+        validateBirthYear() {
+            return (
+                this.user.birthYear.length === 4 &&
+                this.user.birthYear < 2019 &&
+                this.user.birthYear > 1920
+            );
+        },
+    },
 
     methods: {
         setGender(val) {
             this.stepper += 1;
             this.$store.dispatch('SET_GENDER', val);
         },
-        handleBirthday(value) {
-            this.$store.dispatch('SET_BIRTHDAY', value);
+        handleBirthYear(value) {
+            this.$store.dispatch('SET_BIRTHYEAR', value);
         },
         handleHeight(value) {
             this.$store.dispatch('SET_HEIGHT', value);
         },
         handleWeight(value) {
-            this.user.weight = value;
             this.$store.dispatch('SET_WEIGHT', value);
         },
         goBack() {
@@ -175,7 +184,7 @@ export default {
         },
         goNextPage() {
             this.$store.state.user.isUserInfoDone = true;
-            this.$router.push('/checkup');
+            this.$router.push(CONST.PAGE_PROFILE);
         },
     },
 };

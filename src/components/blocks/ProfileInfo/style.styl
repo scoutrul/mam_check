@@ -1,0 +1,95 @@
+@import '../../../assets/styles/vars/index.styl'
+
+.profile-info
+	box-shadow: 0 8px 30px rgba(19,24,31,0.08);
+	border-radius: 8px;
+	margin: 12px 0;
+	padding: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	@media (max-width: $cta_button_brake)
+		flex-direction column
+
+	&-recommendation
+		line-height: 22px;
+		font-size: 14px;
+		color: #1E1E1E;
+		padding 8px 8px 8px 0
+		@media (min-width: $LG_break)
+			padding: 8px 100px 0 0;
+	&-title
+		line-height: 28px;
+		font-size: 22px;
+		color: #58B379;
+		margin 0
+		@media (max-width: $cta_button_brake)
+			line-height: 32px;
+			font-size: 20px;
+	&-inputs
+		display flex
+		width 100%
+		margin 6px 0
+		transform: translateY(10px);
+		@media (max-width: $XS_break)
+			flex-direction column
+		&-item
+			margin auto 6px
+			@media (max-width: $XS_break)
+				margin 16px 0
+			&:last-child
+				margin-right 0 !important
+			&:first-child
+				margin-left 0 !important
+			&__input
+				padding 0
+				line-height: 22px;
+				font-size: 15px;
+				color: #606774;
+			.v-input
+				.v-input__slot
+					&:after, &:before
+						display none
+					.v-text-field__slot
+						&:after, &:before
+						display none
+						input
+							transition $transition_hover
+							border: 1px solid #D6DCE3;
+							border-radius: 4px;
+							padding 8px 16px
+							max-height: 50px;
+							&::disabled
+								background-color: #F00
+								border: 1px solid transparent
+						label
+							line-height: 22px;
+							font-size: 15px
+							color: #1E1E1E
+							top 0
+							font-weight bold
+	&-button
+		display: flex;
+		transform: translateY(10px);
+		max-width: 100%;
+		width 100%
+		margin 6px auto
+		@media (min-width: $cta_button_brake)
+			margin 12px
+			max-width: 128px;
+		@media (min-width: $XL_break)
+			margin 0
+		button
+			min-height: 50px;
+			flex 0 1 128px
+			background: $Special_Blue;
+			border: 0
+			&:disabled
+				background: $Grey;
+				.v-btn__content
+					color $Light_Grey
+			.v-btn__content
+				color #FFF
+			@media (max-width: $cta_button_brake)
+				flex: 1 1 100%;
+				max-width: 100%;

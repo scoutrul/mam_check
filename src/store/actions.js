@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import fakeApi from '@/services/fakeApi';
+import services from '@/services';
+import each from 'lodash/each';
 
 export default {
 	SET_GENDER: (store, payload) => {
 		store.commit('SET_GENDER', payload);
 	},
-	SET_BIRTHDAY: (store, payload) => {
-		store.commit('SET_BIRTHDAY', payload);
+	SET_BIRTHYEAR: (store, payload) => {
+		store.commit('SET_BIRTHYEAR', payload);
 	},
 	SET_WEIGHT: (store, payload) => {
 		store.commit('SET_WEIGHT', payload);
@@ -14,10 +16,13 @@ export default {
 	SET_HEIGHT: (store, payload) => {
 		store.commit('SET_HEIGHT', payload);
 	},
-	get_tests: async store => {
+	get_tests: store => {
 		if (store.getters.allTestsCount < 1) {
 			fakeApi.getMedicalTests().then(tests => {
 				store.commit('STORE_TESTS', tests);
+				each(tests, test => {
+					services.fetchTestQuestions({ id: test.id });
+				});
 			});
 		}
 	},
@@ -32,5 +37,8 @@ export default {
 	},
 	set_treatments: ({ commit }, payload) => {
 		commit('SET_TREATMENTS', payload);
+	},
+	count_profile_progress: ({ commit }, payload) => {
+		commit('COUNT_PROFILE_PROGRESS', payload);
 	},
 };

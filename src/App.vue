@@ -16,6 +16,7 @@
                     <Menu />
                     <StartButton />
                     <portal-target name="closeCurrentTest" />
+                    <portal-target name="StartButtonSimple" />
                 </Container>
             </Header>
             <Body>
@@ -38,14 +39,15 @@
                         order-lg3
                         xs12
                         sm12
-                        md5
+                        md6
+                        lg6
                         class="footer__menu"
                         ><Menu
                     /></v-flex>
                     <v-flex order-xs2 order-sm1 xs12 md3 class="footer__logo"
                         ><LogoFooter
                     /></v-flex>
-                    <v-flex order-xs3 order-sm2 xs12 xs7 md4
+                    <v-flex order-xs3 order-sm2 xs12 xs7 spacer
                         ><Copyrights
                     /></v-flex>
                 </Container>
@@ -101,7 +103,7 @@ export default {
             };
         },
         footerAllowPages() {
-            const pagesWithFooter = ['home', 'checkup'];
+            const pagesWithFooter = ['home', 'profile'];
             return pagesWithFooter.includes(this.$route.name);
         },
     },
@@ -112,11 +114,7 @@ export default {
         this.innerHeight = window.innerHeight;
         this.registerHandlers();
     },
-    mutations: {
-        SET_NAME: (state, name) => {
-            state.name = name;
-        },
-    },
+
     beforeDestroy() {
         this.unregisterHandlers();
         console.log('beforeDestroy');
@@ -144,23 +142,6 @@ export default {
             this.appHeight = this.$el.clientHeight;
         },
     },
-
-    // actions: {
-    //     SET_NAME: async (context, name) => {
-    //         let { data } = await Axios.post('http://myapiendpoint.com/api/name', {
-    //             name: name
-    //         });
-
-    //         if (data.status == 200) {
-    //             context.commit('SET_NAME', name);
-    //         }
-    //     }
-    // },
-
-    // beforeRouteEnter(to, from, next) {
-    // },
-    // beforeRouteUpdate(to, from, next) {
-    // }
 };
 </script>
 

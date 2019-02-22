@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import CONST from '@/const.js';
+
 import fortyFour from './components/pages/fortyFour.vue';
 // import Home from './components/pages/Home';
 
@@ -41,13 +43,13 @@ const router = new Router({
 			component: Record,
 		},
 		{
-			path: '/pretest',
+			path: CONST.PRE_TEST,
 			name: 'pretest',
 			component: Pretest,
 		},
 		{
-			path: '/checkup',
-			name: 'checkup',
+			path: CONST.PAGE_PROFILE,
+			name: 'profile',
 			component: Checkup,
 		},
 		{

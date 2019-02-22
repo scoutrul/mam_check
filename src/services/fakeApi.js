@@ -1037,8 +1037,15 @@ export default {
 								answers: [
 									{
 										id: 1,
-										type: 'string',
-										examinationString: true,
+										type: 'variant',
+										title: 'Да',
+										weight: 2,
+									},
+									{
+										id: 2,
+										type: 'variant',
+										title: 'Нет',
+										weight: 0,
 									},
 								],
 							},
@@ -1855,8 +1862,8 @@ export default {
 			});
 		}),
 
-	getTreatmentByResult: ({ testId, answerSum }) =>{
-		return new Promise((resolve, reject) => {
+	getTreatmentByResult: ({ testId, answerSum }) =>
+		new Promise((resolve, reject) => {
 			setTimeout(() => {
 				const treatments = [
 					// Мозговое кровообращение
@@ -3918,7 +3925,6 @@ export default {
 
 				let neededTreatment = false;
 
-
 				treatments.forEach(treatment => {
 					if (treatment.testId === testId) {
 						if (treatment.sum.type === 'enum') {
@@ -3938,20 +3944,34 @@ export default {
 						}
 					}
 				});
-				
-				let recommendations = ['лучше питайтесь', 'хорошо спите', 'гуляйте', 'пройдите диспансеризацию', 'проконсультирутесь со специалистом', 'радуйтесь' ];
-				let recommendationsRandomItem = () => recommendations[Math.floor(Math.random()*recommendations.length)];
-				
-				let colors = ['#FEE245', '#EF4D4D', '#58B379'];
-				let randomColor = () => colors[Math.floor(Math.random()*colors.length)];
+
+				const recommendations = [
+					'лучше питайтесь',
+					'хорошо спите',
+					'гуляйте',
+					'пройдите диспансеризацию',
+					'проконсультирутесь со специалистом',
+					'радуйтесь',
+				];
+				const recommendationsRandomItem = () =>
+					recommendations[
+						Math.floor(Math.random() * recommendations.length)
+					];
+
+				const colors = ['#FEE245', '#EF4D4D', '#58B379'];
+				const randomColor = () =>
+					colors[Math.floor(Math.random() * colors.length)];
 				const result = {
 					treatment: neededTreatment,
-					recommendations: [recommendationsRandomItem(), recommendationsRandomItem(), recommendationsRandomItem()],
+					recommendations: [
+						recommendationsRandomItem(),
+						recommendationsRandomItem(),
+						recommendationsRandomItem(),
+					],
 					color: randomColor(),
 				};
-				
+
 				resolve(result);
 			}, 500);
-		})
-	},
+		}),
 };
