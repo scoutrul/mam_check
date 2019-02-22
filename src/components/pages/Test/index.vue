@@ -214,6 +214,10 @@ export default {
         },
 
         startSpeaking() {
+            if (!SpeechService.canUse()) {
+                return false;
+            }
+
             SpeechService.textConversion(
                 this.currentTestQuestions[this.stepper - 1].name,
                 {
@@ -237,11 +241,19 @@ export default {
         },
 
         stopSpeaking() {
+            if (!SpeechService.canUse()) {
+                return false;
+            }
+
             this.isSpeaking = false;
             SpeechService.stopTextConversion();
         },
 
         startRecognition() {
+            if (!SpeechService.canUse()) {
+                return false;
+            }
+
             this.goalPhrase = null;
 
             SpeechService.speechRecognition({
@@ -276,6 +288,10 @@ export default {
         },
 
         stopRecognition() {
+            if (!SpeechService.canUse()) {
+                return false;
+            }
+
             this.isRecorded = false;
             SpeechService.stopSpeechRecognition();
         },
