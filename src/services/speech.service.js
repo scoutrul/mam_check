@@ -7,8 +7,10 @@ const SpeechRecognitionEvent =
 const SpeechSynthesisUtterance =
 	window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
 
-const synth = window.speechSynthesis;
-const recognition = new SpeechRecognition();
+if (/Chrome\//.test(navigator.userAgent)) {
+	window.synth = window.speechSynthesis;
+	window.recognition = new SpeechRecognition();
+}
 
 /** Speech Flags */
 let FLAG_SPEECH_MANUALLY_STOPPED = false;
@@ -17,10 +19,16 @@ let FLAG_SPEECH_MANUALLY_STOPPED = false;
 let FLAG_RECOGNITION_STARTED = false;
 let FLAG_RECOGNITION_MANUALLY_STOPPED = false;
 
+window.utterances = [];
+
 const SpeechService = {
 	// FLAG_SPEECH_MANUALLY_STOPPED: false,
 	// FLAG_RECOGNITION_STARTED: false,
 	// FLAG_RECOGNITION_MANUALLY_STOPPED: false,
+
+	canUse() {
+		return /Chrome\//.test(navigator.userAgent);
+	},
 
 	textConversion(text, options) {
 		if (!synth) {
@@ -29,12 +37,12 @@ const SpeechService = {
 
 		FLAG_SPEECH_MANUALLY_STOPPED = false;
 
-		const voices = synth.getVoices();
+		const voices = window.synth.getVoices();
 
 		setTimeout(() => {
 			function speak() {
-				if (synth.speaking) {
-					synth.cancel();
+				if (window.synth.speaking) {
+					window.synth.cancel();
 					setTimeout(speak.bind(this), 100);
 				} else {
 					const utterThis = new SpeechSynthesisUtterance(text);
@@ -66,7 +74,8 @@ const SpeechService = {
 						}
 					};
 
-					synth.speak(utterThis);
+					window.utterances.push(utterThis);
+					window.synth.speak(utterThis);
 				}
 			}
 
@@ -76,29 +85,29 @@ const SpeechService = {
 
 	stopTextConversion() {
 		FLAG_SPEECH_MANUALLY_STOPPED = true;
-		synth.cancel();
+		window.synth.cancel();
 	},
 
 	speechRecognition(options) {
 		FLAG_RECOGNITION_MANUALLY_STOPPED = false;
 
-		recognition.lang = 'ru-RU';
-		recognition.interimResults = false;
-		recognition.maxAlternatives = 1;
+		window.recognition.lang = 'ru-RU';
+		window.recognition.interimResults = false;
+		window.recognition.maxAlternatives = 1;
 
 		if (!FLAG_RECOGNITION_STARTED) {
-			recognition.start();
+			window.recognition.start();
 		}
 
 		FLAG_RECOGNITION_STARTED = true;
 
-		recognition.onstart = event => {
+		window.recognition.onstart = event => {
 			if (options.onStart) {
 				options.onStart(event);
 			}
 		};
 
-		recognition.onend = event => {
+		window.recognition.onend = event => {
 			FLAG_RECOGNITION_STARTED = false;
 
 			const customEvent = Object.assign(event, {
@@ -112,19 +121,19 @@ const SpeechService = {
 			}
 		};
 
-		recognition.onresult = event => {
+		window.recognition.onresult = event => {
 			if (options.onResult) {
 				options.onResult(event, event.results[0][0].transcript);
 			}
 		};
 
-		recognition.onsoundstart = event => {
+		window.recognition.onsoundstart = event => {
 			if (options.onSoundStart) {
 				options.onSoundStart(event);
 			}
 		};
 
-		recognition.onsoundend = event => {
+		window.recognition.onsoundend = event => {
 			if (options.onSoundEnd) {
 				options.onSoundEnd(event);
 			}
@@ -134,7 +143,7 @@ const SpeechService = {
 	stopSpeechRecognition() {
 		FLAG_RECOGNITION_STARTED = false;
 		FLAG_RECOGNITION_MANUALLY_STOPPED = true;
-		recognition.stop();
+		window.recognition.stop();
 	},
 
 	/**
