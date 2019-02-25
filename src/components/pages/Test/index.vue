@@ -111,6 +111,8 @@
 <script>
 import CONST from '@/const.js';
 import delay from 'lodash/delay';
+import map from 'lodash/map';
+import each from 'lodash/each';
 import services from '@/services';
 import { SpeechService } from '@/services';
 
@@ -125,8 +127,6 @@ export default {
         stepper: 1,
         currentStep: 1,
         shortName: '',
-        weights: 0,
-
         isSpeaking: false,
         isRecorded: false,
         goalPhrase: null,
@@ -159,17 +159,13 @@ export default {
         try {
             this.shortName = await currTest.shortName;
             this.stepper = currTest.currentStep || 1;
-
-            this.startSpeaking();
         } catch (e) {
             console.log(e, 'err');
             this.closeSelf();
         }
-    },
-    updated() {
-        if (this.stepper > this.currentTestQuestions.length) {
-            delay(this.closeSelf, 500);
-        }
+        this.stopSpeaking();
+        this.stopRecognition();
+        this.startSpeaking();
     },
 
     destroyed() {
@@ -188,9 +184,7 @@ export default {
             this.stopSpeaking();
             this.stopRecognition();
 
-            setTimeout(() => {
-                this.startSpeaking();
-            }, 200);
+            delay(this.startSpeaking, 200);
         },
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
@@ -205,14 +199,29 @@ export default {
             };
             this.$store.dispatch('store_test_answer', payload);
 
-            this.stopSpeaking();
-            this.stopRecognition();
-
-            setTimeout(() => {
-                this.startSpeaking();
-            }, 200);
+            delay(this.startSpeaking, 300);
         },
+        getCurrentQuestionAnswers() {
+            return (
+                this.currentTestQuestions.length &&
+                map(
+                    this.currentTestQuestions[this.currentStep].answers,
+                    item => item.title,
+                )
+            );
+        },
+        getCurrentQuestionAnswerWeight(answer) {
+            let result;
 
+            this.currentTestQuestions.length &&
+                each(
+                    this.currentTestQuestions[this.currentStep].answers,
+                    item => {
+                        if (item.title === answer) result = item.weight;
+                    },
+                );
+            return result;
+        },
         startSpeaking() {
             if (!SpeechService.canUse()) {
                 return false;
@@ -255,7 +264,6 @@ export default {
             }
 
             this.goalPhrase = null;
-
             SpeechService.speechRecognition({
                 onStart: event => {
                     this.isRecorded = true;
@@ -274,19 +282,23 @@ export default {
                     }
 
                     if (this.goalPhrase) {
-                        // todo Сделать переход на следующий вопрос
+                        console.log('goalPhrase', this.goalPhrase);
+                        this.goNext(
+                            this.getCurrentQuestionAnswerWeight(
+                                this.goalPhrase,
+                            ),
+                            this.stepper,
+                        );
                     }
                 },
                 onResult: (event, phrase) => {
-                    // TODO Передать массив с вариантами ответов вместо (Да, Нет)
-                    this.goalPhrase = SpeechService.identityPhrase(phrase, [
-                        'Да',
-                        'Нет',
-                    ]);
+                    this.goalPhrase = SpeechService.identityPhrase(
+                        phrase,
+                        this.getCurrentQuestionAnswers(),
+                    );
                 },
             });
         },
-
         stopRecognition() {
             if (!SpeechService.canUse()) {
                 return false;
@@ -295,6 +307,11 @@ export default {
             this.isRecorded = false;
             SpeechService.stopSpeechRecognition();
         },
+    },
+    updated() {
+        if (this.stepper > this.currentTestQuestions.length) {
+            delay(this.closeSelf, 500);
+        }
     },
 };
 </script>

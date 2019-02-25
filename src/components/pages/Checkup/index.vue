@@ -7,10 +7,11 @@
                     >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
-            <portal to="StartButtonSimple" v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW">
-                <StartButtonSimple
-                    @click.native="anketa = !anketa"
-                >
+            <portal
+                to="StartButtonSimple"
+                v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
+            >
+                <StartButtonSimple @click.native="anketa = !anketa">
                     Скачать анкету
                 </StartButtonSimple>
             </portal>
@@ -52,7 +53,10 @@
                 </div>
             </v-flex>
         </template>
-        <v-flex class="checkup__section" v-if="filterInProgressTests.length || filterTests.length">
+        <v-flex
+            class="checkup__section"
+            v-if="filterInProgressTests.length || filterTests.length"
+        >
             <Header4>Доступные тесты</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -168,14 +172,12 @@
 
 <script>
 import { mapState, mapGetters } from 'vuex';
-import sum from 'lodash/sum';
-import size from 'lodash/size';
-import map from 'lodash/map';
+
 import each from 'lodash/each';
 import isUndefined from 'lodash/isUndefined';
 import fakeApi from '@/services/fakeApi';
 import portalApi from '@/services/portalApi';
-import CONST from '@/const.js'
+import CONST from '@/const.js';
 
 import {
     Header1,
@@ -263,10 +265,10 @@ export default {
         getProfileProgress() {
             let completedQuestionsCount = 0;
             let questionsCount = 0;
-            each(this.getTests, test => 
+            each(this.getTests, test =>
                 each(test.questions, question => {
                     questionsCount += 1;
-                    if(!isUndefined(question.weight)) {
+                    if (!isUndefined(question.weight)) {
                         completedQuestionsCount += 1;
                     }
                 }),
@@ -279,7 +281,8 @@ export default {
         },
         getAllQuestionsResult() {
             let weight = 0;
-            Promise.all(each(this.getTests, test => {
+            Promise.all(
+                each(this.getTests, test => {
                     each(test.questions, question => {
                         weight = weight + question.weight || 0;
                     });
@@ -296,9 +299,9 @@ export default {
                                 recommendations: result.recommendations,
                                 color: result.color,
                             };
-                            return this.$store.dispatch('set_treatments', treatments);
+                            this.$store.dispatch('set_treatments', treatments);
                         });
-                })
+                }),
             );
         },
         getMedicalForm() {
