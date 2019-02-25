@@ -159,12 +159,13 @@ export default {
         try {
             this.shortName = await currTest.shortName;
             this.stepper = currTest.currentStep || 1;
-
-            this.startSpeaking();
         } catch (e) {
             console.log(e, 'err');
             this.closeSelf();
         }
+        this.stopSpeaking();
+        this.stopRecognition();
+        this.startSpeaking();
     },
 
     destroyed() {
@@ -183,9 +184,7 @@ export default {
             this.stopSpeaking();
             this.stopRecognition();
 
-            setTimeout(() => {
-                this.startSpeaking();
-            }, 200);
+            delay(this.startSpeaking, 200);
         },
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
@@ -199,9 +198,6 @@ export default {
                 currentStep: this.stepper,
             };
             this.$store.dispatch('store_test_answer', payload);
-
-            this.stopSpeaking();
-            this.stopRecognition();
 
             delay(this.startSpeaking, 300);
         },
@@ -268,6 +264,7 @@ export default {
             }
 
             this.goalPhrase = null;
+
             SpeechService.speechRecognition({
                 onStart: event => {
                     this.isRecorded = true;
@@ -286,7 +283,6 @@ export default {
                     }
 
                     if (this.goalPhrase) {
-                        // todo Сделать переход на следующий вопрос
                         console.log('goalPhrase', this.goalPhrase);
                         this.goNext(
                             this.getCurrentQuestionAnswerWeight(
