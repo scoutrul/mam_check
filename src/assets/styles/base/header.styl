@@ -11,12 +11,17 @@
 	transition height $transition_header
 	height: 128px;
 	left: 0
+	@media (max-width: $XS_break)
+		position absolute
+
 	&__container
 		height: 100%
 		align-items: center;
 		margin: 0 auto;
 		flex-flow row nowrap !important
 		background-color #FFF
+		@media (max-width: $XS_break)
+			background: transparent;
 	&.fixed
 		position fixed
 

@@ -13,16 +13,35 @@
 		background: #FFFFFF;
 		box-shadow: 0px 40px 120px rgba(19, 24, 31, 0.15);
 		border-radius: 16px;
-		/*align-self: center;*/
 		max-width 960px
 		width: 100%;
 		height calc(100% - 120px )
 		margin 60px
 		.inner
-			padding 60px
-		@media (max-width: $XS_break)
+			padding 32px 60px
+		@media (max-width: $MD_break)
 			height calc(100%)
-			margin 0px
-			border-radius 0
+			margin 20px
 			.inner
 				padding 16px
+		@media (max-width: $XS_break)
+			margin 0
+			border-radius 0
+
+		&__header
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			.title
+				line-height: 40px;
+				font-size: 28px;
+				font-weight bold
+				color: #1E1E1E;
+				white-space nowrap
+				@media (max-width: $XS_break + 100)
+					line-height: 22px;
+					font-size: 15px;
+					text-align center
+		.hideBtn
+			@media (max-width: $LG_break)
+				display none

@@ -17,7 +17,13 @@
                     Скачать анкету
                 </StartButtonSimple>
             </portal>
-            <v-dialog class="medFormPopUp" v-model="medFormPopUp" lazy>
+            <v-dialog
+                class="medFormPopUp"
+                v-model="medFormPopUp"
+                lazy
+                scrollable
+                persistent
+            >
                 <AnketaPopUp :close-self="closeModal" />
             </v-dialog>
         </v-flex>
@@ -258,7 +264,7 @@ export default {
             this.medFormPopUp = true;
             document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
             document.getElementById('app').style.overflowY = 'scroll';
-            document.getElementsByClassName('header')[0].style.left = '-8px';
+            document.getElementsByClassName('header')[0].style.left = '-17px';
         },
         closeModal() {
             this.medFormPopUp = false;
