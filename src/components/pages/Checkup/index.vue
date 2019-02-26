@@ -11,12 +11,16 @@
                 to="StartButtonSimple"
                 v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
             >
-                <StartButtonSimple @click.native="anketa = !anketa">
+                <StartButtonSimple @click.native="medFormPopUp = !medFormPopUp">
                     Скачать анкету
                 </StartButtonSimple>
             </portal>
-            <v-dialog class="anketa" v-model="anketa">
-                <AnketaPopUp @click.native="anketa = !anketa" />
+            <v-dialog
+                class="medFormPopUp"
+                v-model="medFormPopUp"
+                fullscreen="false"
+            >
+                <AnketaPopUp :close-self="closeModal" />
             </v-dialog>
         </v-flex>
         <v-flex class="checkup__section">
@@ -203,7 +207,7 @@ export default {
     },
     data: () => ({
         medicalFormLoading: false,
-        anketa: false,
+        medFormPopUp: false,
         PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
     computed: {
@@ -251,6 +255,9 @@ export default {
         this.getProfileProgress();
     },
     methods: {
+        closeModal() {
+            this.medFormPopUp = false;
+        },
         startCurrentTest({ id }) {
             this.$router.push({
                 path: `/test/${id}/`,
