@@ -9,17 +9,15 @@
             >
             <portal
                 to="StartButtonSimple"
-                v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
+                v-if="
+                    true || $store.state.user.profileProgress > PROCENT_TO_SHOW
+                "
             >
-                <StartButtonSimple @click.native="medFormPopUp = !medFormPopUp">
+                <StartButtonSimple @click.native="openModal">
                     Скачать анкету
                 </StartButtonSimple>
             </portal>
-            <v-dialog
-                class="medFormPopUp"
-                v-model="medFormPopUp"
-                fullscreen="false"
-            >
+            <v-dialog class="medFormPopUp" v-model="medFormPopUp" lazy>
                 <AnketaPopUp :close-self="closeModal" />
             </v-dialog>
         </v-flex>
@@ -254,9 +252,19 @@ export default {
         this.getAllQuestionsResult();
         this.getProfileProgress();
     },
+
     methods: {
+        openModal() {
+            this.medFormPopUp = true;
+            document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+            document.getElementById('app').style.overflowY = 'scroll';
+            document.getElementsByClassName('header')[0].style.left = '-8px';
+        },
         closeModal() {
             this.medFormPopUp = false;
+            document.getElementsByTagName('body')[0].style.overflowY = 'scroll';
+            document.getElementById('app').style.overflowY = 'hidden';
+            document.getElementsByClassName('header')[0].style.left = '0';
         },
         startCurrentTest({ id }) {
             this.$router.push({

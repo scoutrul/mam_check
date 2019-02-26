@@ -14,6 +14,7 @@ const state = {
 		birthYear: '',
 		height: '',
 		weight: '',
+		profileProgress: 0,
 	},
 	tests: [],
 };

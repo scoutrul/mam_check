@@ -1,0 +1,28 @@
+@import '../../../assets/styles/vars/index.styl';
+
+
+.v-dialog
+	display: flex
+	align-items: flex-start
+	justify-content: center
+	box-shadow: none;
+	height 100%
+	max-height 100% !important
+	margin 0
+	.medform
+		background: #FFFFFF;
+		box-shadow: 0px 40px 120px rgba(19, 24, 31, 0.15);
+		border-radius: 16px;
+		/*align-self: center;*/
+		max-width 960px
+		width: 100%;
+		height calc(100% - 120px )
+		margin 60px
+		.inner
+			padding 60px
+		@media (max-width: $XS_break)
+			height calc(100%)
+			margin 0px
+			border-radius 0
+			.inner
+				padding 16px
