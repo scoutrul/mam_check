@@ -15,8 +15,14 @@
                     <LogoHeader />
                     <Menu />
                     <StartButton />
-                    <portal-target name="closeCurrentTest" />
-                    <portal-target name="StartButtonSimple" />
+                    <portal-target
+                        name="closeCurrentTest"
+                        v-if="$route.name === 'test'"
+                    />
+                    <portal-target
+                        name="StartButtonSimple"
+                        v-if="$route.name !== 'test'"
+                    />
                 </Container>
             </Header>
             <Body>
