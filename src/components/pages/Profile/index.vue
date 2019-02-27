@@ -1,6 +1,6 @@
 <template>
-    <v-layout column class="container checkup">
-        <v-flex class="black checkup__section">
+    <v-layout column class="container profile">
+        <v-flex class="black profile__section">
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
@@ -9,9 +9,7 @@
             >
             <portal
                 to="StartButtonSimple"
-                v-if="
-                    true || $store.state.user.profileProgress > PROCENT_TO_SHOW
-                "
+                v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
             >
                 <StartButtonSimple @click.native="openModal">
                     Открыть анкету
@@ -27,7 +25,7 @@
                 <AnketaPopUp :close-self="closeModal" />
             </v-dialog>
         </v-flex>
-        <v-flex class="checkup__section">
+        <v-flex class="profile__section">
             <Header4>Мои данные</Header4>
             <ProfileInfo />
         </v-flex>
@@ -62,7 +60,7 @@
             </v-flex>
         </template>
         <v-flex
-            class="checkup__section"
+            class="profile__section"
             v-if="filterInProgressTests.length || filterTests.length"
         >
             <Header4>Доступные тесты</Header4>
@@ -104,7 +102,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex v-if="filterCompletedTests.length" class="checkup__section">
+        <v-flex v-if="filterCompletedTests.length" class="profile__section">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -127,7 +125,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex v-if="medicalFormComplete" class="checkup__section">
+        <v-flex v-if="medicalFormComplete" class="profile__section">
             <div class="separate-banner">
                 <v-layout row wrap xs12>
                     <v-flex xs12 md8 class="separate-banner__left">
@@ -352,5 +350,5 @@ export default {
 };
 </script>
 <style lang="stylus">
-@import './checkup.styl';
+@import './styles.styl';
 </style>

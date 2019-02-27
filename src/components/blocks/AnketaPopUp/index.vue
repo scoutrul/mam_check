@@ -9,7 +9,7 @@
                         class="hideBtn"
                         :loading="medicalFormLoading"
                         @click.native="getMedicalForm"
-                        >Открыть анкету</SimpleButton
+                        >Скачать анкету</SimpleButton
                     ></v-layout
                 >
 
@@ -40,7 +40,7 @@
                 <SimpleButton
                     :loading="medicalFormLoading"
                     @click.native="getMedicalForm"
-                    >Открыть анкету</SimpleButton
+                    >Скачать анкету</SimpleButton
                 >
                 <RecordButton>Запись к врачу</RecordButton>
             </div>
