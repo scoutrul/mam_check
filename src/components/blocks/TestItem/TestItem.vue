@@ -128,11 +128,11 @@ export default {
         },
         startSelf: {
             type: Function,
-            default: ({ id }) => console.log(id),
+            default: () => {},
         },
         resetSelf: {
             type: Function,
-            default: ({ id }) => console.log(id),
+            default: () => {},
         },
     },
     data() {

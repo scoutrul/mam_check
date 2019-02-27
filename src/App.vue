@@ -123,7 +123,6 @@ export default {
 
     beforeDestroy() {
         this.unregisterHandlers();
-        console.log('beforeDestroy');
     },
     methods: {
         isHeaderScrolled() {

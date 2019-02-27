@@ -23,8 +23,6 @@ new Vue({
 Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
-	console.log('# from', from);
-	console.log('# to', to);
 	if (to.path === CONST.PAGE_PROFILE) {
 		if (store.state.user.isUserInfoDone === false) {
 			next(CONST.PRE_TEST);
