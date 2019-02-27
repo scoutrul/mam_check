@@ -14,7 +14,7 @@
                 "
             >
                 <StartButtonSimple @click.native="openModal">
-                    Скачать анкету
+                    Открыть анкету
                 </StartButtonSimple>
             </portal>
             <v-dialog
@@ -160,17 +160,12 @@
                             чтобы сделать процесс прохождения быстрее и
                             комфортнее</RegularLg
                         >
-                        <v-btn
-                            depressed
-                            flat
-                            round
-                            dark
-                            ripple
+                        <SimpleButton
                             :loading="medicalFormLoading"
-                            @click="getMedicalForm"
+                            @click.native="getMedicalForm"
                         >
                             <span>Скачать анкету</span>
-                        </v-btn>
+                        </SimpleButton>
                     </v-flex>
                 </v-layout>
             </div>
@@ -196,6 +191,7 @@ import {
     ProfileInfo,
     AnketaPopUp,
     StartButtonSimple,
+    SimpleButton,
 } from '../../blocks';
 
 export default {
@@ -208,6 +204,7 @@ export default {
         TestItem,
         ProfileInfo,
         AnketaPopUp,
+        SimpleButton,
     },
     data: () => ({
         medicalFormLoading: false,

@@ -5,8 +5,11 @@
                 <v-spacer></v-spacer>
                 <v-layout flex xs11 sm8 md11
                     ><div class="title">Анкета диспансеризации</div>
-                    <SimpleButton class="hideBtn"
-                        >Скачать анкету</SimpleButton
+                    <SimpleButton
+                        class="hideBtn"
+                        :loading="medicalFormLoading"
+                        @click.native="getMedicalForm"
+                        >Открыть анкету</SimpleButton
                     ></v-layout
                 >
 
@@ -30,9 +33,15 @@
                 ></v-layout>
             </div>
             <label>Распечатайте анкету и возьмите с собой в поликлинику</label>
-            <v-layout flex class="medform__body"> hi </v-layout>
+            <v-layout flex class="medform__body">
+                <v-layout class="answer_list"> <v-flex></v-flex> </v-layout>
+            </v-layout>
             <div class="medform__footer">
-                <SimpleButton>Скачать анкету</SimpleButton>
+                <SimpleButton
+                    :loading="medicalFormLoading"
+                    @click.native="getMedicalForm"
+                    >Открыть анкету</SimpleButton
+                >
                 <RecordButton>Запись к врачу</RecordButton>
             </div>
         </v-layout>
@@ -40,7 +49,9 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { SimpleButton, RecordButton } from '@/components/blocks';
+import portalApi from '@/services/portalApi';
 
 export default {
     components: {
@@ -53,8 +64,52 @@ export default {
             default: null,
         },
     },
+    data: () => ({
+        medicalFormLoading: false,
+    }),
+    computed: {
+        ...mapGetters({
+            medicalFormComplete: 'medicalFormComplete',
+            answersDataForPortalApi: 'answersDataForPortalApi',
+        }),
+    },
+    methods: {
+        getMedicalForm() {
+            if (this.answersDataForPortalApi.length > 0) {
+                this.medicalFormLoading = true;
+
+                portalApi
+                    .setMedicalTestAnswers({
+                        // TODO подставлять данные из стора
+                        answers: this.answersDataForPortalApi,
+                        birthday: '29.03.1995',
+                        gender: 'M',
+                        grow: 175,
+                        weight: 75,
+                    })
+                    .then(result => {
+                        this.medicalFormLoading = false;
+                        window.open(
+                            `https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${
+                                result.id
+                            }/`,
+                            '_blank',
+                        );
+                    })
+                    .catch(() => {
+                        this.medicalFormLoading = false;
+                    });
+            }
+        },
+    },
 };
 </script>
 <style lang="stylus">
 @import './style.styl';
+    .answer_list
+        &__item
+            .title
+                line-height: 24px;
+                font-size: 16px;
+                color: #1E1E1E;
 </style>
