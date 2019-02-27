@@ -1,14 +1,15 @@
 <template>
     <div class="medform">
         <v-layout class="inner" column>
-            <header class="medform__header">
+            <div class="medform__header">
                 <v-spacer></v-spacer>
-                <v-flex xs10 sm8 md7
-                    ><div class="title">Анкета диспансеризации</div></v-flex
+                <v-layout flex xs11 sm8 md11
+                    ><div class="title">Анкета диспансеризации</div>
+                    <SimpleButton class="hideBtn"
+                        >Скачать анкету</SimpleButton
+                    ></v-layout
                 >
-                <v-flex sm2 md5 class="hideBtn">
-                    <SimpleButton>Распечатать анкету</SimpleButton>
-                </v-flex>
+
                 <v-layout flex justify-end xs1 sm4 md1 style="min-width: 48px"
                     ><SimpleButton
                         class="button__simple--arrow close_button"
@@ -27,18 +28,24 @@
                             />
                         </svg> </SimpleButton
                 ></v-layout>
-            </header>
+            </div>
             <label>Распечатайте анкету и возьмите с собой в поликлинику</label>
+            <v-layout flex class="medform__body"> hi </v-layout>
+            <div class="medform__footer">
+                <SimpleButton>Скачать анкету</SimpleButton>
+                <RecordButton>Запись к врачу</RecordButton>
+            </div>
         </v-layout>
     </div>
 </template>
 
 <script>
-import { SimpleButton } from '@/components/blocks';
+import { SimpleButton, RecordButton } from '@/components/blocks';
 
 export default {
     components: {
         SimpleButton,
+        RecordButton,
     },
     props: {
         closeSelf: {

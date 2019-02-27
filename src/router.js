@@ -38,7 +38,7 @@ const router = new Router({
 			component: Project,
 		},
 		{
-			path: '/record',
+			path: CONST.PAGE_RECORD,
 			name: 'record',
 			component: Record,
 		},

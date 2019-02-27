@@ -1,5 +1,6 @@
 import StartButton from './StartButton/StartButton';
 import StartButtonSimple from './StartButton/StartButtonSimple';
+import RecordButton from './StartButton/RecordButton';
 import SimpleButton from './SimpleButton/SimpleButton';
 import Menu from './Menu/Menu';
 import LogoHeader from './Logo/LogoHeader';
@@ -35,5 +36,6 @@ export {
 	ProfileInfo,
 	SpeechControl,
 	AnketaPopUp,
-	StartButtonSimple
+	StartButtonSimple,
+	RecordButton
 };
