@@ -3,7 +3,7 @@
         <v-layout class="inner" column>
             <div class="medform__header">
                 <v-spacer></v-spacer>
-                <v-layout flex xs11 sm8 md11
+                <v-layout flex xs11 sm8 md11 align-center
                     ><div class="title">Анкета диспансеризации</div>
                     <SimpleButton
                         class="hideBtn"
@@ -34,12 +34,12 @@
             </div>
             <label>Распечатайте анкету и возьмите с собой в поликлинику</label>
             <v-layout flex class="medform__body">
-                <v-layout class="answer_list" column>
+                <div class="answer_list">
                     <v-layout class="answer_list__title">
                         Говорил ли Вам врач когда либо, что у Вас имеется:
                     </v-layout>
 
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Повышенное артериальное давление?</v-flex
                         >
@@ -56,7 +56,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Ишемическая болезнь сердца (стенокардия)?</v-flex
                         >
@@ -73,7 +73,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Цереброваскулярное заболевание (заболевание сосудов
                             головного мозга)?</v-flex
@@ -91,7 +91,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Туберкулез (легких или иных локализаций)?</v-flex
                         >
@@ -108,7 +108,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Сахарный диабет или повышенный уровень сахара в
                             крови?</v-flex
@@ -127,7 +127,7 @@
                         </v-flex>
                     </v-layout>
 
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Если «Да», то принимаете ли Вы препараты для
                             снижения уровня сахара?</v-flex
@@ -145,7 +145,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                    <v-layout>
+                    <v-layout class="answer_list__item">
                         <v-flex class="answer_list__question" xs8 sm9
                             >Заболевания желудка (гастрит, язвенная
                             болезнь)?</v-flex
@@ -163,7 +163,7 @@
                             </v-layout>
                         </v-flex>
                     </v-layout>
-                </v-layout>
+                </div>
             </v-layout>
             <div class="medform__footer">
                 <SimpleButton
@@ -235,41 +235,4 @@ export default {
 </script>
 <style lang="stylus">
 @import './style.styl';
-    .answer_list
-        &__title
-            width 100%
-            line-height: 32px;
-            font-size: 20px;
-            font-weight bold
-            color: #1E1E1E;
-        &__question
-            line-height: 24px;
-            font-size: 16px;
-            font-weight bold
-            @media (max-width: $XS_break + 100)
-                line-height: 18px;
-                font-size: 13px;
-        &__answer_binar
-            width: fit-content;
-            margin: 0 0 0 auto;
-            &_item
-                border: 1px solid #D6DCE3;
-                box-sizing: border-box;
-                border-radius: 200px 0px 0px 200px;
-                min-width 109px
-                min-height 40px
-                display flex
-                justify-content center
-                align-items: center;
-                font-size: 16px;
-                text-align: center;
-                @media (max-width: $XS_break + 100)
-                    font-size: 15px;
-                &.active
-                    background: #00BAFF;
-                    border: 1px solid #00BAFF;
-                    color: #FFF
-                &:last-child
-                    border-radius: 0px 200px 200px 0px
-                    transform translateX(-1px)
 </style>
