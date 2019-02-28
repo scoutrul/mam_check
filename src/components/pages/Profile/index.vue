@@ -1,6 +1,6 @@
 <template>
-    <v-layout column class="container checkup">
-        <v-flex class="black checkup__section">
+    <v-layout column class="container profile">
+        <v-flex class="black profile__section">
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
@@ -11,15 +11,21 @@
                 to="StartButtonSimple"
                 v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
             >
-                <StartButtonSimple @click.native="anketa = !anketa">
-                    Скачать анкету
+                <StartButtonSimple @click.native="openModal">
+                    Открыть анкету
                 </StartButtonSimple>
             </portal>
-            <v-dialog class="anketa" v-model="anketa">
-                <AnketaPopUp @click.native="anketa = !anketa" />
+            <v-dialog
+                class="medFormPopUp"
+                v-model="medFormPopUp"
+                lazy
+                scrollable
+                persistent
+            >
+                <AnketaPopUp :close-self="closeModal" />
             </v-dialog>
         </v-flex>
-        <v-flex class="checkup__section">
+        <v-flex class="profile__section">
             <Header4>Мои данные</Header4>
             <ProfileInfo />
         </v-flex>
@@ -54,7 +60,7 @@
             </v-flex>
         </template>
         <v-flex
-            class="checkup__section"
+            class="profile__section"
             v-if="filterInProgressTests.length || filterTests.length"
         >
             <Header4>Доступные тесты</Header4>
@@ -96,7 +102,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex v-if="filterCompletedTests.length" class="checkup__section">
+        <v-flex v-if="filterCompletedTests.length" class="profile__section">
             <Header4>Заключения</Header4>
             <v-layout column class="testItems_list">
                 <TestItem
@@ -119,7 +125,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex v-if="medicalFormComplete" class="checkup__section">
+        <v-flex v-if="medicalFormComplete" class="profile__section">
             <div class="separate-banner">
                 <v-layout row wrap xs12>
                     <v-flex xs12 md8 class="separate-banner__left">
@@ -152,17 +158,12 @@
                             чтобы сделать процесс прохождения быстрее и
                             комфортнее</RegularLg
                         >
-                        <v-btn
-                            depressed
-                            flat
-                            round
-                            dark
-                            ripple
+                        <SimpleButton
                             :loading="medicalFormLoading"
-                            @click="getMedicalForm"
+                            @click.native="getMedicalForm"
                         >
                             <span>Скачать анкету</span>
-                        </v-btn>
+                        </SimpleButton>
                     </v-flex>
                 </v-layout>
             </div>
@@ -188,6 +189,7 @@ import {
     ProfileInfo,
     AnketaPopUp,
     StartButtonSimple,
+    SimpleButton,
 } from '../../blocks';
 
 export default {
@@ -200,10 +202,11 @@ export default {
         TestItem,
         ProfileInfo,
         AnketaPopUp,
+        SimpleButton,
     },
     data: () => ({
         medicalFormLoading: false,
-        anketa: false,
+        medFormPopUp: false,
         PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
     computed: {
@@ -250,7 +253,20 @@ export default {
         this.getAllQuestionsResult();
         this.getProfileProgress();
     },
+
     methods: {
+        openModal() {
+            this.medFormPopUp = true;
+            document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
+            document.getElementById('app').style.overflowY = 'scroll';
+            document.getElementsByClassName('header')[0].style.left = '-17px';
+        },
+        closeModal() {
+            this.medFormPopUp = false;
+            document.getElementsByTagName('body')[0].style.overflowY = 'scroll';
+            document.getElementById('app').style.overflowY = 'hidden';
+            document.getElementsByClassName('header')[0].style.left = '0';
+        },
         startCurrentTest({ id }) {
             this.$router.push({
                 path: `/test/${id}/`,
@@ -334,5 +350,5 @@ export default {
 };
 </script>
 <style lang="stylus">
-@import './checkup.styl';
+@import './styles.styl';
 </style>

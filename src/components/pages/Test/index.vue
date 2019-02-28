@@ -160,7 +160,6 @@ export default {
             this.shortName = await currTest.shortName;
             this.stepper = currTest.currentStep || 1;
         } catch (e) {
-            console.log(e, 'err');
             this.closeSelf();
         }
         this.stopSpeaking();
@@ -283,7 +282,6 @@ export default {
                     }
 
                     if (this.goalPhrase) {
-                        console.log('goalPhrase', this.goalPhrase);
                         this.goNext(
                             this.getCurrentQuestionAnswerWeight(
                                 this.goalPhrase,

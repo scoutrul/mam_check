@@ -1,6 +1,6 @@
 <template>
     <v-btn
-        v-if="$store.state.route.name === 'home'"
+        v-if="isHomePage"
         depressed
         flat
         round

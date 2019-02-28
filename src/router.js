@@ -14,8 +14,8 @@ const Record = () =>
 	import(/* webpackChunkName: "Record" */ './components/pages/Record');
 const Pretest = () =>
 	import(/* webpackChunkName: "Pretest" */ './components/pages/PreTest');
-const Checkup = () =>
-	import(/* webpackChunkName: "Checkup" */ './components/pages/Checkup');
+const Profile = () =>
+	import(/* webpackChunkName: "Profile" */ './components/pages/Profile');
 const Test = () =>
 	import(/* webpackChunkName: "Test" */ './components/pages/Test');
 
@@ -38,7 +38,7 @@ const router = new Router({
 			component: Project,
 		},
 		{
-			path: '/record',
+			path: CONST.PAGE_RECORD,
 			name: 'record',
 			component: Record,
 		},
@@ -50,7 +50,7 @@ const router = new Router({
 		{
 			path: CONST.PAGE_PROFILE,
 			name: 'profile',
-			component: Checkup,
+			component: Profile,
 		},
 		{
 			path: '/test/:testId',

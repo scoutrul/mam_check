@@ -5,17 +5,27 @@
 	flex 0 0 auto
 	position fixed
 	width 100%
-	left 0
 	top 0
-	background-color #FFF
 	z-index 10
 	align-items: center;
-	transition $transition_header
+	transition height $transition_header
 	height: 128px;
+	left: 0
+	@media (max-width: $XS_break)
+		position absolute
+
 	&__container
-		height: fit-content;
+		height: 100%
 		align-items: center;
 		margin: 0 auto;
 		flex-flow row nowrap !important
+		background-color #FFF
+		@media (max-width: $XS_break)
+			background: transparent;
 	&.fixed
 		position fixed
+
+	.vue-portal-target
+		display: flex;
+		flex: 0;
+		justify-content: flex-end;

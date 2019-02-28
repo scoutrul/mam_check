@@ -1,0 +1,127 @@
+@import '../../../assets/styles/vars/index.styl';
+
+
+.v-dialog
+	display: flex
+	align-items: flex-start
+	justify-content: center
+	box-shadow: none;
+	height 100%
+	max-height 100% !important
+	margin 0
+	.medform
+		background: #FFFFFF;
+		box-shadow: 0px 40px 120px rgba(19, 24, 31, 0.15);
+		border-radius: 16px;
+		max-width 1080px
+		width: 100%;
+		min-height calc(100% - 120px )
+		margin 60px
+		display flex
+		flex-flow column wrap
+		&__close
+			min-width 48px;
+			button
+				transform translateX(16px)
+		.inner
+			padding 32px 60px
+			height 100%
+			box-sizing: border-box;
+		@media (max-width: $MD_break)
+			height calc(100%)
+			margin 20px
+			.inner
+				padding 16px
+		@media (max-width: $XS_break)
+			margin 0
+			border-radius 0
+		label
+			line-height: 18px;
+			font-size: 13px;
+			color: #606774;
+			padding-right 80px
+			margin-bottom 40px
+		&__header
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding 10px 0
+
+			.title
+				line-height: 40px;
+				font-size: 28px;
+				font-weight bold
+				color: #1E1E1E;
+				white-space nowrap
+				margin: 18px 0;
+				@media (max-width: $XS_break + 100)
+					line-height: 22px;
+					font-size: 15px;
+					text-align center
+		.hideBtn
+			margin 0 0 0 40px
+			@media (max-width: $LG_break)
+				display none
+		&__footer
+			display flex
+			padding 10px 0
+			flex-wrap nowrap
+			align-items: flex-end
+			@media (max-width: $XS_break + 100)
+				flex-wrap wrap
+			.button__yellow, .button__simple
+				margin 10px 20px 0 0
+				display flex
+				flex: 1 1 240px;
+				max-width 240px
+				box-sizing: border-box;
+				@media (max-width: $XS_break + 100)
+					margin 8px 0
+					max-width: 100%;
+					flex: 1 0 220px;
+		&__body
+			padding 10px 0
+			margin-bottom 40px
+			.answer_list
+				width: 100%;
+				&__item
+					margin 12px 0
+				&__title
+					width 100%
+					line-height: 32px;
+					font-size: 20px;
+					font-weight bold
+					color: #1E1E1E;
+				&__question
+					line-height: 24px;
+					font-size: 16px;
+					font-weight bold
+					align-self: center;
+					@media (max-width: $XS_break + 100)
+						line-height: 18px;
+						font-size: 13px;
+				&__answer_binar
+					width: fit-content;
+					margin: 0 0 0 auto;
+					&_item
+						border: 1px solid #D6DCE3;
+						box-sizing: border-box;
+						min-width 109px
+						min-height 40px
+						display flex
+						justify-content center
+						align-items: center;
+						font-size: 16px;
+						text-align: center;
+						@media (max-width: $XS_break + 100)
+							font-size: 15px;
+						&.active
+							background: #00BAFF;
+							border: 1px solid #00BAFF;
+							color: #FFF
+						&:first-child
+							border-right-width 0
+							border-radius: 200px 0px 0px 200px;
+						&:last-child
+							border-left-width 0
+							border-radius: 0px 200px 200px 0px

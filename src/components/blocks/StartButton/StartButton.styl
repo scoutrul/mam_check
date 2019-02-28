@@ -11,7 +11,9 @@
 	bottom 0;
 	cursor pointer
 	display flex
-	@media (max-width $cta_button_brake)
+	@media (min-width $LG_break)
+		min-width 240px
+	@media (max-width $XS_break)
 		display none
 	.v-btn__content, a
 		color $Black_Text
