@@ -85,7 +85,7 @@
                     <portal :to="'dest' + item.id">
                         <div
                             class="testSelf__buttons"
-                            :if="stepper === index + 1"
+                            :v-if="stepper === index + 1"
                             :class="
                                 stepper === index + 1
                                     ? 'testSelf__buttons-hide testSelf__buttons-show'
@@ -138,11 +138,11 @@ export default {
     },
     computed: {
         currentTestQuestions() {
-            return (
-                this.$store.state.tests.find(
-                    item => item.id === +this.$route.params.testId,
-                ).questions || []
+            const tests = this.$store.state.tests.find(
+                item => item.id === +this.$route.params.testId,
             );
+
+            return (tests.questions && tests.questions) || [];
         },
         countProgress() {
             const koef =
