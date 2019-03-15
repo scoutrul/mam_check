@@ -135,7 +135,7 @@
             </v-layout>
         </v-flex>
 
-        <v-flex v-if="medicalFormComplete" class="profile__section">
+        <v-flex class="profile__section">
             <div class="separate-banner">
                 <v-layout row wrap xs12>
                     <v-flex xs12 md8 class="separate-banner__left">
@@ -182,13 +182,13 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 import each from 'lodash/each';
 import isUndefined from 'lodash/isUndefined';
 import fakeApi from '@/services/fakeApi';
-import portalApi from '@/services/portalApi';
 import CONST from '@/const.js';
+import { $pdfAnketa } from '@/mixins';
 
 import {
     Header1,
@@ -219,14 +219,12 @@ export default {
         medFormPopUp: false,
         PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
+    mixins: [$pdfAnketa],
     computed: {
         ...mapState({
             getTests: state => state.tests,
         }),
-        ...mapGetters({
-            medicalFormComplete: 'medicalFormComplete',
-            answersDataForPortalApi: 'answersDataForPortalApi',
-        }),
+
         notStartedTest() {
             return (
                 this.getTests.filter(
@@ -337,32 +335,6 @@ export default {
                         });
                 }),
             );
-        },
-        getMedicalForm() {
-            if (this.answersDataForPortalApi.length > 0) {
-                this.medicalFormLoading = true;
-
-                portalApi
-                    .setMedicalTestAnswers({
-                        answers: this.answersDataForPortalApi,
-                        birthday: '29.03.1995',
-                        gender: 'M',
-                        grow: 175,
-                        weight: 75,
-                    })
-                    .then(result => {
-                        this.medicalFormLoading = false;
-                        window.open(
-                            `https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${
-                                result.id
-                            }/`,
-                            '_blank',
-                        );
-                    })
-                    .catch(() => {
-                        this.medicalFormLoading = false;
-                    });
-            }
         },
     },
 };

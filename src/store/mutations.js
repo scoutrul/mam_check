@@ -31,11 +31,17 @@ export default {
 	SET_BIRTHYEAR: (state, payload) => {
 		state.user.birthYear = payload;
 	},
+	SET_BIRTHMONTH: (state, payload) => {
+		state.user.birthMonth = payload;
+	},
+	SET_BIRTHDAY: (state, payload) => {
+		state.user.birthDay = payload;
+	},
 	SET_WEIGHT: (state, payload) => {
 		state.user.weight = payload;
 	},
-	SET_HEIGHT: (state, payload) => {
-		state.user.height = payload;
+	SET_GROW: (state, payload) => {
+		state.user.grow = payload;
 	},
 	RESET_TEST_QUESTIONS: (state, payload) => {
 		const { id } = payload;

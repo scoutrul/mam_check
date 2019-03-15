@@ -9,10 +9,12 @@ Vue.use(Vuex);
 
 const state = {
 	user: {
-		isUserInfoDone: true,
+		isUserInfoDone: false,
 		gender: '',
 		birthYear: '',
-		height: '',
+		birthMonth: '',
+		birthDay: '',
+		grow: '',
 		weight: '',
 		profileProgress: 0,
 	},

@@ -166,9 +166,7 @@
                 </div>
             </v-layout>
             <div class="medform__footer">
-                <SimpleButton
-                    :loading="medicalFormLoading"
-                    @click.native="getMedicalForm"
+                <SimpleButton @click.native="getMedicalForm"
                     >Скачать анкету</SimpleButton
                 >
                 <RecordButton>Запись к врачу</RecordButton>
@@ -178,59 +176,22 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import { SimpleButton, RecordButton } from '@/components/blocks';
-import portalApi from '@/services/portalApi';
+import { $pdfAnketa } from '@/mixins';
 
 export default {
     components: {
         SimpleButton,
         RecordButton,
     },
+    mixins: [$pdfAnketa],
     props: {
         closeSelf: {
             type: Function,
             default: null,
         },
     },
-    data: () => ({
-        medicalFormLoading: false,
-    }),
-    computed: {
-        ...mapGetters({
-            medicalFormComplete: 'medicalFormComplete',
-            answersDataForPortalApi: 'answersDataForPortalApi',
-        }),
-    },
-    methods: {
-        getMedicalForm() {
-            if (this.answersDataForPortalApi.length > 0) {
-                this.medicalFormLoading = true;
-
-                portalApi
-                    .setMedicalTestAnswers({
-                        // TODO подставлять данные из стора
-                        answers: this.answersDataForPortalApi,
-                        birthday: '29.03.1995',
-                        gender: 'M',
-                        grow: 175,
-                        weight: 75,
-                    })
-                    .then(result => {
-                        this.medicalFormLoading = false;
-                        window.open(
-                            `https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${
-                                result.id
-                            }/`,
-                            '_blank',
-                        );
-                    })
-                    .catch(() => {
-                        this.medicalFormLoading = false;
-                    });
-            }
-        },
-    },
+    data: () => ({}),
 };
 </script>
 <style lang="stylus">

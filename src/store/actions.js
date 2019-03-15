@@ -10,11 +10,17 @@ export default {
 	SET_BIRTHYEAR: (store, payload) => {
 		store.commit('SET_BIRTHYEAR', payload);
 	},
+	SET_BIRTHMONTH: (store, payload) => {
+		store.commit('SET_BIRTHMONTH', payload);
+	},
+	SET_BIRTHDAY: (store, payload) => {
+		store.commit('SET_BIRTHDAY', payload);
+	},
 	SET_WEIGHT: (store, payload) => {
 		store.commit('SET_WEIGHT', payload);
 	},
-	SET_HEIGHT: (store, payload) => {
-		store.commit('SET_HEIGHT', payload);
+	SET_GROW: (store, payload) => {
+		store.commit('SET_GROW', payload);
 	},
 	get_tests: store => {
 		if (store.getters.allTestsCount < 1) {

@@ -87,7 +87,7 @@ export default {
     created() {
         this.u_year = this.$store.state.user.birthYear;
         this.u_weight = this.$store.state.user.weight;
-        this.u_height = this.$store.state.user.height;
+        this.u_height = this.$store.state.user.grow;
     },
 
     computed: {
@@ -102,8 +102,8 @@ export default {
         indexBodyMass() {
             return round(
                 this.$store.state.user.weight /
-                    (((this.$store.state.user.height / 100) *
-                        this.$store.state.user.height) /
+                    (((this.$store.state.user.grow / 100) *
+                        this.$store.state.user.grow) /
                         100),
                 2,
             );
@@ -113,7 +113,7 @@ export default {
                 (this.validateBirthYear &&
                     this.$store.state.user.birthYear !== this.u_year) ||
                 this.$store.state.user.weight !== this.u_weight ||
-                this.$store.state.user.height !== this.u_height;
+                this.$store.state.user.grow !== this.u_height;
             return cond;
         },
     },
@@ -129,7 +129,7 @@ export default {
         },
         storeInputsData() {
             this.$store.dispatch('SET_BIRTHYEAR', this.u_year);
-            this.$store.dispatch('SET_HEIGHT', this.u_height);
+            this.$store.dispatch('SET_GROW', this.u_height);
             this.$store.dispatch('SET_WEIGHT', this.u_weight);
             this.updateState();
             this.isEditingAllowed = false;
@@ -140,7 +140,7 @@ export default {
         updateState() {
             this.$store.state.user.birthYear = this.u_year;
             this.$store.state.user.weight = this.u_weight;
-            this.$store.state.user.height = this.u_height;
+            this.$store.state.user.grow = this.u_height;
         },
     },
 };

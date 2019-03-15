@@ -3,9 +3,6 @@ export default {
 	allTestsCount: state => state.tests.length,
 	dispAvailable: state => (state.user.birthYear - 1920) % 3 === 0,
 
-	medicalFormComplete: (state, getters) => true, // TODO Убрать
-	// return getters.allTestsCount === getters.completedTestsCount;
-
 	completedTestsCount: state => {
 		if (typeof state.tests === 'undefined' || state.tests.length === 0) {
 			return 0;
@@ -37,7 +34,6 @@ export default {
 
 	answersDataForPortalApi: (state, getters) => {
 		if (
-			!getters.medicalFormComplete ||
 			(typeof state.tests === 'undefined' || state.tests.length === 0)
 		) {
 			return [];

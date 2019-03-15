@@ -29,14 +29,14 @@
                         <v-flex class="pretest__buttons_item xs12">
                             <SimpleButton
                                 :class="user.gender === 'male' && 'isActive'"
-                                @click.native="setGender('male')"
+                                @click.native="setGender('M')"
                                 >Мужчина</SimpleButton
                             >
                         </v-flex>
                         <v-flex class="pretest__buttons_item xs12">
                             <SimpleButton
                                 :class="user.gender === 'female' && 'isActive'"
-                                @click.native="setGender('female')"
+                                @click.native="setGender('F')"
                                 >Женщина</SimpleButton
                             >
                         </v-flex>
@@ -50,6 +50,37 @@
                     />
                     <div class="title">Укажите ваш год рождения</div>
                     <v-layout justify-center class="pretest__buttons">
+                        <v-flex
+                            class="pretest__buttons_item xs12"
+                            @click="$refs.handleBirthDayInput.focus()"
+                        >
+                            <v-text-field
+                                ref="handleBirthDayInput"
+                                hide-details
+                                class="pretest__input"
+                                :value="user.birthDay"
+                                placeholder="дд"
+                                mask="##"
+                                return-masked-value
+                                @input="handleBirthDay"
+                            ></v-text-field>
+                        </v-flex>
+
+                        <v-flex
+                            class="pretest__buttons_item xs12"
+                            @click="$refs.handleBirthMonthInput.focus()"
+                        >
+                            <v-text-field
+                                ref="handleBirthMonthInput"
+                                hide-details
+                                class="pretest__input"
+                                :value="user.birthMonth"
+                                placeholder="мм"
+                                mask="##"
+                                return-masked-value
+                                @input="handleBirthMonth"
+                            ></v-text-field>
+                        </v-flex>
                         <v-flex
                             class="pretest__buttons_item xs12"
                             @click="$refs.birthYearInput.focus()"
@@ -96,11 +127,11 @@
                                 hide-details
                                 label="см"
                                 class="pretest__input"
-                                :value="user.height"
+                                :value="user.grow"
                                 placeholder="рост"
                                 mask="###"
                                 return-masked-value
-                                @input="handleHeight"
+                                @input="handleGrow"
                             ></v-text-field>
                         </v-flex>
                         <v-flex
@@ -121,10 +152,10 @@
                         </v-flex>
                         <v-flex class="pretest__buttons_item xs12">
                             <SimpleButton
-                                :disabled="!(user.weight && user.height)"
+                                :disabled="!(user.weight && user.grow)"
                                 :class="[
                                     'button__simple--next',
-                                    !(user.weight && user.height) &&
+                                    !(user.weight && user.grow) &&
                                         'button__simple--disabled',
                                 ]"
                                 @click.native="goNextPage()"
@@ -156,7 +187,9 @@ export default {
             return (
                 this.user.birthYear.length === 4 &&
                 this.user.birthYear < 2019 &&
-                this.user.birthYear > 1920
+                this.user.birthYear > 1920 &&
+                this.user.birthMonth <= 12 &&
+                this.user.birthDay <= 31
             );
         },
     },
@@ -169,8 +202,14 @@ export default {
         handleBirthYear(value) {
             this.$store.dispatch('SET_BIRTHYEAR', value);
         },
-        handleHeight(value) {
-            this.$store.dispatch('SET_HEIGHT', value);
+        handleBirthMonth(value) {
+            this.$store.dispatch('SET_BIRTHMONTH', value);
+        },
+        handleBirthDay(value) {
+            this.$store.dispatch('SET_BIRTHDAY', value);
+        },
+        handleGrow(value) {
+            this.$store.dispatch('SET_GROW', value);
         },
         handleWeight(value) {
             this.$store.dispatch('SET_WEIGHT', value);

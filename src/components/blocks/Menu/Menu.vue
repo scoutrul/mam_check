@@ -5,13 +5,7 @@
     </ul>
 </template>
 
-<script>
-import { $viewport } from '../../../mixins';
-
-export default {
-    mixins: [$viewport],
-};
-</script>
+<script></script>
 <style lang="stylus">
 @import './menu.styl';
 </style>
