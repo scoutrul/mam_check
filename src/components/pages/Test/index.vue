@@ -55,7 +55,10 @@
                         :style="`transform: translateX(${countProgress}%)`"
                     ></div>
                 </div>
-                <div class="testSelf__speech-control">
+                <div
+                    v-if="stepper <= currentTestQuestions.length"
+                    class="testSelf__speech-control"
+                >
                     <speech-control
                         :speaking="isSpeaking"
                         :recording="isRecorded"
@@ -84,8 +87,8 @@
                 >
                     <portal :to="'dest' + item.id">
                         <div
+                            v-if="stepper === index + 1"
                             class="testSelf__buttons"
-                            :v-if="stepper === index + 1"
                             :class="
                                 stepper === index + 1
                                     ? 'testSelf__buttons-hide testSelf__buttons-show'
@@ -113,6 +116,8 @@ import CONST from '@/const.js';
 import delay from 'lodash/delay';
 import map from 'lodash/map';
 import each from 'lodash/each';
+import debounce from 'lodash/debounce';
+
 import services from '@/services';
 import { SpeechService } from '@/services';
 
@@ -138,11 +143,14 @@ export default {
     },
     computed: {
         currentTestQuestions() {
-            const tests = this.$store.state.tests.find(
-                item => item.id === +this.$route.params.testId,
-            );
-
-            return (tests.questions && tests.questions) || [];
+            try {
+                const tests = this.$store.state.tests.find(
+                    item => item.id === +this.$route.params.testId,
+                );
+                return tests.questions;
+            } catch (e) {
+                return [];
+            }
         },
         countProgress() {
             const koef =
@@ -188,17 +196,19 @@ export default {
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
         },
+
         goNext(weight, answerIndex) {
-            this.stepper += 1;
             const payload = {
                 testId: +this.$route.params.testId,
                 answerIndex,
                 weight,
                 currentStep: this.stepper,
             };
-            this.$store.dispatch('store_test_answer', payload);
 
-            delay(this.startSpeaking, 300);
+            this.$store.dispatch('store_test_answer', payload).then(() => {
+                this.stepper += 1;
+                delay(this.startSpeaking, 300);
+            });
         },
         getCurrentQuestionAnswers() {
             return (
@@ -222,7 +232,10 @@ export default {
             return result;
         },
         startSpeaking() {
-            if (!SpeechService.canUse()) {
+            if (
+                !SpeechService.canUse() ||
+                !this.currentTestQuestions[this.stepper - 1]
+            ) {
                 return false;
             }
 

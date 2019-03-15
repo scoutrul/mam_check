@@ -8,16 +8,16 @@
                 ></Header1
             >
             <portal
-                to="StartButtonSimple"
                 v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
+                to="StartButtonSimple"
             >
                 <StartButtonSimple @click.native="openModal">
                     Открыть анкету
                 </StartButtonSimple>
             </portal>
             <v-dialog
-                class="medFormPopUp"
                 v-model="medFormPopUp"
+                class="medFormPopUp"
                 lazy
                 scrollable
                 persistent
@@ -60,11 +60,15 @@
             </v-flex>
         </template>
         <v-flex
-            class="profile__section"
             v-if="filterInProgressTests.length || filterTests.length"
+            class="profile__section"
         >
             <Header4>Доступные тесты</Header4>
-            <v-layout column class="testItems_list">
+            <v-layout
+                v-if="filterInProgressTests.length"
+                column
+                class="testItems_list"
+            >
                 <TestItem
                     v-for="item in filterInProgressTests"
                     :id="item.id"
@@ -82,8 +86,14 @@
                     :recommendations="item.recommendations"
                     :color="item.color"
                 />
+            </v-layout>
+            <v-layout
+                v-if="notStartedTest.length"
+                column
+                class="testItems_list"
+            >
                 <TestItem
-                    v-for="item in filterTests"
+                    v-for="item in notStartedTest"
                     :id="item.id"
                     :key="item.id"
                     :short-name="item.shortName"
@@ -217,13 +227,20 @@ export default {
             medicalFormComplete: 'medicalFormComplete',
             answersDataForPortalApi: 'answersDataForPortalApi',
         }),
+        notStartedTest() {
+            return (
+                this.getTests.filter(
+                    item => !item.currentStep || item.currentStep <= 1,
+                ) || []
+            );
+        },
         filterCompletedTests() {
             return (
                 this.getTests.filter(
                     item =>
                         item.questions &&
                         item.currentStep &&
-                        item.currentStep >= item.questions.length,
+                        item.currentStep === item.questions.length,
                 ) || []
             );
         },
@@ -233,7 +250,7 @@ export default {
                     item =>
                         item.currentStep > 1 &&
                         item.questions &&
-                        item.currentStep <= item.questions.length,
+                        item.currentStep < item.questions.length,
                 ) || []
             );
         },
@@ -249,9 +266,10 @@ export default {
         },
     },
     beforeMount() {
-        this.$store.dispatch('get_tests');
-        this.getAllQuestionsResult();
-        this.getProfileProgress();
+        this.$store.dispatch('get_tests').then(() => {
+            this.getAllQuestionsResult();
+            this.getProfileProgress();
+        });
     },
 
     methods: {

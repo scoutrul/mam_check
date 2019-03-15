@@ -1032,19 +1032,19 @@ export default {
 								id: 7,
 								name:
 									'Если "Да", то сколько сигарет в день в среднем Вы выкуриваете?',
-								type: 'string',
+								type: 'variant',
 								examinationQuestionId: 1103,
 								answers: [
 									{
 										id: 1,
 										type: 'variant',
-										title: 'Да',
+										title: 'Меньше 10',
 										weight: 2,
 									},
 									{
 										id: 2,
 										type: 'variant',
-										title: 'Нет',
+										title: 'Больше 10',
 										weight: 0,
 									},
 								],
