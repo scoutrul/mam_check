@@ -20,9 +20,10 @@
 
 		&_inner
 			flex-direction: row
-
 			@media (max-width: $MD_break)
 				flex-direction: column
+			@media (max-width: $XS_break)
+				flex-direction: row
 
 	&__info
 		display: flex
@@ -32,6 +33,8 @@
 
 		@media (max-width: $MD_break)
 			justify-content: flex-start
+			text-align: left;
+
 
 	&__icon
 		flex: 0 0 24px

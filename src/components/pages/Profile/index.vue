@@ -4,7 +4,11 @@
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
-                    >{{ $store.state.user.profileProgress || 0 }}%</span
+                    >{{
+                        $store.state.user.profileProgress > 95
+                            ? 100
+                            : $store.state.user.profileProgress || 0
+                    }}%</span
                 ></Header1
             >
             <portal
@@ -155,7 +159,6 @@ import {
     ProfileInfo,
     AnketaPopUp,
     StartButtonSimple,
-    SimpleButton,
 } from '../../blocks';
 
 export default {

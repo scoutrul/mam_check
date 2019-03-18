@@ -29,10 +29,7 @@
                         ее и возьмите с собой в поликлинику, чтобы сделать
                         процесс прохождения быстрее и комфортнее
                     </RegularLg>
-                    <SimpleButton
-                        :loading="medicalFormLoading"
-                        @click.native="getMedicalForm"
-                    >
+                    <SimpleButton @click.native="getMedicalForm">
                         <span>Скачать анкету</span>
                     </SimpleButton>
                 </v-flex>
