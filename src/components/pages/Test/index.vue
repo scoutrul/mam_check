@@ -73,11 +73,6 @@
                 />
             </div>
 
-            <portal-target
-                v-for="item in currentTestQuestions"
-                :key="item.id"
-                :name="'dest' + item.id"
-            />
             <v-stepper-items>
                 <v-stepper-content
                     v-for="(item, index) in currentTestQuestions"
@@ -85,6 +80,7 @@
                     class="testSelf__body"
                     :step="index + 1"
                 >
+                    <div class="testSelf__body_question">{{ item.name }}</div>
                     <portal :to="'dest' + item.id">
                         <div
                             v-if="stepper === index + 1"
@@ -104,9 +100,13 @@
                             </SimpleButton>
                         </div>
                     </portal>
-                    <div class="testSelf__body_question">{{ item.name }}</div>
                 </v-stepper-content>
             </v-stepper-items>
+            <portal-target
+                v-for="item in currentTestQuestions"
+                :key="item.id"
+                :name="'dest' + item.id"
+            />
         </v-stepper>
     </v-layout>
 </template>

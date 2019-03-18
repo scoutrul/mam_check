@@ -2,12 +2,11 @@
     <v-layout class="profile-info">
         <v-flex class="profile-info-text xs12 sm6 md6">
             <div class="profile-info-title">
-                Индекс массы тела — {{ indexBodyMass || 'не рассчитано' }}
+                <span :style="{ color: resultColor }">
+                    Индекс массы тела — {{ indexBodyMass || 'не рассчитано' }}
+                </span>
             </div>
-            <div class="profile-info-recommendation">
-                Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто
-                имеет большую мышечную массу, например, для тяжелоатлетов
-            </div>
+            <div class="profile-info-recommendation">{{ resultText }}</div>
         </v-flex>
         <v-flex class="profile-info-inputs xs12 sm4 md4 ">
             <div class="profile-info-inputs-item">
@@ -79,17 +78,34 @@ export default {
         SimpleButton,
     },
     data: () => ({
+        indexBodyMass: 0,
         u_year: '',
         u_weight: '',
         u_height: '',
         isEditingAllowed: false,
+        resultColor: 'initial',
+        results: {
+            1: '1',
+            2: '2',
+            3: '3',
+            4: '4',
+            6: '6',
+            7: '7',
+        },
+        resultText:
+            'Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто имеет большую мышечную массу, например, для тяжелоатлетов',
     }),
     created() {
         this.u_year = this.$store.state.user.birthYear;
         this.u_weight = this.$store.state.user.weight;
         this.u_height = this.$store.state.user.grow;
+        this.getItmResult();
+        this.getIndexBodyMass();
     },
-
+    updated() {
+        this.getItmResult();
+        this.getIndexBodyMass();
+    },
     computed: {
         ...mapState(['user']),
         validateBirthYear() {
@@ -99,25 +115,45 @@ export default {
                 this.u_year > 1920
             );
         },
-        indexBodyMass() {
-            return round(
+        hasChanged() {
+            return (
+                (this.validateBirthYear &&
+                    this.$store.state.user.birthYear !== this.u_year) ||
+                this.$store.state.user.weight !== this.u_weight ||
+                this.$store.state.user.grow !== this.u_height
+            );
+        },
+    },
+    methods: {
+        getIndexBodyMass() {
+            this.indexBodyMass = round(
                 this.$store.state.user.weight /
                     (((this.$store.state.user.grow / 100) *
                         this.$store.state.user.grow) /
                         100),
-                2,
+                1,
             );
         },
-        hasChanged() {
-            const cond =
-                (this.validateBirthYear &&
-                    this.$store.state.user.birthYear !== this.u_year) ||
-                this.$store.state.user.weight !== this.u_weight ||
-                this.$store.state.user.grow !== this.u_height;
-            return cond;
+        getItmResult() {
+            const {
+                birthYear = 2000,
+                birthMonth = 10,
+                birthDay = 10,
+            } = this.$store.state.user;
+            const userAge =
+                (new Date() -
+                    new Date(`${birthMonth}-${birthDay}-${birthYear}`)) /
+                1000 /
+                60 /
+                60 /
+                24 /
+                365.25;
+            if (userAge < 30) {
+                console.log(this.indexBodyMass, ' < 30');
+            } else {
+                console.log(this.indexBodyMass, ' > 30');
+            }
         },
-    },
-    methods: {
         handleBirthYear(value) {
             this.u_year = value;
         },
@@ -131,8 +167,9 @@ export default {
             this.$store.dispatch('SET_BIRTHYEAR', this.u_year);
             this.$store.dispatch('SET_GROW', this.u_height);
             this.$store.dispatch('SET_WEIGHT', this.u_weight);
-            this.updateState();
             this.isEditingAllowed = false;
+            this.updateState();
+            this.getItmResult();
         },
         allowEdit() {
             this.isEditingAllowed = true;

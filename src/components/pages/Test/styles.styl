@@ -2,6 +2,9 @@
 @import "../../blocks/SimpleButton/SimpleButton.styl"
 
 .testSelf
+	.vue-portal-target {
+		width: 100%;
+	}
 	.v-stepper {
 		width 100%
 		@media(max-width: $XS_break) {
@@ -22,8 +25,8 @@
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			min-height: 200px;
-			padding-bottom: 60px;
+			min-height: 128px;
+			padding-bottom: 20px;
 		}
 	}
 	&__body {
@@ -105,16 +108,19 @@
 		width: 100%;
 		max-width: 520px;
 		margin: auto;
-		position: absolute;
-		bottom: 0;
-		left: 50%;
-		transform: translateX(-50%);
+		padding-bottom 40px
+		//position: absolute;
+		//bottom: 0;
+		//left: 50%;
+		//transform: translateX(-50%);
 		z-index: 9;
 
 		button
 			margin-bottom: 8px
 			background-color $Special_Blue
 			border: 0 !important;
+			max-width: 100%;
+
 			&:hover, &:focus 
 				background-color $Blue_Dark !important
 				color white !important
