@@ -263,11 +263,10 @@ export default {
                     }
                 }),
             );
-            const profileProgress = {
+            this.$store.dispatch('count_profile_progress', {
                 questionsCount,
                 completedQuestionsCount,
-            };
-            this.$store.dispatch('count_profile_progress', profileProgress);
+            });
         },
         getAllQuestionsResult() {
             let weight = 0;
