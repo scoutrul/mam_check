@@ -62,7 +62,7 @@
                     <speech-control
                         :speaking="isSpeaking"
                         :recording="isRecorded"
-                        @click.native="startSpeaking()"
+                        @click.native="changeMicrophoneMode()"
                     />
                 </div>
             </div>
@@ -135,6 +135,7 @@ export default {
         isSpeaking: false,
         isRecorded: false,
         goalPhrase: null,
+        microphoneMode: false,
     }),
     beforeRouteEnter(to, from, next) {
         next(vm => {
@@ -153,19 +154,18 @@ export default {
             }
         },
         countProgress() {
-            const koef =
-                (this.stepper / this.currentTestQuestions.length) * 100;
+            const kef = (this.stepper / this.currentTestQuestions.length) * 100;
 
-            return koef - 100 - 100 / this.currentTestQuestions.length;
+            return kef - 100 - 100 / this.currentTestQuestions.length;
         },
     },
 
-    async mounted() {
+    mounted() {
         const currTest = this.$store.state.tests.find(
             test => test.id === +this.$route.params.testId,
         );
         try {
-            this.shortName = await currTest.shortName;
+            this.shortName = currTest.shortName;
             this.stepper = currTest.currentStep || 1;
         } catch (e) {
             this.closeSelf();
@@ -185,18 +185,31 @@ export default {
     },
 
     methods: {
+        changeMicrophoneMode() {
+            if (!this.microphoneMode) {
+                this.microphoneMode = !this.microphoneMode;
+                this.startSpeaking();
+            } else {
+                this.microphoneMode = !this.microphoneMode;
+                this.stopSpeaking();
+                this.stopRecognition();
+            }
+        },
         goBack() {
             if (this.stepper > 1) {
                 this.stepper = this.stepper - 1;
             } else {
                 this.stepper = 1;
             }
-
-            this.stopSpeaking();
-            this.stopRecognition();
+            if (this.microphoneMode) {
+                this.stopRecognition();
+                this.startSpeaking();
+            }
         },
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
+            this.stopSpeaking();
+            this.stopRecognition();
         },
 
         goNext(weight, answerIndex) {
@@ -209,9 +222,11 @@ export default {
 
             this.$store.dispatch('store_test_answer', payload).then(() => {
                 this.stepper += 1;
+                if (this.microphoneMode) {
+                    this.stopRecognition();
+                    this.startSpeaking();
+                }
             });
-            this.stopSpeaking();
-            this.stopRecognition();
         },
         getCurrentQuestionAnswers() {
             return (
