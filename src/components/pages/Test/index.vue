@@ -62,6 +62,7 @@
                     <speech-control
                         :speaking="isSpeaking"
                         :recording="isRecorded"
+                        @click.native="startSpeaking()"
                     />
                 </div>
             </div>
@@ -171,7 +172,6 @@ export default {
         }
         this.stopSpeaking();
         this.stopRecognition();
-        this.startSpeaking();
     },
 
     destroyed() {
@@ -194,8 +194,6 @@ export default {
 
             this.stopSpeaking();
             this.stopRecognition();
-
-            delay(this.startSpeaking, 200);
         },
         closeSelf() {
             this.$router.push(CONST.PAGE_PROFILE);
@@ -211,8 +209,9 @@ export default {
 
             this.$store.dispatch('store_test_answer', payload).then(() => {
                 this.stepper += 1;
-                delay(this.startSpeaking, 300);
             });
+            this.stopSpeaking();
+            this.stopRecognition();
         },
         getCurrentQuestionAnswers() {
             return (

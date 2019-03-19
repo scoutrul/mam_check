@@ -69,7 +69,7 @@ export default {
 
 		const profileProgress = round(
 			completedQuestionsCount * (100 / questionsCount),
-			1,
+			0,
 		);
 		state.user = {
 			...state.user,

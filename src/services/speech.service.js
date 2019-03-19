@@ -158,15 +158,16 @@ const SpeechService = {
 
 		let canLevenshtein = true;
 
-		phrases.forEach(phrase => {
-			if (phrase.split(' ').length <= 1) {
-				canLevenshtein = false;
-			}
+		phrases.length &&
+			phrases.forEach(phrase => {
+				if (phrase.split(' ').length <= 1) {
+					canLevenshtein = false;
+				}
 
-			if (voicePhrase.toLowerCase() === phrase.toLowerCase()) {
-				goalPhrase = phrase;
-			}
-		});
+				if (voicePhrase.toLowerCase() === phrase.toLowerCase()) {
+					goalPhrase = phrase;
+				}
+			});
 
 		if (!goalPhrase && canLevenshtein) {
 			phrases.forEach(phrase => {
