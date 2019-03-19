@@ -95,17 +95,6 @@ export default {
         resultText:
             'Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто имеет большую мышечную массу, например, для тяжелоатлетов',
     }),
-    created() {
-        this.u_year = this.$store.state.user.birthYear;
-        this.u_weight = this.$store.state.user.weight;
-        this.u_height = this.$store.state.user.grow;
-        this.getItmResult();
-        this.getIndexBodyMass();
-    },
-    updated() {
-        this.getItmResult();
-        this.getIndexBodyMass();
-    },
     computed: {
         ...mapState(['user']),
         validateBirthYear() {
@@ -124,6 +113,16 @@ export default {
             );
         },
     },
+    created() {
+        this.u_year = this.$store.state.user.birthYear;
+        this.u_weight = this.$store.state.user.weight;
+        this.u_height = this.$store.state.user.grow;
+        this.getIndexBodyMass();
+    },
+    updated() {
+        this.getIndexBodyMass();
+    },
+
     methods: {
         getIndexBodyMass() {
             this.indexBodyMass = round(
@@ -133,6 +132,7 @@ export default {
                         100),
                 1,
             );
+            this.getItmResult();
         },
         getItmResult() {
             const red = '#ef4d4d';
@@ -255,13 +255,13 @@ export default {
             this.$store.dispatch('SET_GROW', this.u_height);
             this.$store.dispatch('SET_WEIGHT', this.u_weight);
             this.isEditingAllowed = false;
-            this.updateState();
+            this.updateUserState();
             this.getItmResult();
         },
         allowEdit() {
             this.isEditingAllowed = true;
         },
-        updateState() {
+        updateUserState() {
             this.$store.state.user.birthYear = this.u_year;
             this.$store.state.user.weight = this.u_weight;
             this.$store.state.user.grow = this.u_height;

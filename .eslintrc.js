@@ -31,13 +31,7 @@ module.exports = {
 			},
 		],
 		'vue/html-indent': 4,
-		//
-		// 'vue/html-closing-bracket-spacing': [
-		// 	'error',
-		// 	{
-		// 		selfClosingTag: 'always',
-		// 	},
-		// ],
+		'vue/html-closing-bracket-spacing': ['error', {selfClosingTag: 'always',}],
 		'vue/max-attributes-per-line': [
 			4,
 			{

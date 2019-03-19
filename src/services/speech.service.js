@@ -1,9 +1,9 @@
 const SpeechRecognition =
 	window.SpeechRecognition || window.webkitSpeechRecognition;
-const SpeechGrammarList =
-	window.SpeechGrammarList || window.webkitSpeechGrammarList;
-const SpeechRecognitionEvent =
-	window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
+// const SpeechGrammarList =
+// 	window.SpeechGrammarList || window.webkitSpeechGrammarList;
+// const SpeechRecognitionEvent =
+// 	window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 const SpeechSynthesisUtterance =
 	window.SpeechSynthesisUtterance || window.webkitSpeechSynthesisUtterance;
 
@@ -31,7 +31,7 @@ const SpeechService = {
 	},
 
 	textConversion(text, options) {
-		if (!synth) {
+		if (!window.synth) {
 			throw new Error('Синтезатор речи не поддерживается');
 		}
 

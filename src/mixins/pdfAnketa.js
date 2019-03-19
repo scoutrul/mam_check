@@ -14,7 +14,9 @@ export default {
 				portalApi
 					.setMedicalTestAnswers({
 						answers: this.answersDataForPortalApi,
-						birthday: `${this.user.birthDay}.${this.user.birthMonth}.${this.user.birthYear}`,
+						birthday: `${this.user.birthDay}.${
+							this.user.birthMonth
+						}.${this.user.birthYear}`,
 						gender: this.user.gender,
 						grow: this.user.grow,
 						weight: this.user.weight,

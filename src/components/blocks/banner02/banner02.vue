@@ -43,7 +43,7 @@ import { SimpleButton } from '../index';
 import { $pdfAnketa } from '@/mixins';
 
 export default {
-    name: 'banner02',
+    name: 'Banner02',
     components: {
         SimpleButton,
     },

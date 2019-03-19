@@ -15,8 +15,8 @@
                 v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
                 to="StartButtonSimple"
             >
-                <StartButtonSimple @click.native="openModal">
-                    Открыть анкету
+                <StartButtonSimple @click.native="getMedicalForm">
+                    Скачать PDF-анкету
                 </StartButtonSimple>
             </portal>
             <v-dialog
@@ -172,12 +172,12 @@ export default {
         ProfileInfo,
         AnketaPopUp,
     },
+    mixins: [$pdfAnketa],
     data: () => ({
         medicalFormLoading: false,
         medFormPopUp: false,
         PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
-    mixins: [$pdfAnketa],
     computed: {
         ...mapState({
             getTests: state => state.tests,
