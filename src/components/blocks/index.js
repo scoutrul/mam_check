@@ -37,5 +37,5 @@ export {
 	SpeechControl,
 	AnketaPopUp,
 	StartButtonSimple,
-	RecordButton
+	RecordButton,
 };

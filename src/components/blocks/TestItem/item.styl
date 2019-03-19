@@ -17,13 +17,10 @@
 
 	&__header
 		align-items: center
-
 		&_inner
 			flex-direction: row
 			@media (max-width: $MD_break)
 				flex-direction: column
-			@media (max-width: $XS_break)
-				flex-direction: row
 
 	&__info
 		display: flex
@@ -70,12 +67,13 @@
 
 		@media (max-width: $MD_break)
 			justify-content: flex-start
-
 			line-height: 24px
 			font-size: 16px
 
 	&__progressBar
 		width: 70px
+		@media (max-width: $XS_break)
+			width: 30px
 		height: 6px
 		border-radius: 90px
 		background: $Lighter_Blue

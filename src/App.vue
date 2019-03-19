@@ -16,12 +16,12 @@
                     <Menu />
                     <StartButton />
                     <portal-target
-                        name="closeCurrentTest"
                         v-if="$route.name === 'test'"
+                        name="closeCurrentTest"
                     />
                     <portal-target
-                        name="StartButtonSimple"
                         v-if="$route.name !== 'test'"
+                        name="StartButtonSimple"
                     />
                 </Container>
             </Header>

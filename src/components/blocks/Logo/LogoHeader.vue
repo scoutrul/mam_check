@@ -4,7 +4,7 @@
             <template v-if="isXs()">
                 <img
                     svg-inline
-                    src="@/assets/images/logo_sm.svg"
+                    src="@/assets/images/logo_min.svg"
                     alt="MedAbout<Me"
                 />
             </template>

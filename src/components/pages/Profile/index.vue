@@ -172,12 +172,12 @@ export default {
         ProfileInfo,
         AnketaPopUp,
     },
+    mixins: [$pdfAnketa],
     data: () => ({
         medicalFormLoading: false,
         medFormPopUp: false,
         PROCENT_TO_SHOW: CONST.PROCENT_TO_SHOW,
     }),
-    mixins: [$pdfAnketa],
     computed: {
         ...mapState({
             getTests: state => state.tests,

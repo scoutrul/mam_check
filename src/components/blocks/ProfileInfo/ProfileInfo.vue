@@ -95,17 +95,6 @@ export default {
         resultText:
             'Ваш индекс массы в норме. Значение ИМТ неактуально для тех, кто имеет большую мышечную массу, например, для тяжелоатлетов',
     }),
-    created() {
-        this.u_year = this.$store.state.user.birthYear;
-        this.u_weight = this.$store.state.user.weight;
-        this.u_height = this.$store.state.user.grow;
-        this.getItmResult();
-        this.getIndexBodyMass();
-    },
-    updated() {
-        this.getItmResult();
-        this.getIndexBodyMass();
-    },
     computed: {
         ...mapState(['user']),
         validateBirthYear() {
@@ -123,6 +112,17 @@ export default {
                 this.$store.state.user.grow !== this.u_height
             );
         },
+    },
+    created() {
+        this.u_year = this.$store.state.user.birthYear;
+        this.u_weight = this.$store.state.user.weight;
+        this.u_height = this.$store.state.user.grow;
+        this.getItmResult();
+        this.getIndexBodyMass();
+    },
+    updated() {
+        this.getItmResult();
+        this.getIndexBodyMass();
     },
     methods: {
         getIndexBodyMass() {

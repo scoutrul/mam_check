@@ -116,7 +116,6 @@ import CONST from '@/const.js';
 import delay from 'lodash/delay';
 import map from 'lodash/map';
 import each from 'lodash/each';
-import debounce from 'lodash/debounce';
 
 import services from '@/services';
 import { SpeechService } from '@/services';
@@ -179,6 +178,11 @@ export default {
         this.stopSpeaking();
         this.stopRecognition();
     },
+    updated() {
+        if (this.stepper > this.currentTestQuestions.length) {
+            delay(this.closeSelf, 500);
+        }
+    },
 
     methods: {
         goBack() {
@@ -239,7 +243,7 @@ export default {
                 return false;
             }
 
-            SpeechService.textConversion(
+            return SpeechService.textConversion(
                 this.currentTestQuestions[this.stepper - 1].name,
                 {
                     onStart: event => {
@@ -267,7 +271,7 @@ export default {
             }
 
             this.isSpeaking = false;
-            SpeechService.stopTextConversion();
+            return SpeechService.stopTextConversion();
         },
 
         startRecognition() {
@@ -277,7 +281,7 @@ export default {
 
             this.goalPhrase = null;
 
-            SpeechService.speechRecognition({
+            return SpeechService.speechRecognition({
                 onStart: event => {
                     this.isRecorded = true;
                 },
@@ -317,13 +321,8 @@ export default {
             }
 
             this.isRecorded = false;
-            SpeechService.stopSpeechRecognition();
+            return SpeechService.stopSpeechRecognition();
         },
-    },
-    updated() {
-        if (this.stepper > this.currentTestQuestions.length) {
-            delay(this.closeSelf, 500);
-        }
     },
 };
 </script>

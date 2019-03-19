@@ -33,9 +33,7 @@ export default {
 	},
 
 	answersDataForPortalApi: (state, getters) => {
-		if (
-			(typeof state.tests === 'undefined' || state.tests.length === 0)
-		) {
+		if (typeof state.tests === 'undefined' || state.tests.length === 0) {
 			return [];
 		}
 

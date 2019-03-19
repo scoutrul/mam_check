@@ -65,7 +65,7 @@ const TESTS_DATA = [
 			'Возможности онкологии в спасении жизни человека за последние два десятилетия выросли колоссально. Но, по-прежнему, благоприятный прогноз возможен только при раннем выявлении онкологических заболеваний. Ответив на несколько простых вопросов, Вы узнаете какие исследования нужно пройти, чтобы своевременно выявить возможное наличие грозной болезни на ранней стадии',
 		questionsNum: 10,
 		shortName: 'cancer',
-	}
+	},
 ];
 
 export default {
@@ -3953,10 +3953,12 @@ export default {
 					'проконсультирутесь со специалистом',
 					'радуйтесь',
 				];
-				const recommendationsRandomItem = () =>
-					recommendations[
-						Math.floor(Math.random() * recommendations.length)
-					];
+				const recommendationsRandomItem = () => {
+					const random = Math.floor(
+						Math.random() * recommendations.length,
+					);
+					return recommendations[random];
+				};
 
 				const colors = ['#FEE245', '#EF4D4D', '#58B379'];
 				const randomColor = () =>
