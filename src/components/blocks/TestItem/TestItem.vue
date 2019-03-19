@@ -64,7 +64,7 @@
         >
             <v-flex class="testItem__treatment_info">{{ treatment }}</v-flex>
             <v-flex
-                v-if="recommendations.length"
+                v-if="recommendations.length && false"
                 class="testItem__recommendations"
             >
                 <div class="testItem__recommendations_label">
