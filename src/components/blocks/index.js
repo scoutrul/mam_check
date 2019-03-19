@@ -14,7 +14,7 @@ import Header4 from './Typography/Header4';
 import RegularMd from './Typography/RegularMd';
 import RegularLg from './Typography/RegularLg';
 import TestItem from './TestItem/TestItem';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
+import ProfileInfo from './indexBodyMass/indexBodyMass';
 import SpeechControl from './SpeechControl/SpeechControl';
 import AnketaPopUp from './AnketaPopUp';
 

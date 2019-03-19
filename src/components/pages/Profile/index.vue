@@ -15,8 +15,8 @@
                 v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
                 to="StartButtonSimple"
             >
-                <StartButtonSimple @click.native="openModal">
-                    Открыть анкету
+                <StartButtonSimple @click.native="getMedicalForm">
+                    Скачать PDF-анкету
                 </StartButtonSimple>
             </portal>
             <v-dialog
