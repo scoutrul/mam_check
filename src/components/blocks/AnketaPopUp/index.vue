@@ -38,7 +38,14 @@
                     class="answer_list"
                 >
                     <v-layout class="answer_list__title">
-                        {{ test.title }}
+                        <TestIcon
+                            :name="test.shortName"
+                            :color="`#00baff`"
+                            class="answer_list__icon"
+                        />
+                        <span style="padding-left: 10px">
+                            {{ test.title }}
+                        </span>
                     </v-layout>
 
                     <v-layout
@@ -49,15 +56,60 @@
                         <v-flex class="answer_list__question" xs6 md8 lg 10
                             >{{ question.title }}
                         </v-flex>
-                        <v-flex class="answer_list__answer" >
+                        <v-flex
+                            v-if="
+                                question.type === 'variant' &&
+                                    question.answers.length === 2
+                            "
+                            class="answer_list__answer"
+                        >
                             <v-layout class="answer_list__answer_binar">
-                                <div class="answer_list__answer_binar_item">
-                                    Да
-                                </div>
                                 <div
-                                    class="answer_list__answer_binar_item active"
+                                    v-for="(answer, i) of question.answers"
+                                    :key="i"
+                                    :class="
+                                        `answer_list__answer_binar_item ${answer.checked &&
+                                            'active'}`
+                                    "
                                 >
-                                    Нет
+                                    {{ answer.title }}
+                                </div>
+                            </v-layout>
+                        </v-flex>
+                        <v-flex
+                            v-if="
+                                question.answers.length > 2 &&
+                                    question.type !== 'list'
+                            "
+                            class="answer_list__answer"
+                        >
+                            <v-layout class="answer_list__answer_multi">
+                                <div
+                                    v-for="answer of question.answers"
+                                    v-if="answer.checked"
+                                    :key="answer.id || answer.title"
+                                    :class="
+                                        `answer_list__answer_multi_item ${answer.checked &&
+                                            'active'}`
+                                    "
+                                    style="text-align: right"
+                                >
+                                    {{ answer.title }}
+                                </div>
+                            </v-layout>
+                        </v-flex>
+                        <v-flex
+                            v-if="
+                                question.type === 'list' &&
+                                    question.lastPickedAnswer
+                            "
+                            class="answer_list__answer"
+                        >
+                            <v-layout class="answer_list__answer_multicheck">
+                                <div
+                                    class="answer_list__answer_multicheck_item"
+                                >
+                                    {{ question.lastPickedAnswer }}
                                 </div>
                             </v-layout>
                         </v-flex>
@@ -77,11 +129,13 @@
 <script>
 import { SimpleButton, RecordButton } from '@/components/blocks';
 import { $pdfAnketa } from '@/mixins';
+import TestIcon from '@/components/blocks/TestIcon';
 
 export default {
     components: {
         SimpleButton,
         RecordButton,
+        TestIcon,
     },
     mixins: [$pdfAnketa],
     props: {
@@ -98,22 +152,31 @@ export default {
     },
     methods: {
         getAllTestResults() {
-            const Tests = this.$store.state.tests;
             const allTests = [];
-            Tests.forEach(test => {
+            this.$store.state.tests.forEach(test => {
                 const currTest = {
                     title: test.name,
+                    shortName: test.shortName,
                     questions: [],
                 };
                 test.questions.forEach(question => {
-                    const findAnswer = () =>
-                        question.answers.filter(
-                            answer => answer.weight === question.weight,
-                        );
+                    const getAnswers = () =>
+                        question.answers.map(answer => {
+                            const currAnswer = { ...answer };
+                            if (
+                                answer.weight !== undefined &&
+                                answer.weight === question.weight
+                            ) {
+                                currAnswer.checked = true;
+                            }
+                            return currAnswer;
+                        });
 
                     const currQuest = {
                         title: question.name,
-                        answer: findAnswer(),
+                        answers: getAnswers(),
+                        lastPickedAnswer: question.lastPickedAnswer,
+                        type: question.type,
                     };
 
                     currTest.questions.push(currQuest);

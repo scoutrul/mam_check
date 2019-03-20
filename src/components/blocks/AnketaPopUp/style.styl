@@ -27,6 +27,7 @@
 			padding 32px 60px
 			height 100%
 			box-sizing: border-box;
+			width: 100%;
 		@media (max-width: $MD_break)
 			height calc(100%)
 			margin 20px
@@ -87,11 +88,19 @@
 			.answer_list
 				width: 100%;
 				margin-bottom: 40px;
+				justify-content: flex-end;
+				display: flex;
+				flex-direction: column;
 				&__item
-					margin 12px 0
+					margin 24px 0
+					align-items: center;
+					flex-wrap wrap
+				&__icon svg path {
+					fill: currentColor;
+				}
 				&__title
 					width 100%
-					line-height: 32px;
+					align-items: center;
 					font-size: 20px;
 					font-weight bold
 					color: #1E1E1E;
@@ -104,6 +113,10 @@
 					@media (max-width: $XS_break + 100)
 						line-height: 18px;
 						font-size: 13px;
+				&__answer
+					display flex
+					flex-direction column
+					align-items: flex-end;
 				&__answer_binar
 					width: fit-content;
 					margin: 0 0 0 auto;
@@ -129,3 +142,44 @@
 						&:last-child
 							border-left-width 0
 							border-radius: 0px 200px 200px 0px
+				&__answer_multi
+					width: fit-content
+					justify-content: flex-end;
+					&_item
+						box-sizing: border-box;
+						min-width 109px
+						min-height 40px
+						display flex
+						justify-content center
+						align-items: center;
+						font-size: 16px;
+						text-align: center;
+						background: #00baff;
+						color #FFF;
+						box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
+						border-radius: 4px;
+						margin 4px
+						padding 0 16px
+						flex-wrap: wrap;
+						@media (max-width: $XS_break + 100)
+							font-size: 15px;
+				&__answer_multicheck
+					width: fit-content
+					justify-content: flex-start;
+					flex-wrap wrap
+					&_item
+						box-sizing: border-box;
+						min-width 109px
+						min-height 40px
+						display flex
+						justify-content center
+						align-items: center;
+						font-size: 16px;
+						text-align: center;
+						background: #FFF;
+						box-shadow: 0px 8px 30px rgba(19, 24, 31, 0.08);
+						border-radius: 4px;
+						margin 4px
+						padding 0 16px
+						@media (max-width: $XS_break + 100)
+							font-size: 15px;

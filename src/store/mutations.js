@@ -13,12 +13,13 @@ export default {
 		});
 	},
 	STORE_TEST_ANSWER: (state, payload) => {
-		const { testId, answerIndex, weight, currentStep } = payload;
+		const { testId, questionIndex, weight, currentStep, title } = payload;
 		state.tests = state.tests.map(item => {
 			if (item.id === testId) {
-				item.questions[answerIndex] = {
-					...item.questions[answerIndex],
+				item.questions[questionIndex] = {
+					...item.questions[questionIndex],
 					weight,
+					lastPickedAnswer: title,
 				};
 				item.currentStep = currentStep;
 			}
