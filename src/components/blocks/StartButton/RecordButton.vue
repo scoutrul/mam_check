@@ -6,7 +6,8 @@
         dark
         ripple
         class="button__yellow"
-        :to="PAGE_RECORD"
+        to="//medaboutme.ru/zdorove/servisy/zapis-k-vrachu/"
+        target="_blank"
     >
         <span><slot></slot></span>
     </v-btn>
