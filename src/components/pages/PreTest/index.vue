@@ -158,7 +158,7 @@
                                     !(user.weight && user.grow) &&
                                         'button__simple--disabled',
                                 ]"
-                                @click.native="goNextPage()"
+                                @click.native="goNextQuestionPage()"
                                 >Перейти к тестам</SimpleButton
                             >
                         </v-flex>
@@ -221,7 +221,7 @@ export default {
                 this.stepper = 1;
             }
         },
-        goNextPage() {
+        goNextQuestionPage() {
             this.$store.state.user.isUserInfoDone = true;
             this.$router.push(CONST.PAGE_PROFILE);
         },

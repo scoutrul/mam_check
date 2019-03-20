@@ -76,26 +76,40 @@
 
             <v-stepper-items>
                 <v-stepper-content
-                    v-for="(item, index) in currentTestQuestions"
-                    :key="item.id"
+                    v-for="(question, questionIndex) in currentTestQuestions"
+                    :key="question.id"
                     class="testSelf__body"
-                    :step="index + 1"
+                    :step="questionIndex + 1"
                 >
-                    <div class="testSelf__body_question">{{ item.name }}</div>
-                    <portal :to="'dest' + item.id">
+                    <div class="testSelf__body_question">
+                        {{ question.name }}
+                    </div>
+                    <portal :to="'dest' + question.id">
                         <div
-                            v-if="stepper === index + 1"
+                            v-if="stepper === questionIndex + 1"
                             class="testSelf__buttons"
                             :class="
-                                stepper === index + 1
+                                stepper === questionIndex + 1
                                     ? 'testSelf__buttons-hide testSelf__buttons-show'
                                     : 'testSelf__buttons-hide'
                             "
                         >
                             <SimpleButton
-                                v-for="(answer, i) in item.answers"
-                                :key="i"
-                                @click.native="goNext(answer.weight, index)"
+                                v-for="(answer,
+                                answerIndex) in question.answers"
+                                v-if="
+                                    !answer.gender ||
+                                        answer.gender ===
+                                            '$store.state.user.gender'
+                                "
+                                :key="answerIndex"
+                                @click.native="
+                                    goNextQuestion(
+                                        answer.weight,
+                                        questionIndex,
+                                        answer.title,
+                                    )
+                                "
                             >
                                 {{ answer.title }}
                             </SimpleButton>
@@ -212,11 +226,12 @@ export default {
             this.stopRecognition();
         },
 
-        goNext(weight, answerIndex) {
+        goNextQuestion(weight, questionIndex, questionTitle) {
             const payload = {
                 testId: +this.$route.params.testId,
-                answerIndex,
-                weight,
+                questionIndex,
+                weight: weight === undefined ? 0 : weight,
+                title: questionTitle,
                 currentStep: this.stepper,
             };
 
@@ -313,7 +328,7 @@ export default {
                     }
 
                     if (this.goalPhrase) {
-                        this.goNext(
+                        this.goNextQuestion(
                             this.getCurrentQuestionAnswerWeight(
                                 this.goalPhrase,
                             ),

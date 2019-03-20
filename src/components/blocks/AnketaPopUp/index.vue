@@ -3,18 +3,15 @@
         <v-layout class="inner" column>
             <div class="medform__header">
                 <v-spacer></v-spacer>
-                <v-layout flex xs11 sm8 md11 align-center
-                    ><div class="title">Анкета диспансеризации</div>
-                    <SimpleButton
-                        class="hideBtn"
-                        :loading="medicalFormLoading"
-                        @click.native="getMedicalForm"
-                        >Скачать анкету</SimpleButton
-                    ></v-layout
-                >
+                <v-layout flex xs11 sm8 md11 align-center>
+                    <div class="title">Анкета диспансеризации</div>
+                    <SimpleButton class="hideBtn" @click.native="getMedicalForm"
+                        >Скачать анкету
+                    </SimpleButton>
+                </v-layout>
 
-                <v-layout flex justify-end xs1 sm4 md1 class="medform__close"
-                    ><SimpleButton
+                <v-layout flex justify-end xs1 sm4 md1 class="medform__close">
+                    <SimpleButton
                         class="button__simple--arrow close_button"
                         @click.native="closeSelf"
                     >
@@ -28,137 +25,91 @@
                             <path
                                 d="M17.7549 4.7549C18.1656 4.33879 18.8366 4.33659 19.25 4.75V4.75C19.6634 5.16342 19.6612 5.83437 19.2451 6.24507L13.4142 12L19.2451 17.7549C19.6612 18.1656 19.6634 18.8366 19.25 19.25V19.25C18.8366 19.6634 18.1656 19.6612 17.7549 19.2451L12 13.4142L6.24507 19.2451C5.83437 19.6612 5.16342 19.6634 4.75 19.25V19.25C4.33659 18.8366 4.33879 18.1656 4.7549 17.7549L10.5858 12L4.7549 6.24507C4.33878 5.83437 4.33658 5.16342 4.75 4.75V4.75C5.16342 4.33658 5.83437 4.33878 6.24507 4.7549L12 10.5858L17.7549 4.7549Z"
                                 fill="#1E1E1E"
-                            />
-                        </svg> </SimpleButton
-                ></v-layout>
+                            ></path>
+                        </svg>
+                    </SimpleButton>
+                </v-layout>
             </div>
             <label>Распечатайте анкету и возьмите с собой в поликлинику</label>
             <v-layout flex class="medform__body">
-                <div class="answer_list">
+                <div
+                    v-for="test of allTests"
+                    :key="test.title"
+                    class="answer_list"
+                >
                     <v-layout class="answer_list__title">
-                        Говорил ли Вам врач когда либо, что у Вас имеется:
+                        <TestIcon
+                            :name="test.shortName"
+                            :color="`#00baff`"
+                            class="answer_list__icon"
+                        />
+                        <span style="padding-left: 10px">
+                            {{ test.title }}
+                        </span>
                     </v-layout>
 
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Повышенное артериальное давление?</v-flex
+                    <v-layout
+                        v-for="question of test.questions"
+                        :key="question.title"
+                        class="answer_list__item"
+                    >
+                        <v-flex class="answer_list__question" xs6 md8 lg 10
+                            >{{ question.title }}
+                        </v-flex>
+                        <v-flex
+                            v-if="
+                                question.type === 'variant' &&
+                                    question.answers.length === 2
+                            "
+                            class="answer_list__answer"
                         >
-                        <v-flex class="answer_list__answer" xs4 sm3>
                             <v-layout class="answer_list__answer_binar">
-                                <div class="answer_list__answer_binar_item">
-                                    Да
-                                </div>
                                 <div
-                                    class="answer_list__answer_binar_item active"
+                                    v-for="(answer, i) of question.answers"
+                                    :key="i"
+                                    :class="
+                                        `answer_list__answer_binar_item ${answer.checked &&
+                                            'active'}`
+                                    "
                                 >
-                                    Нет
+                                    {{ answer.title }}
                                 </div>
                             </v-layout>
                         </v-flex>
-                    </v-layout>
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Ишемическая болезнь сердца (стенокардия)?</v-flex
+                        <v-flex
+                            v-if="
+                                question.answers.length > 2 &&
+                                    question.type !== 'list'
+                            "
+                            class="answer_list__answer"
                         >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div class="answer_list__answer_binar_item">
-                                    Да
-                                </div>
+                            <v-layout class="answer_list__answer_multi">
                                 <div
-                                    class="answer_list__answer_binar_item active"
+                                    v-for="answer of question.answers"
+                                    v-if="answer.checked"
+                                    :key="answer.id || answer.title"
+                                    :class="
+                                        `answer_list__answer_multi_item ${answer.checked &&
+                                            'active'}`
+                                    "
+                                    style="text-align: right"
                                 >
-                                    Нет
+                                    {{ answer.title }}
                                 </div>
                             </v-layout>
                         </v-flex>
-                    </v-layout>
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Цереброваскулярное заболевание (заболевание сосудов
-                            головного мозга)?</v-flex
+                        <v-flex
+                            v-if="
+                                question.type === 'list' &&
+                                    question.lastPickedAnswer
+                            "
+                            class="answer_list__answer"
                         >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div class="answer_list__answer_binar_item">
-                                    Да
-                                </div>
+                            <v-layout class="answer_list__answer_multicheck">
                                 <div
-                                    class="answer_list__answer_binar_item active"
+                                    class="answer_list__answer_multicheck_item"
                                 >
-                                    Нет
-                                </div>
-                            </v-layout>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Туберкулез (легких или иных локализаций)?</v-flex
-                        >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div
-                                    class="answer_list__answer_binar_item active"
-                                >
-                                    Да
-                                </div>
-                                <div class="answer_list__answer_binar_item">
-                                    Нет
-                                </div>
-                            </v-layout>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Сахарный диабет или повышенный уровень сахара в
-                            крови?</v-flex
-                        >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div
-                                    class="answer_list__answer_binar_item active"
-                                >
-                                    Да
-                                </div>
-                                <div class="answer_list__answer_binar_item">
-                                    Нет
-                                </div>
-                            </v-layout>
-                        </v-flex>
-                    </v-layout>
-
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Если «Да», то принимаете ли Вы препараты для
-                            снижения уровня сахара?</v-flex
-                        >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div
-                                    class="answer_list__answer_binar_item active"
-                                >
-                                    Да
-                                </div>
-                                <div class="answer_list__answer_binar_item">
-                                    Нет
-                                </div>
-                            </v-layout>
-                        </v-flex>
-                    </v-layout>
-                    <v-layout class="answer_list__item">
-                        <v-flex class="answer_list__question" xs8 sm9
-                            >Заболевания желудка (гастрит, язвенная
-                            болезнь)?</v-flex
-                        >
-                        <v-flex class="answer_list__answer" xs4 sm3>
-                            <v-layout class="answer_list__answer_binar">
-                                <div
-                                    class="answer_list__answer_binar_item active"
-                                >
-                                    Да
-                                </div>
-                                <div class="answer_list__answer_binar_item">
-                                    Нет
+                                    {{ question.lastPickedAnswer }}
                                 </div>
                             </v-layout>
                         </v-flex>
@@ -167,8 +118,8 @@
             </v-layout>
             <div class="medform__footer">
                 <SimpleButton @click.native="getMedicalForm"
-                    >Скачать анкету</SimpleButton
-                >
+                    >Скачать анкету
+                </SimpleButton>
                 <RecordButton>Запись к врачу</RecordButton>
             </div>
         </v-layout>
@@ -178,11 +129,13 @@
 <script>
 import { SimpleButton, RecordButton } from '@/components/blocks';
 import { $pdfAnketa } from '@/mixins';
+import TestIcon from '@/components/blocks/TestIcon';
 
 export default {
     components: {
         SimpleButton,
         RecordButton,
+        TestIcon,
     },
     mixins: [$pdfAnketa],
     props: {
@@ -191,7 +144,48 @@ export default {
             default: null,
         },
     },
-    data: () => ({}),
+    data: () => ({
+        allTests: [],
+    }),
+    created() {
+        this.getAllTestResults();
+    },
+    methods: {
+        getAllTestResults() {
+            const allTests = [];
+            this.$store.state.tests.forEach(test => {
+                const currTest = {
+                    title: test.name,
+                    shortName: test.shortName,
+                    questions: [],
+                };
+                test.questions.forEach(question => {
+                    const getAnswers = () =>
+                        question.answers.map(answer => {
+                            const currAnswer = { ...answer };
+                            if (
+                                answer.weight !== undefined &&
+                                answer.weight === question.weight
+                            ) {
+                                currAnswer.checked = true;
+                            }
+                            return currAnswer;
+                        });
+
+                    const currQuest = {
+                        title: question.name,
+                        answers: getAnswers(),
+                        lastPickedAnswer: question.lastPickedAnswer,
+                        type: question.type,
+                    };
+
+                    currTest.questions.push(currQuest);
+                });
+                allTests.push(currTest);
+            });
+            this.allTests = allTests;
+        },
+    },
 };
 </script>
 <style lang="stylus">

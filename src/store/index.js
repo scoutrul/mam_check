@@ -10,7 +10,7 @@ Vue.use(Vuex);
 const state = {
 	user: {
 		isUserInfoDone: false,
-		gender: '',
+		gender: 'male',
 		birthYear: '',
 		birthMonth: '',
 		birthDay: '',

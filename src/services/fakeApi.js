@@ -1482,7 +1482,7 @@ export default {
 									{
 										id: 1,
 										type: 'variant',
-										title: 'Этого никогда не было.',
+										title: 'Нет.',
 										weight: 0,
 										examinationVariantId: 2927,
 									},
@@ -1490,7 +1490,7 @@ export default {
 										id: 2,
 										type: 'variant',
 										title:
-											'Да, такое в моей жизни случалось.',
+											'Да',
 										weight: 20,
 										examinationVariantId: 2926,
 									},

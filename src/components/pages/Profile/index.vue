@@ -4,19 +4,15 @@
             <Header1
                 >Анкета заполнена на
                 <span style="color: #00BAFF"
-                    >{{
-                        $store.state.user.profileProgress > 95
-                            ? 100
-                            : $store.state.user.profileProgress || 0
-                    }}%</span
+                    >{{ $store.state.user.profileProgress || 0 }}%</span
                 ></Header1
             >
             <portal
-                v-if="$store.state.user.profileProgress > PROCENT_TO_SHOW"
+                v-if="$store.state.user.profileProgress >= PROCENT_TO_SHOW"
                 to="StartButtonSimple"
             >
-                <StartButtonSimple @click.native="getMedicalForm">
-                    Скачать PDF-анкету
+                <StartButtonSimple @click.native="openModal">
+                    Открыть анкету
                 </StartButtonSimple>
             </portal>
             <v-dialog
