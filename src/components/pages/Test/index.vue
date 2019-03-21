@@ -174,13 +174,13 @@ export default {
         },
     },
 
-    mounted() {
+    created() {
         const currTest = this.$store.state.tests.find(
             test => test.id === +this.$route.params.testId,
         );
         try {
             this.shortName = currTest.shortName;
-            this.stepper = currTest.currentStep || 1;
+            this.stepper = currTest.currentStep + 1 || 1;
         } catch (e) {
             this.closeSelf();
         }

@@ -20,7 +20,7 @@
                         {{ shortDescription }}
                     </template>
                     <v-flex v-else-if="isInProgress" class="testItem__progress"
-                        >Выполнено {{ completedNum - 1 }} / {{ questionsNum }}
+                        >Выполнено {{ completedNum }} / {{ questionsNum }}
                         <div class="testItem__progressBar">
                             <div
                                 class="testItem__progressBar_completed"

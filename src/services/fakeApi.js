@@ -1482,15 +1482,14 @@ export default {
 									{
 										id: 1,
 										type: 'variant',
-										title: 'Нет.',
+										title: 'Нет',
 										weight: 0,
 										examinationVariantId: 2927,
 									},
 									{
 										id: 2,
 										type: 'variant',
-										title:
-											'Да',
+										title: 'Да',
 										weight: 20,
 										examinationVariantId: 2926,
 									},
@@ -1863,12 +1862,15 @@ export default {
 		}),
 
 	getTreatmentByResult: ({ testId, answerSum }) =>
+		
 		new Promise((resolve, reject) => {
+			console.log(answerSum)
 			setTimeout(() => {
 				const treatments = [
 					// Мозговое кровообращение
 					{
 						testId: 2,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -1878,6 +1880,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1],
@@ -1887,6 +1890,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [2, 3],
@@ -1896,6 +1900,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [4, 5],
@@ -1905,6 +1910,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'normal',
 						sum: {
 							type: 'interval',
 							values: [6, 13],
@@ -1914,6 +1920,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [20, 33],
@@ -1923,6 +1930,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [40, 73],
@@ -1932,6 +1940,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [100, 101],
@@ -1941,6 +1950,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [102, 113],
@@ -1950,6 +1960,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [120, 193],
@@ -1959,6 +1970,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [1000, 1001],
@@ -1968,6 +1980,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1002, 1013],
@@ -1977,6 +1990,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1020, 1093],
@@ -1986,6 +2000,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1100, 1113],
@@ -1995,6 +2010,7 @@ export default {
 					},
 					{
 						testId: 2,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1120, 1193],
@@ -2006,6 +2022,7 @@ export default {
 					// Алкоголь и наркотики
 					{
 						testId: 6,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -2015,6 +2032,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1, 2],
@@ -2024,6 +2042,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [3, 4],
@@ -2033,6 +2052,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [5, 9],
@@ -2042,6 +2062,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [10, 12],
@@ -2051,6 +2072,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [20, 24],
@@ -2060,6 +2082,7 @@ export default {
 					},
 					{
 						testId: 6,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [25, 32],
@@ -2071,6 +2094,7 @@ export default {
 					// моче-половая система м
 					{
 						testId: 5,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -2080,6 +2104,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1, 3],
@@ -2089,6 +2114,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [10, 20, 30],
@@ -2098,6 +2124,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [11, 12, 13, 21, 22, 23, 31, 32, 33],
@@ -2107,6 +2134,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [100, 200, 300],
@@ -2116,6 +2144,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2135,6 +2164,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2154,6 +2184,7 @@ export default {
 					},
 					{
 						testId: 5,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2192,6 +2223,7 @@ export default {
 					// Коронарное что-то там
 					{
 						testId: 1,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -2201,6 +2233,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1],
@@ -2210,6 +2243,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [2, 3],
@@ -2219,6 +2253,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [4, 5],
@@ -2228,6 +2263,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2252,6 +2288,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [20, 39],
@@ -2261,6 +2298,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [40, 59],
@@ -2270,6 +2308,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [60, 119],
@@ -2279,6 +2318,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [1000, 1001],
@@ -2288,6 +2328,7 @@ export default {
 					},
 					{
 						testId: 1,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [1002, 1119],
@@ -2298,6 +2339,7 @@ export default {
 					// Онкологии, мужчины
 					{
 						testId: 3,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -2307,6 +2349,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1, 2],
@@ -2316,6 +2359,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10, 20, 30, 40],
@@ -2325,6 +2369,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [100, 200],
@@ -2334,6 +2379,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1000, 2000],
@@ -2343,6 +2389,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [11, 12, 21, 22, 31, 32, 41, 42],
@@ -2352,6 +2399,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [101, 102, 201, 202],
@@ -2361,6 +2409,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1001, 1002, 2001, 2002],
@@ -2370,6 +2419,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [110, 120, 130, 140, 210, 220, 230, 240],
@@ -2379,6 +2429,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2397,6 +2448,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1100, 1200, 2100, 2200],
@@ -2406,6 +2458,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2432,6 +2485,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2458,6 +2512,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2476,6 +2531,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2502,6 +2558,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2546,6 +2603,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10000],
@@ -2555,6 +2613,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10001, 10002],
@@ -2564,6 +2623,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10010, 10020, 10030, 10040],
@@ -2573,6 +2633,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10100, 10200],
@@ -2582,6 +2643,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [11000, 12000],
@@ -2591,6 +2653,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2609,6 +2672,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [10101, 10102, 10201, 10202],
@@ -2618,6 +2682,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [11001, 11002, 12001, 12002],
@@ -2627,6 +2692,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2645,6 +2711,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2663,6 +2730,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [11100, 11200, 12100, 12200],
@@ -2672,6 +2740,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2698,6 +2767,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2724,6 +2794,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2742,6 +2813,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2768,6 +2840,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2812,6 +2885,7 @@ export default {
 					},
 					{
 						testId: 3,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [100000, 112242],
@@ -2822,6 +2896,7 @@ export default {
 					// Лёгкие
 					{
 						testId: 4,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -2831,6 +2906,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [1],
@@ -2840,6 +2916,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [2],
@@ -2849,6 +2926,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [3],
@@ -2858,6 +2936,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [4, 5, 6, 7],
@@ -2867,6 +2946,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [10, 11, 12, 13],
@@ -2876,6 +2956,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [14, 15, 16, 17],
@@ -2885,6 +2966,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [20, 21, 22, 23, 30, 31, 32, 33],
@@ -2894,6 +2976,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [24, 25, 26, 27, 34, 35, 36, 37],
@@ -2903,6 +2986,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [50, 137],
@@ -2912,6 +2996,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [200, 337],
@@ -2921,6 +3006,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [400],
@@ -2930,6 +3016,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [401],
@@ -2939,6 +3026,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [402],
@@ -2948,6 +3036,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [403],
@@ -2957,6 +3046,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [404, 407],
@@ -2966,6 +3056,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -2985,6 +3076,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3007,6 +3099,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [450, 597],
@@ -3016,6 +3109,7 @@ export default {
 					},
 					{
 						testId: 4,
+						status: 'bad',
 						sum: {
 							type: 'interval',
 							values: [600, 737],
@@ -3026,6 +3120,7 @@ export default {
 					// Образ жизни
 					{
 						testId: 7,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [0],
@@ -3035,6 +3130,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'fine',
 						sum: {
 							type: 'enum',
 							values: [1, 2],
@@ -3044,6 +3140,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [3],
@@ -3053,6 +3150,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3078,6 +3176,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [13, 23, 33, 43, 53],
@@ -3087,6 +3186,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'interval',
 							values: [100, 102],
@@ -3096,6 +3196,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [103],
@@ -3105,6 +3206,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3130,6 +3232,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'normal',
 						sum: {
 							type: 'enum',
 							values: [113, 123, 133, 143, 153],
@@ -3139,6 +3242,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3158,6 +3262,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [1003, 2003, 3003],
@@ -3167,6 +3272,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3309,6 +3415,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3451,6 +3558,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3515,6 +3623,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3579,6 +3688,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3751,6 +3861,7 @@ export default {
 					},
 					{
 						testId: 7,
+						status: 'bad',
 						sum: {
 							type: 'enum',
 							values: [
@@ -3960,9 +4071,10 @@ export default {
 					return recommendations[random];
 				};
 
-				const colors = ['#FEE245', '#EF4D4D', '#58B379'];
-				const randomColor = () =>
-					colors[Math.floor(Math.random() * colors.length)];
+				// const colors = ['#FEE245', '#EF4D4D', '#58B379'];
+				// const randomColor = () =>
+				// 	colors[Math.floor(Math.random() * colors.length)];
+
 				const result = {
 					treatment: neededTreatment,
 					recommendations: [
@@ -3970,8 +4082,16 @@ export default {
 						recommendationsRandomItem(),
 						recommendationsRandomItem(),
 					],
-					color: randomColor(),
+					color: null,
 				};
+
+				if (neededTreatment.status === 'fine') {
+					result.color = '#58B379';
+				} else if (neededTreatment.status === 'normal') {
+					result.color = '#FEE245';
+				} else if (neededTreatment.status === 'bad') {
+					result.color = '#EF4D4D';
+				}
 
 				resolve(result);
 			}, 500);
