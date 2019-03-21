@@ -162,7 +162,6 @@ export default {
     methods: {
         getAllTestResults() {
             const allTests = [];
-             console.log(this.favoriteQuestionIds)
             this.$store.state.tests.forEach(test => {
                 const currTest = {
                     title: test.name,
