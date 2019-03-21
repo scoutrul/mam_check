@@ -150,16 +150,19 @@ export default {
     },
     data: () => ({
         allTests: [],
-        favoriteIds: [],
+        favoriteQuestionIds: [],
     }),
     mounted() {
         this.getAllTestResults();
-        this.favoriteIds = CONST.QUEST_TO_ANKETA;
+    },
+    beforeMount(){
+        this.favoriteQuestionIds = CONST.QUEST_TO_ANKETA;
     },
 
     methods: {
         getAllTestResults() {
             const allTests = [];
+             console.log(this.favoriteQuestionIds)
             this.$store.state.tests.forEach(test => {
                 const currTest = {
                     title: test.name,
@@ -186,12 +189,12 @@ export default {
                         type: question.type,
                         examinationQuestionId: question.examinationQuestionId,
                     };
+                   
                     if (
-                        this.favoriteIds.includes(
+                        this.favoriteQuestionIds.includes(
                             question.examinationQuestionId,
                         )
                     ) {
-                        // debugger;
                         currTest.questions.push(currQuest);
                     }
                 });
