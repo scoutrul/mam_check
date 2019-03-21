@@ -180,7 +180,7 @@ export default {
         );
         try {
             this.shortName = currTest.shortName;
-            this.stepper = currTest.currentStep || 1;
+            this.stepper = currTest.currentStep + 1 || 1;
         } catch (e) {
             this.closeSelf();
         }

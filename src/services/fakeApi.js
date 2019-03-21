@@ -1482,7 +1482,7 @@ export default {
 									{
 										id: 1,
 										type: 'variant',
-										title: 'Нет.',
+										title: 'Нет',
 										weight: 0,
 										examinationVariantId: 2927,
 									},
