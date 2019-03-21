@@ -130,6 +130,10 @@
 import { SimpleButton, RecordButton } from '@/components/blocks';
 import { $pdfAnketa } from '@/mixins';
 import TestIcon from '@/components/blocks/TestIcon';
+import CONST from '@/const.js';
+import every from 'lodash/every';
+import filter from 'lodash/filter';
+import map from 'lodash/map';
 
 export default {
     components: {
@@ -146,10 +150,13 @@ export default {
     },
     data: () => ({
         allTests: [],
+        favoriteIds: [],
     }),
-    created() {
+    mounted() {
         this.getAllTestResults();
+        this.favoriteIds = CONST.QUEST_TO_ANKETA;
     },
+
     methods: {
         getAllTestResults() {
             const allTests = [];
@@ -177,9 +184,16 @@ export default {
                         answers: getAnswers(),
                         lastPickedAnswer: question.lastPickedAnswer,
                         type: question.type,
+                        examinationQuestionId: question.examinationQuestionId,
                     };
-
-                    currTest.questions.push(currQuest);
+                    if (
+                        this.favoriteIds.includes(
+                            question.examinationQuestionId,
+                        )
+                    ) {
+                        // debugger;
+                        currTest.questions.push(currQuest);
+                    }
                 });
                 allTests.push(currTest);
             });

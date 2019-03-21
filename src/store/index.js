@@ -9,8 +9,8 @@ Vue.use(Vuex);
 
 const state = {
 	user: {
-		isUserInfoDone: false,
-		gender: '',
+		isUserInfoDone: true, // сделать в режим разработки
+		gender: 'male', // сделать в режим разработки
 		birthYear: '',
 		birthMonth: '',
 		birthDay: '',

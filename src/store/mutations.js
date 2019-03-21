@@ -54,7 +54,7 @@ export default {
 		});
 	},
 	SET_TREATMENTS: (state, payload) => {
-		const { recommendations, treatment, id, color, weight } = payload;
+		const { recommendations, treatment, id, color, weight, examinationQuestionId } = payload;
 
 		state.tests = state.tests.map(item => {
 			if (item.id === id) {
@@ -62,6 +62,7 @@ export default {
 				item.recommendations = recommendations;
 				item.color = color;
 				item.resultWeight = weight;
+				item.examinationQuestionId = examinationQuestionId;
 			}
 			return item;
 		});
