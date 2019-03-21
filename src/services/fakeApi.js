@@ -1862,7 +1862,9 @@ export default {
 		}),
 
 	getTreatmentByResult: ({ testId, answerSum }) =>
+		
 		new Promise((resolve, reject) => {
+			console.log(answerSum)
 			setTimeout(() => {
 				const treatments = [
 					// Мозговое кровообращение

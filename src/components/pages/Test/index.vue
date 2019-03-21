@@ -174,7 +174,7 @@ export default {
         },
     },
 
-    mounted() {
+    created() {
         const currTest = this.$store.state.tests.find(
             test => test.id === +this.$route.params.testId,
         );

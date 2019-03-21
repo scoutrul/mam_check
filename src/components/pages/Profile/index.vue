@@ -141,6 +141,7 @@
 import { mapState } from 'vuex';
 
 import each from 'lodash/each';
+import map from 'lodash/map';
 import isUndefined from 'lodash/isUndefined';
 import fakeApi from '@/services/fakeApi';
 import CONST from '@/const.js';
@@ -265,27 +266,31 @@ export default {
             });
         },
         getAllQuestionsResult() {
-            let weight = 0;
             Promise.all(
-                each(this.getTests, test => {
+                map(this.getTests, test => {
                     each(test.questions, question => {
-                        weight = weight + question.weight || 0;
+                        let weight = 0;
+                        weight += question.weight;
+                        console.log(weight);
+                        fakeApi
+                            .getTreatmentByResult({
+                                testId: test.id,
+                                answerSum: weight,
+                            })
+                            .then(result => {
+                                const treatments = {
+                                    id: test.id,
+                                    treatment: result.treatment.decode,
+                                    recommendations: result.recommendations,
+                                    color: result.color,
+                                    weight,
+                                };
+                                this.$store.dispatch(
+                                    'set_treatments',
+                                    treatments,
+                                );
+                            });
                     });
-
-                    fakeApi
-                        .getTreatmentByResult({
-                            testId: test.id,
-                            answerSum: weight,
-                        })
-                        .then(result => {
-                            const treatments = {
-                                id: test.id,
-                                treatment: result.treatment.decode,
-                                recommendations: result.recommendations,
-                                color: result.color,
-                            };
-                            this.$store.dispatch('set_treatments', treatments);
-                        });
                 }),
             );
         },
