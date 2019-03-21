@@ -271,7 +271,6 @@ export default {
                     each(test.questions, question => {
                         let weight = 0;
                         weight += question.weight;
-                        console.log(weight);
                         fakeApi
                             .getTreatmentByResult({
                                 testId: test.id,

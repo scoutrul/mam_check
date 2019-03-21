@@ -30,8 +30,6 @@ export default {
 				},
 			})
 				.then(response => {
-					console.log(response);
-
 					if (response.data.result === 'success') {
 						return resolve(response.data.data.answer);
 					}
