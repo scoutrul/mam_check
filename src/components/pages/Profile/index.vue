@@ -230,7 +230,7 @@ export default {
             this.medFormPopUp = true;
             document.getElementsByTagName('body')[0].style.overflowY = 'hidden';
             document.getElementById('app').style.overflowY = 'scroll';
-            document.getElementsByClassName('header')[0].style.left = '-17px';
+            document.getElementsByClassName('header')[0].style.left = '-8px';
         },
         closeModal() {
             this.medFormPopUp = false;
