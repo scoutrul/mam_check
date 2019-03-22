@@ -9,14 +9,14 @@ Vue.use(Vuex);
 
 const state = {
 	user: {
-		isUserInfoDone: true, // сделать в режим разработки
-		gender: 'male', // сделать в режим разработки
+		isUserInfoDone: false, // сделать в режим разработки
+		gender: '', // сделать в режим разработки
 		birthYear: '',
 		birthMonth: '',
 		birthDay: '',
 		grow: '',
 		weight: '',
-		profileProgress: 0,
+		profileProgress: 99,
 	},
 	tests: [],
 };
