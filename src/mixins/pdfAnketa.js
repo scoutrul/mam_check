@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { mapGetters, mapState } from 'vuex';
 import portalApi from '@/services/portalApi';
 
@@ -22,12 +23,19 @@ export default {
 						weight: this.user.weight,
 					})
 					.then(result => {
-						window.open(
-							`https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${
-								result.id
-							}/`,
-							'_blank',
-						);
+						axios({
+							url: `https://medaboutme.ru/zdorove/servisy/dispanserizatsiya/download-result/${result.id}/`,
+							method: 'GET',
+							responseType: 'blob', // important
+						}).then((response) => {
+							const url = window.URL.createObjectURL(new Blob([response.data]));
+							const link = document.createElement('a');
+							link.href = url;
+							link.setAttribute('download', `Анкета_Диспансеризации-${result.id}.pdf`);
+							document.body.appendChild(link);
+							link.click();
+							link.parentNode.removeChild(link);
+						});
 					})
 					.catch(() => {});
 			}

@@ -155,7 +155,7 @@ export default {
     mounted() {
         this.getAllTestResults();
     },
-    beforeMount(){
+    beforeMount() {
         this.favoriteQuestionIds = CONST.QUEST_TO_ANKETA;
     },
 
@@ -188,7 +188,7 @@ export default {
                         type: question.type,
                         examinationQuestionId: question.examinationQuestionId,
                     };
-                   
+
                     if (
                         this.favoriteQuestionIds.includes(
                             question.examinationQuestionId,
