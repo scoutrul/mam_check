@@ -22,7 +22,7 @@
                 scrollable
                 persistent
             >
-                <AnketaPopUp :close-self="closeModal" />
+                <AnketaPopUp2 :close-self="closeModal" />
             </v-dialog>
         </v-flex>
         <v-flex class="profile__section">
@@ -155,6 +155,7 @@ import {
     RegularLg,
     ProfileInfo,
     AnketaPopUp,
+    AnketaPopUp2,
     StartButtonSimple,
 } from '../../blocks';
 
@@ -168,6 +169,7 @@ export default {
         TestItem,
         ProfileInfo,
         AnketaPopUp,
+        AnketaPopUp2,
     },
     mixins: [$pdfAnketa],
     data: () => ({
