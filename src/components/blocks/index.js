@@ -17,6 +17,7 @@ import TestItem from './TestItem/TestItem';
 import ProfileInfo from './indexBodyMass/indexBodyMass';
 import SpeechControl from './SpeechControl/SpeechControl';
 import AnketaPopUp from './AnketaPopUp';
+import AnketaPopUp2 from './AnketaPopUp2';
 
 export {
 	StartButton,
@@ -36,6 +37,7 @@ export {
 	ProfileInfo,
 	SpeechControl,
 	AnketaPopUp,
+	AnketaPopUp2,
 	StartButtonSimple,
 	RecordButton,
 };
