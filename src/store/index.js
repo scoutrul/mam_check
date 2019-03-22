@@ -16,7 +16,7 @@ const state = {
 		birthDay: '',
 		grow: '',
 		weight: '',
-		profileProgress: 0,
+		profileProgress: 99,
 	},
 	tests: [],
 };
