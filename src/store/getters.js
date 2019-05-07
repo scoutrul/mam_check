@@ -1,7 +1,9 @@
 export default {
 	isUserInfoDone: state => state.user.isUserInfoDone,
 	allTestsCount: state => state.tests.length,
-	dispAvailable: state => (state.user.birthYear - 1920) % 3 === 0,
+	dispAvailable: state =>
+		new Date().getUTCFullYear() - state.user.birthYear >= 40 ||
+		(state.user.birthYear - 1920) % 3 === 0,
 
 	completedTestsCount: state => {
 		if (typeof state.tests === 'undefined' || state.tests.length === 0) {
